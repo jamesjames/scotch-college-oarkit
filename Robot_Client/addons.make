@@ -1,0 +1,12 @@
+ofxOsc
+ofxXmlSettings
+ofxGui
+ofxVectorGraphics
+ofxKinect
+ofxAssimpModelLoader
+ofxOpenCv
+ofxNetwork
+ofx3DModelLoader
+ofxSvg
+ofxThreadedImageLoader
+ofxGamepad
