@@ -47,7 +47,7 @@ def setPosition(ID, pos, vel):
 def moveToDxAngle(ID,dxlPosition,dxlSpeed):
 	setPosition(ID,dxlPosition,dxlSpeed)
 
-def moveToDegAngle(ID, degPosition, pcSpeed):
+def moveToDegAngle(ID, degPosition, pcSpeed): 
 	while degPosition > 180:
 		degPosition = degPosition - 360
 	while degPosition < -180:
@@ -62,28 +62,28 @@ def moveToDegAngle(ID, degPosition, pcSpeed):
 def spinAtDxSpeed(ID,dxlSpeed):
 	writeWord(ID,DXL_REG_Moving_Speed,dxlSpeed)
 
-# Spins at a certain percent of full speed.
-def spinAtPcSpeed(ID,pcSpeed):
+# Spins at a certain percent of full speed. 
+def spinAtPcSpeed(ID,pcSpeed): 
 	if pcSpeed >= 0:
 		spinAtDxSpeed(ID,int(float(pcSpeed)*10.23))
 	else:
 		spinAtDxSpeed(ID,1024+int(float(-pcSpeed)*10.23))
 
 def throttleSteeringToLeftRight(inThrottle, inSteering):
-	left = min(100, max(-100, inThrottle - inSteering));
-	right = min(100, max(-100, inThrottle + inSteering));
+	left = min(100, max(-100, inThrottle - inSteering)); 
+	right = min(100, max(-100, inThrottle + inSteering)); 
 	return (left, right)
 
 
 
 # Purge the first value
-time.sleep(0.5)
-print("Press [triangle] to exit.")
+time.sleep(0.5) 
+#print("Press [triangle] to exit.") 
 shoulderPos = -45
 tiltPos = 0
 panPos = 90
 
-# Set wheel and joint modes.
+# Set wheel and joint modes. 
 writeWord(1, DXL_REG_CCW_Angle_Limit, 0)
 writeWord(2, DXL_REG_CCW_Angle_Limit, 0)
 writeWord(3, DXL_REG_CCW_Angle_Limit, 0)
@@ -93,19 +93,19 @@ jointMode(5)
 jointMode(6)
 jointMode(7)
 
-
+ 
 tiltSpeed = 100
 panSpeed = 100
 shoulderSpeed = 20
 
-# Shoulder is limited to -90 and 150. Note that this will hit the ground (which could be desired).
+# Shoulder is limited to -90 and 150. Note that this will hit the ground (which could be desired). 
 shoulderPos = max(-90, min(150, shoulderPos))
 
 
 tiltcmd = tiltPos + shoulderPos
 pancmd = panPos
 
-# Tilt is limited to 90 degrees, pan to 150.
+# Tilt is limited to 90 degrees, pan to 150. 
 tiltcmd = max(-90, min(90, tiltcmd))
 pancmd = max(-150, min(150, pancmd))
 
@@ -113,6 +113,6 @@ moveToDegAngle(5, shoulderPos,shoulderSpeed)
 moveToDegAngle(6, tiltcmd, max(10, tiltSpeed))
 moveToDegAngle(7, pancmd, max(10, panSpeed))
 
-time.sleep(2.05)
+time.sleep(2.05) 
 
-print("Exiting.")
+print("Server Ready") 

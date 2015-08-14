@@ -24,14 +24,31 @@ import socket
 import pygame
 from time import sleep
 
-TCP_IP = '10.82.78.50' # Set to Raspi IP
+TCP_IP = '192.168.100.1'
 TCP_PORT = 5005
 BUFFER_SIZE = 1024
-MESSAGE = "System online"
+MESSAGE = "Sysetem online"
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((TCP_IP, TCP_PORT))
 #s.send(MESSAGE)
+
+
+#Pygame stuff
+pygame.init()
+#background_colour = (255,255,255)
+ 
+#screen = pygame.display.set_mode((500, 400), 0, 32)
+#pygame.display.set_caption('Controller Status')
+#screen.fill(background_colour)
+ 
+#pygame.display.flip()
+# set up fonts
+#basicFont = pygame.font.SysFont(None, 48)
+
+# set up the text
+#text = basicFont.render('Hello world!', True, (255,255,0), (255,0,0))
+
 
 def stop():
 	pygame.quit()
@@ -68,7 +85,9 @@ buttonMap = ["", #Square
                  stop  #Home/PS
                  ]
 
-# Pygame Inititalisation
+hatState = []
+buttonState = []
+
 pygame.init()
 pygame.joystick.init()
 joystick = pygame.joystick.Joystick(0)
@@ -76,93 +95,33 @@ joystick = pygame.joystick.Joystick(0)
 joystick.init() #Initialize joystick for use
 
 servoPos = [0,0,0]
-#Map inputs in order to gain a better comparison and control scheme
+
 def map(x, in_min, in_max, out_min, out_max):
-	return (x - in_min) * (out_max - out_min) // (in_max - in_min) + out_min
+        return x
 
-def throttleSteeringToLeftRight(inThrottle, inSteering):
-	left = min(100, max(-100, inThrottle - inSteering)); 
-	right = min(100, max(-100, inThrottle + inSteering)); 
-	return [left, right]
+for button in range(0,12):
+        buttonState.append([button + 1, 0])
 
-def checkButtons():
-	for button in range(joystick.get_numbuttons()):
-		buttonState = joystick.get_button(button)
-		if buttonState == 1 :
-			print str(buttonNames[button]) + " has been pressed (" + str(button) + ")"
-			try:
-				buttonMap[button]() #Call any functions listed with the button in buttonMap
-			except:
-				pass #Button is not assigned
 
 while True:
-	for event in pygame.event.get(): #Update controller positions
-		if event.type == pygame.JOYBUTTONDOWN:
-			#print "Button Press detected"
-			checkButtons()
-
-	#Movement Controls (Left, Right)
-	if joystick.get_button(11) == 1 :
-		inputMap = [map(joystick.get_axis(2), -1, 1, -100, 100), map(joystick.get_axis(3), -1, 1, -100, 100)]
-
-	else:
-		inputMap = [map(joystick.get_axis(2), -1, 1, -75, 75), map(joystick.get_axis(3), -1, 1, -75, 75)]
+        for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                        stop()
 
 
-
-	turn = throttleSteeringToLeftRight(inputMap[0], inputMap[1])
-	print turn
-
-	s.send(str(turn)) #Send output of throttleSterringToLeftRight as a list for the server to interpret
-	sleep(0.1) #Debounce controls  
-"""
-        Not in use
-	#if joystick.get_button(4) == 1:
-		#s.send("bot.spinAtPcSpeed(1,75)")
-		#s.send(1,75)
-
-	#if joystick.get_button(5) == 1:
-		#s.send("bot.spinAtPcSpeed(2,-75)")
-		#s.send(2,-75)
-
-	#if joystick.get_button(6) == 1:
-		#s.send("bot.spinAtPcSpeed(4,75)")
-		#s.send(3,-75)
-
-	#if joystick.get_button(7) == 1:
-		#s.send("bot.spinAtPcSpeed(3,-75)")
-		#s.send(4,75)
+        #Send positions of all axes [Right stick Vertical, Right Stick Horizontal, Left Stick Vertical, Left Stick Horizontal, Hat Vertical, Hat Horizontal]
+        positions = [joystick.get_axis(0), joystick.get_axis(1), joystick.get_axis(2), joystick.get_axis(3), joystick.get_hat(0)[0], joystick.get_hat(0)[1]]
         
-	#print "Bot_LR: " + str(Bot_LR)
-	#print "Bot_FB: " + str(Bot_FB)
-
-	turn = throttleSteeringToLeftRight(inputMap[0], inputMap[1])
-	print turn
-
-	s.send(str(turn)) #Send output of throttleSterringToLeftRight as a list for the server to interpret
-
-
-        Not in use
-        #s.send("bot.spinAtPcSpeed(1,turn[0])")
-	#s.send("bot.spinAtPcSpeed(2,turn[1])")
-	#s.send("bot.spinAtPcSpeed(3,turn[1])")
-	#s.send("bot.spinAtPcSpeed(4,turn[0])")
-
-	#Camera Controls LR FB H
-	#servoCommands = [joystick.get_axis(1), joystick.get_axis(1),joystick.get_hat(0)[1] ]
-	#bot.moveToDegAngle(5, servoPos[0] + servoCommands[0], 50)
-	#bot.moveToDegAngle(6, servoPos[1] + servoCommands[1], 50)
-	#bot.moveToDegAngle(7, servoPos[2] + servoCommands[2], 50)
-
-	#Update servo positions
-	#servoPos[0] += servoCommands[0]
-	#servoPos[1] += servoCommands[1]
-	#servoPos[2] += servoCommands[2]
-
+        for button in range(0,12):
+                positions.append(joystick.get_button(button))
         
-
-	sleep(0.1) #Debounce controls  
-"""
+        #s.send(str(positions))
+        print (positions)
+        encode = str(positions)
+        sendpos = str.encode(encode) 
+        s.send(sendpos)
+        
+        sleep(0.1) #Debounce controls  
 
 
 
