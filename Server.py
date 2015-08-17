@@ -1,7 +1,7 @@
 """
 The MIT License (MIT)
 
-Copyright (c) Sat May 23 2015 Aren Leishman
+Copyright (c) Sat May 23 2015 Aren Leishman, Andrew Schaff, James Oakey, James Barr
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -58,7 +58,7 @@ Command breakdown
 [Joystick Axis 0, Joystick Axis 1, Joystick Axis 2, Joystick Axis 3, Hat Axis 0, Hat Axis 1]
 [Right Joystick Horiz, Right Joystick Vert, Left Joystick Horiz, Right Joystick Vert, Hat Horiz, Hat Vert, button 1, ..., button 12]
 """
-    
+
 #Map inputs in order to gain a better comparison and control scheme
 def map(x, in_min, in_max, out_min, out_max):
 	return (x - in_min) * (out_max - out_min) // (in_max - in_min) + out_min
@@ -102,15 +102,15 @@ buttonScripts = [printButton, #Square
 
 #Copied from ServoInterface - determines wheel speed based on steering input
 def throttleSteeringToLeftRight(inThrottle, inSteering):
-	left = min(100, max(-100, inThrottle - inSteering)); 
-	right = min(100, max(-100, inThrottle + inSteering)); 
+	left = min(100, max(-100, inThrottle - inSteering));
+	right = min(100, max(-100, inThrottle + inSteering));
 	return [left, right]
 
 
 #Process command input from socket
 def processCommand(unprocessed_command):
     unprocessed_command = str(unprocessed_command) #Convert to a string if command comes in as a byte
-    
+
     #try is used to ensure that any faulty strings to cause problems
     try:
         #Format incoming list in order to be read
@@ -125,7 +125,7 @@ def processCommand(unprocessed_command):
             command[element] = command[element].replace(" ", "")
 
         #print "Pre-converted Command: " + str(command)
-            
+
         #Iterate through command and converted to floats zeroing out any noise on the way
         for element in range(len(command) - 2):
             command[element] = float(command[element]) #Convert to a floating point number
@@ -135,14 +135,14 @@ def processCommand(unprocessed_command):
         #Iterate through the remaining
         for element in range(len(command) - 2, len(command)):
             command[element] = int(float(command[element]))
-            
+
         #Iterate through the back 12 elements (button data) and set them to True or False for On or Off, respectively
         for element in range(len(command) - 12, len(command)):
             if float(command[element]) == 1.0:
                 command[element] = True
             else:
                 command[element] = False
-        
+
 
         #print command
         #Apply multipliers for each axis commands
@@ -163,7 +163,7 @@ def processCommand(unprocessed_command):
         """
         print "Processed Command: " + str(command) + "\n"
         return command
-    
+
     except:
         #Return a default position should the processing fail
         return [0.0, 0.0, 0.0, 0.0, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
@@ -181,9 +181,9 @@ while True:
         #print "Data: " + str(data)
 
         #Get and process data if available
-        if data: 
+        if data:
             command = processCommand(data)
-            
+
         else:
             print "No data available"
 
@@ -194,29 +194,29 @@ while True:
             if buttonList[button]:
                 buttonScripts[button]() #Call the appropriate function from buttonScripts
 
-                
+
         #Send throttle and steering data to be prepared to g to the wheels
         turn = throttleSteeringToLeftRight(command[0], command[1])
-        
+
         #Set servo speeds
         bot.spinAtPcSpeed(1, turn[0])
         bot.spinAtPcSpeed(2, turn[1])
         bot.spinAtPcSpeed(3, turn[1])
         bot.spinAtPcSpeed(4, turn[0])
 
-        
+
         #Update camera positions
         cameraPos[0] += command[5] #Update target location for Servo 5
         cameraPos[1] += command[3] #Update target location for Servo 6
         cameraPos[2] += -command[2] #Update target location for Servo 7
-    
+
         #Move camera to positions
         bot.moveToDegAngle(5, cameraPos[0], cameraSpeed)
         bot.moveToDegAngle(6, cameraPos[1], cameraSpeed)
         bot.moveToDegAngle(7, cameraPos[2], cameraSpeed)
-        
+
         data = None #Clear data, just in case
-        
+
 
 #Stop servos when loop broken
 bot.spinAtPcSpeed(1, 0)
