@@ -9,7 +9,8 @@ This section outlines the client and server code for connecting the controller t
 ###How To:
 
 ####Prerequisites
-In order to start this task, you must have:
+
+#####In order to start this task, you must have:
 * A functioning wireless access point on the Raspberry Pi
 
 #####The following installed on the host computer
@@ -44,5 +45,7 @@ If you intend to use a slightly different setup than the standard you may need t
 ####Resources:
 
 [Server](https://github.com/QuickRecon/ScotchOARKit/blob/master/Server.py)
+
 [Client](https://github.com/QuickRecon/ScotchOARKit/blob/master/Client.py)
+
 [Library](https://github.com/QuickRecon/ScotchOARKit/blob/master/ServoInterface.py)
