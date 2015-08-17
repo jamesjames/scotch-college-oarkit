@@ -11,7 +11,8 @@ This section outlines the client and server code for connecting the controller t
 ####Prerequisites
 In order to start this task, you must have:
 * A functioning wireless access point on the Raspberry Pi
-* The following installed on the host computer
+
+#####The following installed on the host computer
 * Python 3.0
 * Pygame
 * Python-socket
@@ -42,6 +43,6 @@ If you intend to use a slightly different setup than the standard you may need t
 
 ####Resources:
 
-https://github.com/QuickRecon/ScotchOARKit/blob/master/Server.py
-https://github.com/QuickRecon/ScotchOARKit/blob/master/Client.py
-https://github.com/QuickRecon/ScotchOARKit/blob/master/ServoInterface.py
+[Server](https://github.com/QuickRecon/ScotchOARKit/blob/master/Server.py)
+[Client](https://github.com/QuickRecon/ScotchOARKit/blob/master/Client.py)
+[Library](https://github.com/QuickRecon/ScotchOARKit/blob/master/ServoInterface.py)
