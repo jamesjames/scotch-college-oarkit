@@ -13,7 +13,7 @@ This section outlines the client and server code for connecting the controller t
 #####In order to start this task, you must have:
 * A functioning wireless access point on the Raspberry Pi
 
-#####The following installed on the host computer
+#####The following installed on the host computer:
 * Python 3.0
 * Pygame
 * Python-socket
