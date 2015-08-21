@@ -166,14 +166,14 @@ obj/linux64/Debug/src/ofApp.o: src/ofApp.cpp src/ofApp.h \
  ../../../libs/openFrameworks/video/ofGstUtils.h \
  /usr/include/gstreamer-1.0/gst/gst.h /usr/include/glib-2.0/glib.h \
  /usr/include/glib-2.0/glib/galloca.h /usr/include/glib-2.0/glib/gtypes.h \
- /usr/lib/x86_64-linux-gnu/glib-2.0/include/glibconfig.h \
+ /usr/lib/glib-2.0/include/glibconfig.h \
  /usr/include/glib-2.0/glib/gmacros.h \
  /usr/include/glib-2.0/glib/gversionmacros.h \
  /usr/include/glib-2.0/glib/garray.h \
  /usr/include/glib-2.0/glib/gasyncqueue.h \
  /usr/include/glib-2.0/glib/gthread.h \
  /usr/include/glib-2.0/glib/gatomic.h /usr/include/glib-2.0/glib/gerror.h \
- /usr/include/glib-2.0/glib/gquark.h \
+ /usr/include/glib-2.0/glib/gquark.h /usr/include/glib-2.0/glib/gutils.h \
  /usr/include/glib-2.0/glib/gbacktrace.h \
  /usr/include/glib-2.0/glib/gbase64.h \
  /usr/include/glib-2.0/glib/gbitlock.h \
@@ -197,7 +197,6 @@ obj/linux64/Debug/src/ofApp.o: src/ofApp.cpp src/ofApp.h \
  /usr/include/glib-2.0/glib/gmain.h /usr/include/glib-2.0/glib/gpoll.h \
  /usr/include/glib-2.0/glib/gslist.h /usr/include/glib-2.0/glib/gstring.h \
  /usr/include/glib-2.0/glib/gunicode.h \
- /usr/include/glib-2.0/glib/gutils.h \
  /usr/include/glib-2.0/glib/gkeyfile.h \
  /usr/include/glib-2.0/glib/gmappedfile.h \
  /usr/include/glib-2.0/glib/gmarkup.h \
@@ -228,6 +227,7 @@ obj/linux64/Debug/src/ofApp.o: src/ofApp.cpp src/ofApp.h \
  /usr/include/glib-2.0/glib/deprecated/gmain.h \
  /usr/include/glib-2.0/glib/deprecated/grel.h \
  /usr/include/glib-2.0/glib/deprecated/gthread.h \
+ /usr/include/glib-2.0/glib/glib-autocleanups.h \
  /usr/include/gstreamer-1.0/gst/glib-compat.h \
  /usr/include/gstreamer-1.0/gst/gstenumtypes.h \
  /usr/include/glib-2.0/glib-object.h \
@@ -248,6 +248,7 @@ obj/linux64/Debug/src/ofApp.o: src/ofApp.cpp src/ofApp.h \
  /usr/include/glib-2.0/gobject/gtypeplugin.h \
  /usr/include/glib-2.0/gobject/gvaluearray.h \
  /usr/include/glib-2.0/gobject/gvaluetypes.h \
+ /usr/include/glib-2.0/gobject/gobject-autocleanups.h \
  /usr/include/gstreamer-1.0/gst/gstversion.h \
  /usr/include/gstreamer-1.0/gst/gstatomicqueue.h \
  /usr/include/gstreamer-1.0/gst/gstbin.h \
@@ -392,7 +393,7 @@ obj/linux64/Debug/src/ofApp.o: src/ofApp.cpp src/ofApp.h \
  ../../../addons/ofxOpenCv/src/ofxCvFloatImage.h \
  ../../../addons/ofxOpenCv/src/ofxCvShortImage.h \
  ../../../addons/ofxOpenCv/src/ofxCvContourFinder.h \
- ../../../addons/ofxOpenCv/src/ofxCvHaarFinder.h
+ ../../../addons/ofxOpenCv/src/ofxCvHaarFinder.h src/setup.h
 
 src/ofApp.h:
 
@@ -740,7 +741,7 @@ src/ofApp.h:
 
 /usr/include/glib-2.0/glib/gtypes.h:
 
-/usr/lib/x86_64-linux-gnu/glib-2.0/include/glibconfig.h:
+/usr/lib/glib-2.0/include/glibconfig.h:
 
 /usr/include/glib-2.0/glib/gmacros.h:
 
@@ -757,6 +758,8 @@ src/ofApp.h:
 /usr/include/glib-2.0/glib/gerror.h:
 
 /usr/include/glib-2.0/glib/gquark.h:
+
+/usr/include/glib-2.0/glib/gutils.h:
 
 /usr/include/glib-2.0/glib/gbacktrace.h:
 
@@ -817,8 +820,6 @@ src/ofApp.h:
 /usr/include/glib-2.0/glib/gstring.h:
 
 /usr/include/glib-2.0/glib/gunicode.h:
-
-/usr/include/glib-2.0/glib/gutils.h:
 
 /usr/include/glib-2.0/glib/gkeyfile.h:
 
@@ -886,6 +887,8 @@ src/ofApp.h:
 
 /usr/include/glib-2.0/glib/deprecated/gthread.h:
 
+/usr/include/glib-2.0/glib/glib-autocleanups.h:
+
 /usr/include/gstreamer-1.0/gst/glib-compat.h:
 
 /usr/include/gstreamer-1.0/gst/gstenumtypes.h:
@@ -925,6 +928,8 @@ src/ofApp.h:
 /usr/include/glib-2.0/gobject/gvaluearray.h:
 
 /usr/include/glib-2.0/gobject/gvaluetypes.h:
+
+/usr/include/glib-2.0/gobject/gobject-autocleanups.h:
 
 /usr/include/gstreamer-1.0/gst/gstversion.h:
 
@@ -1215,3 +1220,5 @@ src/ofApp.h:
 ../../../addons/ofxOpenCv/src/ofxCvContourFinder.h:
 
 ../../../addons/ofxOpenCv/src/ofxCvHaarFinder.h:
+
+src/setup.h:

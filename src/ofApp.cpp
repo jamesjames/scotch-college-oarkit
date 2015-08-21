@@ -1,39 +1,13 @@
 #include "ofApp.h"
+#include "setup.h"
 
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofBackground(255,255,255);
     ofSetVerticalSync(true);
-
-    connectButton.addListener(this, &ofApp::connectButtonPressed);
-    playButton.addListener(this, &ofApp::playButtonPressed);
-
-    networkcontrol.setup();
-    networkcontrol.add(connectButton.setup("Connect"));
-
-    videocontrol.setup();
-    videocontrol.add(playButton.setup("Start Stream"));
-
-    bHide = true;
-
-    ofxGamepadHandler::get()->enableHotplug();
-//CHECK IF THERE EVEN IS A GAMEPAD CONNECTED
-    if(ofxGamepadHandler::get()->getNumPads()>0)
-    {
-        ofxGamepad* pad = ofxGamepadHandler::get()->getGamepad(0);
-        ofAddListener(pad->onAxisChanged, this, &ofApp::axisChanged);
-        ofAddListener(pad->onButtonPressed, this, &ofApp::buttonPressed);
-        ofAddListener(pad->onButtonReleased, this, &ofApp::buttonReleased);
-        cout << "Gamepad Loaded Sucessfully" << endl;
-    }
-    else{
-        cout << "Gamepad Failed to load (is it pluged in?)" << endl;
-    }
-    cameraStream.loadMovie("/dev/stdin");
-
-    if (cameraStream.isLoaded() == false){
-        cout << "Camera Stream Failed to load" << endl;
-    }
+    ofApp::textboxsetup();
+    ofApp::uisetup();
+    ofApp::gamepadsetup();
 }
 //--------------------------------------------------------------
 void ofApp::exit(){
@@ -43,10 +17,6 @@ void ofApp::exit(){
 
 //--------------------------------------------------------------
 void ofApp::connectButtonPressed(){
-
-    cameraStream.loadMovie("/dev/stdin");
-
-    /*
     if (tcpClient.isConnected())
     {
         tcpClient.setup("192.168.100.1", 5005);
@@ -55,12 +25,11 @@ void ofApp::connectButtonPressed(){
     {
         tcpClient.close();
     }
-    **/
-
 }
 
 //--------------------------------------------------------------
 void ofApp::playButtonPressed(){
+    //bool ofGstUtils::setPipelineWithSink(string pipeline, string sinkname = "sink",bool isStream = true)
 
 }
 //--------------------------------------------------------------
@@ -71,9 +40,9 @@ void ofApp::update(){
     }
     else
     {
-        cameraStream.loadMovie("/dev/stdin");
+        cameraStream.stream("/dev/stdin");
     }
-    **/
+**/
     if(tcpClient.isConnected())
     {
        connectButton.setName("Disconnect");
@@ -83,15 +52,29 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofSetHexColor(0xFFFFFF);
-    cameraStream.draw(400,20);
+
+    ofPushMatrix();
+	drawText();
+	ofPopMatrix();
 
     ofxGamepadHandler::get()->draw(200,200);
 
     if( bHide )
     {
-		videocontrol.draw();
 		networkcontrol.draw();
 	}
+}
+
+void ofApp::drawText() {
+	ofScale(5,5);
+	ofDrawBitmapString(text, 10,10);
+
+	ofPushStyle();
+	float timeFrac = 255.0f * sin(3.0f * ofGetElapsedTimef());
+	ofSetColor(timeFrac,timeFrac,timeFrac);
+	ofSetLineWidth(3.0f);
+	ofLine(cursorx*8 + 10, 13.7*cursory, cursorx*8 + 10, 10+13.7*cursory);
+	ofPopStyle();
 }
 
 //--------------------------------------------------------------
@@ -110,6 +93,52 @@ void ofApp::buttonReleased(ofxGamepadButtonEvent& e){
 }
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+    typeKey(key);
+}
+
+void ofApp::typeKey(int key) {
+	//add charachter
+	if (key >=32 && key <=126) {
+		text.insert(text.begin()+position, key);
+		position++;
+	}
+
+	if (key==OF_KEY_RETURN) {
+		text.insert(text.begin()+position, '\n');
+		position++;
+	}
+
+	if (key==OF_KEY_BACKSPACE) {
+		if (position>0) {
+			text.erase(text.begin()+position-1);
+			--position;
+		}
+	}
+
+	if (key==OF_KEY_DEL) {
+		if (text.size() > position) {
+			text.erase(text.begin()+position);
+		}
+	}
+
+	if (key==OF_KEY_LEFT)
+		if (position>0)
+			--position;
+
+	if (key==OF_KEY_RIGHT)
+		if (position<text.size()+1)
+			++position;
+
+	//for multiline:
+	cursorx = cursory = 0;
+	for (int i=0; i<position; ++i) {
+		if (*(text.begin()+i) == '\n') {
+			++cursory;
+			cursorx = 0;
+		} else {
+			cursorx++;
+		}
+	}
 
 }
 
