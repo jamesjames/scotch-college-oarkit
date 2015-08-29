@@ -9,5 +9,6 @@ ofxVectorGraphics
 ofxNetwork
 ofxThreadedImageLoader
 ofxOsc
-ofxIpVideoGrabber
 ofxGamepad
+ofxAxisGrabber
+ofxHttpUtils

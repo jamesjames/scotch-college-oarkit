@@ -12,6 +12,7 @@
 #include "ofMain.h"
 #include "ofxOpenCv.h"
 #include "ofGstUtils.h"
+#include "ofxAxisGrabber.h"
 
 class ofApp : public ofBaseApp{
 
@@ -26,6 +27,9 @@ class ofApp : public ofBaseApp{
         void uisetup();
         void gamepadsetup();
         void textboxsetup();
+        void camerasetup();
+        void tcpsetup();
+        void setIP(string newIP);
 
         //Gamepad listeners
         void axisChanged(ofxGamepadAxisEvent &e);
@@ -46,6 +50,7 @@ class ofApp : public ofBaseApp{
         //ui listener
 		void connectButtonPressed();
 		void playButtonPressed();
+		void disconnectButtonPressed();
 
         //ui variable
         bool bHide;
@@ -59,11 +64,13 @@ class ofApp : public ofBaseApp{
 
         //ui definitions
 		ofxButton connectButton;
+		ofxButton disconnectButton;
         ofxButton playButton;
         ofxPanel networkcontrol;
 
         //camera definitions
-		ofVideoGrabber  cameraStream;
+		ofPtr<ofxAxisGrabber> axisGrabber;
+		ofVideoGrabber grabber;
 
         //network definitions
         ofxTCPClient tcpClient;

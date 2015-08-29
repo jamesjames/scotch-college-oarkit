@@ -393,7 +393,19 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
  ../../../addons/ofxOpenCv/src/ofxCvFloatImage.h \
  ../../../addons/ofxOpenCv/src/ofxCvShortImage.h \
  ../../../addons/ofxOpenCv/src/ofxCvContourFinder.h \
- ../../../addons/ofxOpenCv/src/ofxCvHaarFinder.h
+ ../../../addons/ofxOpenCv/src/ofxCvHaarFinder.h \
+ ../../../addons/ofxAxisGrabber/src/ofxAxisGrabber.h \
+ ../../../addons/ofxHttpUtils/src/ofxHttpUtils.h \
+ ../../../libs/poco/include/Poco/Net/HTTPResponse.h \
+ ../../../libs/poco/include/Poco/Net/Net.h \
+ ../../../libs/poco/include/Poco/Net/HTTPMessage.h \
+ ../../../libs/poco/include/Poco/Net/MessageHeader.h \
+ ../../../libs/poco/include/Poco/Net/NameValueCollection.h \
+ ../../../libs/poco/include/Poco/String.h \
+ ../../../libs/poco/include/Poco/Ascii.h \
+ ../../../libs/poco/include/Poco/Net/HTTPCookie.h \
+ ../../../libs/poco/include/Poco/Net/HTTPBasicCredentials.h \
+ ../../../addons/ofxHttpUtils/src/ofxHttpTypes.h
 
 ../../../libs/openFrameworks/ofMain.h:
 
@@ -1220,3 +1232,27 @@ src/ofApp.h:
 ../../../addons/ofxOpenCv/src/ofxCvContourFinder.h:
 
 ../../../addons/ofxOpenCv/src/ofxCvHaarFinder.h:
+
+../../../addons/ofxAxisGrabber/src/ofxAxisGrabber.h:
+
+../../../addons/ofxHttpUtils/src/ofxHttpUtils.h:
+
+../../../libs/poco/include/Poco/Net/HTTPResponse.h:
+
+../../../libs/poco/include/Poco/Net/Net.h:
+
+../../../libs/poco/include/Poco/Net/HTTPMessage.h:
+
+../../../libs/poco/include/Poco/Net/MessageHeader.h:
+
+../../../libs/poco/include/Poco/Net/NameValueCollection.h:
+
+../../../libs/poco/include/Poco/String.h:
+
+../../../libs/poco/include/Poco/Ascii.h:
+
+../../../libs/poco/include/Poco/Net/HTTPCookie.h:
+
+../../../libs/poco/include/Poco/Net/HTTPBasicCredentials.h:
+
+../../../addons/ofxHttpUtils/src/ofxHttpTypes.h:

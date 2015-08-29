@@ -1,6 +1,8 @@
 #include "ofApp.h"
-#include "setup.h"
 
+string IP;
+
+//--------------------------------------------------------------
 void ofApp::gamepadsetup(){
     ofxGamepadHandler::get()->enableHotplug();
     //CHECK IF THERE EVEN IS A GAMEPAD CONNECTED
@@ -17,20 +19,33 @@ void ofApp::gamepadsetup(){
     }
 }
 
+//--------------------------------------------------------------
 void ofApp::uisetup(){
     connectButton.addListener(this, &ofApp::connectButtonPressed);
     playButton.addListener(this, &ofApp::playButtonPressed);
+    disconnectButton.addListener(this, &ofApp::disconnectButtonPressed);
 
     networkcontrol.setup();
     networkcontrol.add(connectButton.setup("Connect"));
+    networkcontrol.add(disconnectButton.setup("Disconnect"));
     networkcontrol.add(playButton.setup("Start Stream"));
 
     bHide = true;
 }
 
-void ofApp::textboxsetup(){
-    text="192.168.100.1";
-	position=0;
-	cursorx=0;
-	cursory=0;
+//--------------------------------------------------------------
+void ofApp::camerasetup(){
+    axisGrabber = ofPtr<ofxAxisGrabber>(new ofxAxisGrabber);
+	axisGrabber->setCameraAddress(IP);
+	grabber.setGrabber(axisGrabber);
+	grabber.initGrabber(640,480);
+}
+
+void ofApp::tcpsetup(){
+    tcpClient.setup(IP, 5005);
+}
+
+void ofApp::setIP(string newIP)
+{
+    IP = newIP;
 }
