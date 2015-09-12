@@ -41,11 +41,17 @@ void ofApp::camerasetup(){
 	grabber.initGrabber(640,480);
 }
 
+//--------------------------------------------------------------
 void ofApp::tcpsetup(){
     tcpClient.setup(IP, 5005);
 }
 
-void ofApp::setIP(string newIP)
-{
+//--------------------------------------------------------------
+void ofApp::setIP(string newIP){
     IP = newIP;
+}
+
+//--------------------------------------------------------------
+void ofApp::resetIP(string newIp){
+
 }

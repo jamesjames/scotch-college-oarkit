@@ -30,6 +30,7 @@ class ofApp : public ofBaseApp{
         void camerasetup();
         void tcpsetup();
         void setIP(string newIP);
+        void resetIP(string newIP);
 
         //Gamepad listeners
         void axisChanged(ofxGamepadAxisEvent &e);
@@ -37,7 +38,7 @@ class ofApp : public ofBaseApp{
         void buttonReleased(ofxGamepadButtonEvent &e);
 
         //input listeners
-		void keyPressed(int key);
+		void keyPressed(int key, string IP);
 		void keyReleased(int key);
 		void mouseMoved(int x, int y );
 		void mouseDragged(int x, int y, int button);

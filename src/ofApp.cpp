@@ -1,5 +1,6 @@
 #include "ofApp.h"
 
+
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofBackground(255,255,255);
@@ -82,7 +83,9 @@ void ofApp::buttonReleased(ofxGamepadButtonEvent& e){
 }
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+    if (key == 'n'){
+        IP = ofSystemTextBoxDialog("IP", IP);
+    }
 }
 
 //--------------------------------------------------------------
