@@ -1,6 +1,8 @@
 #include "ofApp.h"
 
 string IP;
+bool gamepad = true;
+bool camerainitalized = true;
 
 //--------------------------------------------------------------
 void ofApp::gamepadsetup(){
@@ -15,35 +17,54 @@ void ofApp::gamepadsetup(){
         cout << "Gamepad Detected" << endl;
     }
     else{
-        cout << "Gamepad Failed to detect.(is it pluged in?)" << endl;
+        ofSystemAlertDialog("Warning: Gamepad not detected, sending movement commands to the robot has been disabled.");
+        gamepad = false;
     }
 }
 
 //--------------------------------------------------------------
 void ofApp::uisetup(){
-    connectButton.addListener(this, &ofApp::connectButtonPressed);
     playButton.addListener(this, &ofApp::playButtonPressed);
-    disconnectButton.addListener(this, &ofApp::disconnectButtonPressed);
+    stopButton.addListener(this, &ofApp::stopButtonPressed);
+    ipButton.addListener(this, &ofApp::ipButtonPressed);
+
+    if (gamepad = false){
+        connectButton.addListener(this, &ofApp::connectButtonPressed);
+        disconnectButton.addListener(this, &ofApp::disconnectButtonPressed);
+    }
 
     networkcontrol.setup();
-    networkcontrol.add(connectButton.setup("Connect"));
-    networkcontrol.add(disconnectButton.setup("Disconnect"));
-    networkcontrol.add(playButton.setup("Start Stream"));
 
+    networkcontrol.add(playButton.setup("Start Stream"));
+    networkcontrol.add(stopButton.setup("Stop Stream"));
+    networkcontrol.add(ipButton.setup("Change IP"));
+    if (gamepad = false){
+        networkcontrol.add(connectButton.setup("Connect"));
+        networkcontrol.add(disconnectButton.setup("Disconnect"));
+    }
     bHide = true;
 }
 
 //--------------------------------------------------------------
 void ofApp::camerasetup(){
-    axisGrabber = ofPtr<ofxAxisGrabber>(new ofxAxisGrabber);
-	axisGrabber->setCameraAddress(IP);
+    if (camerainitalized){
+        axisGrabber = ofPtr<ofxAxisGrabber>(new ofxAxisGrabber);
+        axisGrabber->setCameraAddress(IP);
+        camerainitalized = false;
+    }
 	grabber.setGrabber(axisGrabber);
 	grabber.initGrabber(640,480);
 }
 
+
 //--------------------------------------------------------------
 void ofApp::tcpsetup(){
-    tcpClient.setup(IP, 5005);
+    if (gamepad){
+        FILE *ssh = popen("ssh pi@192.168.1.5", "w");
+        fprintf(ssh, "python server.py", 10);
+        sleep(10);
+        tcpClient.setup(IP, 5005);
+    }
 }
 
 //--------------------------------------------------------------
@@ -52,6 +73,10 @@ void ofApp::setIP(string newIP){
 }
 
 //--------------------------------------------------------------
-void ofApp::resetIP(string newIp){
-
+void ofApp::resetIP(){
+    IP = ofSystemTextBoxDialog("IP", IP);
+    ofApp::setIP(IP);
+    //reset all connections.
+    ofApp::tcpClient.close();
+    ofApp::tcpClient.setup(IP, 5005);
 }

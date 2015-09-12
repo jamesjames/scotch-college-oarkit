@@ -5,10 +5,8 @@
 void ofApp::setup(){
     ofBackground(255,255,255);
     ofSetVerticalSync(true);
-    //ofApp::textboxsetup();
     ofApp::uisetup();
     ofApp::gamepadsetup();
-    ofApp::camerasetup();
 }
 //--------------------------------------------------------------
 void ofApp::exit(){
@@ -28,10 +26,18 @@ void ofApp::disconnectButtonPressed(){
 
 //--------------------------------------------------------------
 void ofApp::playButtonPressed(){
-    //bool ofGstUtils::setPipelineWithSink(string pipeline, string sinkname = "sink",bool isStream = true)
-
+    ofApp::camerasetup();
 }
 
+//--------------------------------------------------------------
+void ofApp::stopButtonPressed(){
+    grabber.close();
+}
+
+//--------------------------------------------------------------
+void ofApp::ipButtonPressed(){
+    ofApp::resetIP();
+}
 //--------------------------------------------------------------
 void ofApp::update(){
     if(tcpClient.isConnected())
@@ -44,14 +50,11 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofSetHexColor(0xFFFFFF);
-/*
-    ofPushMatrix();
-	drawText();
-	ofPopMatrix();
-**/
     ofxGamepadHandler::get()->draw(200,200);
 
-    grabber.draw(0,0);
+    if (grabber.isInitialized()){
+        grabber.draw(0,0);
+    }
 
     if( bHide )
     {
@@ -67,12 +70,20 @@ void ofApp::axisChanged(ofxGamepadAxisEvent& e){
 //--------------------------------------------------------------
 void ofApp::buttonPressed(ofxGamepadButtonEvent& e){
     cout << "BUTTON " << e.button << " PRESSED" << endl;
-    if (e.button == 8){
+    if (e.button == 6){
         if (tcpClient.isConnected()){
             tcpClient.close();
         }
         else{
             ofApp::tcpsetup();
+        }
+    }
+    if (e.button == 7){
+        if (grabber.isInitialized()){
+            grabber.close();
+        }
+        else{
+            ofApp::camerasetup();
         }
     }
 }
@@ -83,8 +94,9 @@ void ofApp::buttonReleased(ofxGamepadButtonEvent& e){
 }
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+    cout << key << endl;
     if (key == 'n'){
-        IP = ofSystemTextBoxDialog("IP", IP);
+        ofApp::resetIP();
     }
 }
 

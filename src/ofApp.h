@@ -30,7 +30,7 @@ class ofApp : public ofBaseApp{
         void camerasetup();
         void tcpsetup();
         void setIP(string newIP);
-        void resetIP(string newIP);
+        void resetIP();
 
         //Gamepad listeners
         void axisChanged(ofxGamepadAxisEvent &e);
@@ -38,7 +38,7 @@ class ofApp : public ofBaseApp{
         void buttonReleased(ofxGamepadButtonEvent &e);
 
         //input listeners
-		void keyPressed(int key, string IP);
+		void keyPressed(int key);
 		void keyReleased(int key);
 		void mouseMoved(int x, int y );
 		void mouseDragged(int x, int y, int button);
@@ -52,6 +52,8 @@ class ofApp : public ofBaseApp{
 		void connectButtonPressed();
 		void playButtonPressed();
 		void disconnectButtonPressed();
+		void stopButtonPressed();
+		void ipButtonPressed();
 
         //ui variable
         bool bHide;
@@ -67,6 +69,8 @@ class ofApp : public ofBaseApp{
 		ofxButton connectButton;
 		ofxButton disconnectButton;
         ofxButton playButton;
+        ofxButton stopButton;
+        ofxButton ipButton;
         ofxPanel networkcontrol;
 
         //camera definitions
