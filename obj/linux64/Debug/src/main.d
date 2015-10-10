@@ -252,7 +252,7 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
  /usr/include/gstreamer-1.0/gst/gstatomicqueue.h \
  /usr/include/gstreamer-1.0/gst/gstbin.h \
  /usr/include/gstreamer-1.0/gst/gstelement.h \
- /usr/include/gstreamer-1.0/gst/gstconfig.h \
+ /usr/lib/gstreamer-1.0/include/gst/gstconfig.h \
  /usr/include/gstreamer-1.0/gst/gstobject.h \
  /usr/include/gstreamer-1.0/gst/gstcontrolbinding.h \
  /usr/include/gstreamer-1.0/gst/gstcontrolsource.h \
@@ -288,21 +288,23 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
  /usr/include/gstreamer-1.0/gst/gstmacros.h \
  /usr/include/gstreamer-1.0/gst/gstpluginfeature.h \
  /usr/include/gstreamer-1.0/gst/gsturi.h \
+ /usr/include/gstreamer-1.0/gst/gstminiobject.h \
  /usr/include/gstreamer-1.0/gst/gstbufferpool.h \
  /usr/include/gstreamer-1.0/gst/gstchildproxy.h \
  /usr/include/gstreamer-1.0/gst/gstdebugutils.h \
+ /usr/include/gstreamer-1.0/gst/gstdevicemonitor.h \
  /usr/include/gstreamer-1.0/gst/gstdeviceprovider.h \
  /usr/include/gstreamer-1.0/gst/gstdeviceproviderfactory.h \
  /usr/include/gstreamer-1.0/gst/gstelementmetadata.h \
  /usr/include/gstreamer-1.0/gst/gsterror.h \
  /usr/include/gstreamer-1.0/gst/gstghostpad.h \
- /usr/include/gstreamer-1.0/gst/gstdevicemonitor.h \
  /usr/include/gstreamer-1.0/gst/gstinfo.h \
  /usr/include/gstreamer-1.0/gst/gstparamspecs.h \
  /usr/include/gstreamer-1.0/gst/gstvalue.h \
  /usr/include/gstreamer-1.0/gst/gstpipeline.h \
  /usr/include/gstreamer-1.0/gst/gstpoll.h \
  /usr/include/gstreamer-1.0/gst/gstpreset.h \
+ /usr/include/gstreamer-1.0/gst/gstprotection.h \
  /usr/include/gstreamer-1.0/gst/gstregistry.h \
  /usr/include/gstreamer-1.0/gst/gstsystemclock.h \
  /usr/include/gstreamer-1.0/gst/gsttagsetter.h \
@@ -947,7 +949,7 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
 
 /usr/include/gstreamer-1.0/gst/gstelement.h:
 
-/usr/include/gstreamer-1.0/gst/gstconfig.h:
+/usr/lib/gstreamer-1.0/include/gst/gstconfig.h:
 
 /usr/include/gstreamer-1.0/gst/gstobject.h:
 
@@ -1019,11 +1021,15 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
 
 /usr/include/gstreamer-1.0/gst/gsturi.h:
 
+/usr/include/gstreamer-1.0/gst/gstminiobject.h:
+
 /usr/include/gstreamer-1.0/gst/gstbufferpool.h:
 
 /usr/include/gstreamer-1.0/gst/gstchildproxy.h:
 
 /usr/include/gstreamer-1.0/gst/gstdebugutils.h:
+
+/usr/include/gstreamer-1.0/gst/gstdevicemonitor.h:
 
 /usr/include/gstreamer-1.0/gst/gstdeviceprovider.h:
 
@@ -1034,8 +1040,6 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
 /usr/include/gstreamer-1.0/gst/gsterror.h:
 
 /usr/include/gstreamer-1.0/gst/gstghostpad.h:
-
-/usr/include/gstreamer-1.0/gst/gstdevicemonitor.h:
 
 /usr/include/gstreamer-1.0/gst/gstinfo.h:
 
@@ -1048,6 +1052,8 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
 /usr/include/gstreamer-1.0/gst/gstpoll.h:
 
 /usr/include/gstreamer-1.0/gst/gstpreset.h:
+
+/usr/include/gstreamer-1.0/gst/gstprotection.h:
 
 /usr/include/gstreamer-1.0/gst/gstregistry.h:
 

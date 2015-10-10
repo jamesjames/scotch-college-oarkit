@@ -82,7 +82,7 @@ void ofApp::buttonReleased(ofxGamepadButtonEvent& e){
     cout << "BUTTON " << e.button << " RELEASED" << endl;
 }
 //--------------------------------------------------------------
-void ofApp::keyPressed(int key){
+void ofApp::keyPressed(int key, string IP){
     if (key == 'n'){
         IP = ofSystemTextBoxDialog("IP", IP);
     }
