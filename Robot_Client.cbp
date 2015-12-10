@@ -981,9 +981,6 @@
 		<Unit filename="src/setup.cpp">
 			<Option virtualFolder="src/" />
 		</Unit>
-		<Unit filename="src/setup.h">
-			<Option virtualFolder="src/" />
-		</Unit>
 		<Extensions>
 			<code_completion />
 			<envvars />

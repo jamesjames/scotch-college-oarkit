@@ -34,14 +34,6 @@ void ofApp::uisetup(){
 }
 
 //--------------------------------------------------------------
-void ofApp::camerasetup(){
-    axisGrabber = ofPtr<ofxAxisGrabber>(new ofxAxisGrabber);
-	axisGrabber->setCameraAddress(IP);
-	grabber.setGrabber(axisGrabber);
-	grabber.initGrabber(640,480);
-}
-
-//--------------------------------------------------------------
 void ofApp::tcpsetup(){
     tcpClient.setup(IP, 5005);
 }

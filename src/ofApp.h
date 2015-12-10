@@ -12,7 +12,6 @@
 #include "ofMain.h"
 #include "ofxOpenCv.h"
 #include "ofGstUtils.h"
-#include "ofxAxisGrabber.h"
 
 class ofApp : public ofBaseApp{
 
@@ -68,10 +67,6 @@ class ofApp : public ofBaseApp{
 		ofxButton disconnectButton;
         ofxButton playButton;
         ofxPanel networkcontrol;
-
-        //camera definitions
-		ofPtr<ofxAxisGrabber> axisGrabber;
-		ofVideoGrabber grabber;
 
         //network definitions
         ofxTCPClient tcpClient;

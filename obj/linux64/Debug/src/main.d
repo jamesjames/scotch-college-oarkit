@@ -1,17 +1,9 @@
-obj/linux64/Debug/src/main.o: src/main.cpp \
+obj/linux64/Debug/src/main.o: \
+ /home/aren/Code/openFrameworks/apps/myApps/ScotchOARKit/src/main.cpp \
  ../../../libs/openFrameworks/ofMain.h \
  ../../../libs/openFrameworks/utils/ofConstants.h \
  ../../../libs/tess2/include/tesselator.h \
  ../../../libs/openFrameworks/utils/ofFileUtils.h \
- ../../../libs/poco/include/Poco/File.h \
- ../../../libs/poco/include/Poco/Foundation.h \
- ../../../libs/poco/include/Poco/Config.h \
- ../../../libs/poco/include/Poco/Platform.h \
- ../../../libs/poco/include/Poco/Platform_POSIX.h \
- ../../../libs/poco/include/Poco/Bugcheck.h \
- ../../../libs/poco/include/Poco/Types.h \
- ../../../libs/poco/include/Poco/Timestamp.h \
- ../../../libs/poco/include/Poco/File_UNIX.h \
  ../../../libs/openFrameworks/utils/ofLog.h \
  ../../../libs/openFrameworks/types/ofTypes.h \
  ../../../libs/openFrameworks/types/ofColor.h \
@@ -20,53 +12,51 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
  ../../../libs/openFrameworks/math/ofVec3f.h \
  ../../../libs/openFrameworks/math/ofVec2f.h \
  ../../../libs/openFrameworks/math/ofVec4f.h \
+ ../../../libs/openFrameworks/utils/ofSystemUtils.h \
+ ../../../libs/openFrameworks/utils/ofURLFileLoader.h \
+ ../../../libs/openFrameworks/events/ofEvents.h \
+ ../../../libs/openFrameworks/events/ofEventUtils.h \
+ ../../../libs/openFrameworks/events/ofEvent.h \
+ ../../../libs/openFrameworks/utils/ofTimer.h \
+ ../../../libs/openFrameworks/utils/ofFpsCounter.h \
+ ../../../libs/openFrameworks/utils/ofUtils.h \
+ ../../../libs/utf8cpp/include/utf8.h \
+ ../../../libs/utf8cpp/include/utf8/checked.h \
+ ../../../libs/utf8cpp/include/utf8/core.h \
+ ../../../libs/utf8cpp/include/utf8/unchecked.h \
+ ../../../libs/openFrameworks/utils/ofThread.h \
+ ../../../libs/poco/include/Poco/AtomicCounter.h \
+ ../../../libs/poco/include/Poco/Foundation.h \
+ ../../../libs/poco/include/Poco/Config.h \
+ ../../../libs/poco/include/Poco/Platform.h \
+ ../../../libs/poco/include/Poco/Platform_POSIX.h \
+ ../../../libs/poco/include/Poco/Alignment.h \
+ ../../../libs/poco/include/Poco/Bugcheck.h \
+ ../../../libs/poco/include/Poco/Types.h \
  ../../../libs/poco/include/Poco/Mutex.h \
  ../../../libs/poco/include/Poco/Exception.h \
  ../../../libs/poco/include/Poco/ScopedLock.h \
  ../../../libs/poco/include/Poco/Mutex_POSIX.h \
- ../../../libs/openFrameworks/utils/ofSystemUtils.h \
- ../../../libs/openFrameworks/utils/ofThread.h \
- ../../../libs/poco/include/Poco/AtomicCounter.h \
  ../../../libs/poco/include/Poco/Thread.h \
+ ../../../libs/poco/include/Poco/Event.h \
+ ../../../libs/poco/include/Poco/Event_POSIX.h \
  ../../../libs/poco/include/Poco/Thread_POSIX.h \
  ../../../libs/poco/include/Poco/Runnable.h \
  ../../../libs/poco/include/Poco/SignalHandler.h \
- ../../../libs/poco/include/Poco/Event.h \
- ../../../libs/poco/include/Poco/Event_POSIX.h \
  ../../../libs/poco/include/Poco/RefCountedObject.h \
  ../../../libs/poco/include/Poco/AutoPtr.h \
- ../../../libs/openFrameworks/utils/ofURLFileLoader.h \
- ../../../libs/openFrameworks/events/ofEvents.h \
- ../../../libs/openFrameworks/events/ofEventUtils.h \
- ../../../libs/poco/include/Poco/PriorityEvent.h \
- ../../../libs/poco/include/Poco/AbstractEvent.h \
- ../../../libs/poco/include/Poco/SingletonHolder.h \
  ../../../libs/poco/include/Poco/SharedPtr.h \
- ../../../libs/poco/include/Poco/ActiveResult.h \
- ../../../libs/poco/include/Poco/ActiveMethod.h \
- ../../../libs/poco/include/Poco/ActiveRunnable.h \
- ../../../libs/poco/include/Poco/ActiveStarter.h \
- ../../../libs/poco/include/Poco/ThreadPool.h \
- ../../../libs/poco/include/Poco/PriorityStrategy.h \
- ../../../libs/poco/include/Poco/NotificationStrategy.h \
- ../../../libs/poco/include/Poco/AbstractPriorityDelegate.h \
- ../../../libs/poco/include/Poco/AbstractDelegate.h \
- ../../../libs/poco/include/Poco/PriorityDelegate.h \
- ../../../libs/poco/include/Poco/PriorityExpire.h \
- ../../../libs/poco/include/Poco/FunctionPriorityDelegate.h \
- ../../../libs/openFrameworks/events/ofDelegate.h \
- ../../../libs/poco/include/Poco/Condition.h \
- ../../../libs/poco/include/Poco/ScopedUnlock.h \
- ../../../libs/openFrameworks/utils/ofUtils.h \
- ../../../libs/poco/include/Poco/Path.h \
+ ../../../libs/openFrameworks/utils/ofThreadChannel.h \
  ../../../libs/openFrameworks/types/ofBaseTypes.h \
  ../../../libs/openFrameworks/types/ofRectangle.h \
+ ../../../libs/openFrameworks/math/ofMatrix4x4.h \
+ ../../../libs/openFrameworks/math/ofQuaternion.h \
  ../../../libs/openFrameworks/3d/ofMesh.h \
  ../../../libs/openFrameworks/gl/ofGLUtils.h \
  ../../../libs/openFrameworks/graphics/ofPixels.h \
- ../../../libs/openFrameworks/math/ofMatrix4x4.h \
- ../../../libs/openFrameworks/math/ofQuaternion.h \
  ../../../libs/openFrameworks/utils/ofXml.h \
+ ../../../libs/openFrameworks/types/ofParameter.h \
+ ../../../libs/openFrameworks/types/ofParameterGroup.h \
  ../../../libs/poco/include/Poco/DOM/Document.h \
  ../../../libs/poco/include/Poco/XML/XML.h \
  ../../../libs/poco/include/Poco/DOM/AbstractContainerNode.h \
@@ -112,9 +102,6 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
  ../../../libs/poco/include/Poco/DOM/NamedNodeMap.h \
  ../../../libs/poco/include/Poco/DOM/ChildNodesList.h \
  ../../../libs/poco/include/Poco/DOM/NodeList.h \
- ../../../libs/openFrameworks/types/ofParameter.h \
- ../../../libs/openFrameworks/types/ofParameterGroup.h \
- ../../../libs/poco/include/Poco/Any.h \
  ../../../libs/openFrameworks/math/ofVectorMath.h \
  ../../../libs/openFrameworks/math/ofMatrix3x3.h \
  ../../../libs/openFrameworks/communication/ofSerial.h \
@@ -124,19 +111,26 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
  ../../../libs/openFrameworks/gl/ofVboMesh.h \
  ../../../libs/openFrameworks/gl/ofVbo.h \
  ../../../libs/openFrameworks/gl/ofGLUtils.h \
+ ../../../libs/openFrameworks/gl/ofBufferObject.h \
  ../../../libs/openFrameworks/gl/ofGLRenderer.h \
  ../../../libs/openFrameworks/graphics/ofPolyline.h \
- ../../../libs/openFrameworks/graphics/ofGraphics.h \
- ../../../libs/openFrameworks/utils/ofMatrixStack.h \
- ../../../libs/openFrameworks/gl/ofLight.h \
- ../../../libs/openFrameworks/3d/ofNode.h \
- ../../../libs/openFrameworks/3d/of3dUtils.h \
  ../../../libs/openFrameworks/graphics/of3dGraphics.h \
  ../../../libs/openFrameworks/3d/of3dPrimitives.h \
+ ../../../libs/openFrameworks/3d/ofNode.h \
+ ../../../libs/openFrameworks/3d/of3dUtils.h \
+ ../../../libs/openFrameworks/app/ofAppRunner.h \
+ ../../../libs/openFrameworks/app/ofWindowSettings.h \
+ ../../../libs/openFrameworks/app/ofMainLoop.h \
+ ../../../libs/openFrameworks/app/ofAppBaseWindow.h \
+ ../../../libs/openFrameworks/app/ofBaseApp.h \
+ ../../../libs/openFrameworks/graphics/ofBitmapFont.h \
+ ../../../libs/openFrameworks/utils/ofMatrixStack.h \
+ ../../../libs/openFrameworks/graphics/ofGraphics.h \
+ ../../../libs/openFrameworks/graphics/ofPath.h \
+ ../../../libs/openFrameworks/graphics/ofTessellator.h \
+ ../../../libs/openFrameworks/gl/ofLight.h \
  ../../../libs/openFrameworks/gl/ofMaterial.h \
  ../../../libs/openFrameworks/gl/ofShader.h \
- ../../../libs/poco/include/Poco/RegularExpression.h \
- ../../../libs/openFrameworks/app/ofAppBaseWindow.h \
  ../../../libs/openFrameworks/gl/ofGLProgrammableRenderer.h \
  ../../../libs/openFrameworks/graphics/ofCairoRenderer.h \
  /usr/include/cairo/cairo-features.h /usr/include/cairo/cairo-pdf.h \
@@ -144,22 +138,23 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
  /usr/include/cairo/cairo-features.h \
  /usr/include/cairo/cairo-deprecated.h /usr/include/cairo/cairo-svg.h \
  /usr/include/cairo/cairo.h \
- ../../../libs/openFrameworks/graphics/ofPath.h \
- ../../../libs/openFrameworks/graphics/ofTessellator.h \
  ../../../libs/openFrameworks/graphics/ofImage.h \
  ../../../libs/openFrameworks/graphics/ofRendererCollection.h \
  ../../../libs/openFrameworks/graphics/ofTrueTypeFont.h \
- ../../../libs/openFrameworks/app/ofBaseApp.h \
- ../../../libs/openFrameworks/app/ofAppRunner.h \
+ ../../../libs/openFrameworks/app/ofAppGLFWWindow.h \
+ ../../../libs/glfw/include/GLFW/glfw3.h \
+ ../../../libs/openFrameworks/app/ofAppGlutWindow.h \
  ../../../libs/openFrameworks/sound/ofSoundStream.h \
  ../../../libs/openFrameworks/sound/ofBaseSoundStream.h \
  ../../../libs/openFrameworks/sound/ofRtAudioSoundStream.h \
+ ../../../libs/openFrameworks/sound/ofSoundBuffer.h \
  ../../../libs/openFrameworks/sound/ofSoundPlayer.h \
  ../../../libs/openFrameworks/sound/ofBaseSoundPlayer.h \
  ../../../libs/openFrameworks/sound/ofOpenALSoundPlayer.h \
  ../../../libs/kiss/include/kiss_fft.h \
  ../../../libs/kiss/include/kiss_fftr.h \
  ../../../libs/kiss/include/kiss_fft.h \
+ ../../../libs/openFrameworks/sound/ofSoundBuffer.h \
  ../../../libs/openFrameworks/video/ofVideoGrabber.h \
  ../../../libs/openFrameworks/video/ofGstVideoGrabber.h \
  ../../../libs/openFrameworks/video/ofGstUtils.h \
@@ -314,100 +309,72 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
  /usr/include/gstreamer-1.0/gst/gstutils.h \
  /usr/include/gstreamer-1.0/gst/gstparse.h \
  /usr/include/gstreamer-1.0/gst/gstcompat.h \
+ /usr/include/gstreamer-1.0/gst/video/video.h \
+ /usr/include/gstreamer-1.0/gst/video/video-format.h \
+ /usr/include/gstreamer-1.0/gst/video/video-enumtypes.h \
+ /usr/include/gstreamer-1.0/gst/video/video-tile.h \
+ /usr/include/gstreamer-1.0/gst/video/video-chroma.h \
+ /usr/include/gstreamer-1.0/gst/video/video-color.h \
+ /usr/include/gstreamer-1.0/gst/video/video-dither.h \
+ /usr/include/gstreamer-1.0/gst/video/video-info.h \
+ /usr/include/gstreamer-1.0/gst/video/video-frame.h \
+ /usr/include/gstreamer-1.0/gst/video/video-converter.h \
+ /usr/include/gstreamer-1.0/gst/video/video-scaler.h \
+ /usr/include/gstreamer-1.0/gst/video/video-resampler.h \
+ /usr/include/gstreamer-1.0/gst/video/video-multiview.h \
+ /usr/include/gstreamer-1.0/gst/video/colorbalancechannel.h \
+ /usr/include/gstreamer-1.0/gst/video/colorbalance.h \
+ /usr/include/gstreamer-1.0/gst/video/gstvideodecoder.h \
+ /usr/include/gstreamer-1.0/gst/base/gstadapter.h \
+ /usr/include/gstreamer-1.0/gst/video/gstvideoutils.h \
+ /usr/include/gstreamer-1.0/gst/video/gstvideoencoder.h \
+ /usr/include/gstreamer-1.0/gst/video/gstvideofilter.h \
+ /usr/include/gstreamer-1.0/gst/base/gstbasetransform.h \
+ /usr/include/gstreamer-1.0/gst/video/gstvideometa.h \
+ /usr/include/gstreamer-1.0/gst/video/gstvideopool.h \
+ /usr/include/gstreamer-1.0/gst/video/gstvideosink.h \
+ /usr/include/gstreamer-1.0/gst/base/gstbasesink.h \
+ /usr/include/gstreamer-1.0/gst/video/navigation.h \
+ /usr/include/gstreamer-1.0/gst/video/video-blend.h \
+ /usr/include/gstreamer-1.0/gst/video/video-event.h \
+ /usr/include/gstreamer-1.0/gst/video/videoorientation.h \
+ /usr/include/gstreamer-1.0/gst/video/video-overlay-composition.h \
+ /usr/include/gstreamer-1.0/gst/video/videooverlay.h \
  ../../../libs/openFrameworks/video/ofVideoPlayer.h \
  ../../../libs/openFrameworks/video/ofGstVideoPlayer.h \
  ../../../libs/openFrameworks/3d/ofCamera.h \
- ../../../libs/openFrameworks/3d/ofEasyCam.h src/ofApp.h \
- ../../../addons/ofxGamepad/src/ofxGamepad.h \
- ../../../addons/ofxGamepad/src/ofxGamepadConfigs.h \
- ../../../addons/ofxGamepad/src/ofxGamepadHandler.h \
- ../../../addons/ofxGamepad/src/ofxGamepad.h \
- ../../../addons/ofxGamepad/src/ofxGamepadLinux.h \
- ../../../addons/ofxGui/src/ofxGui.h \
- ../../../addons/ofxGui/src/ofxToggle.h \
- ../../../addons/ofxGui/src/ofxBaseGui.h \
- ../../../addons/ofxGui/src/ofxSlider.h \
- ../../../addons/ofxGui/src/ofxSliderGroup.h \
- ../../../addons/ofxGui/src/ofxGuiGroup.h \
- ../../../addons/ofxGui/src/ofxButton.h \
- ../../../addons/ofxGui/src/ofxPanel.h \
- ../../../addons/ofxGui/src/ofxLabel.h \
- ../../../addons/ofxNetwork/src/ofxNetwork.h \
- ../../../addons/ofxNetwork/src/ofxTCPClient.h \
- ../../../addons/ofxNetwork/src/ofxTCPManager.h \
- ../../../addons/ofxNetwork/src/ofxTCPServer.h \
- ../../../addons/ofxNetwork/src/ofxUDPManager.h \
- ../../../addons/ofxOpenCv/src/ofxOpenCv.h \
- ../../../addons/ofxOpenCv/src/ofxCvConstants.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv/cv.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/core/core_c.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/core/types_c.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/core/core.hpp \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/core/version.hpp \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/core/operations.hpp \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/core/mat.hpp \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/imgproc/imgproc_c.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/imgproc/types_c.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/imgproc/imgproc.hpp \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/video/tracking.hpp \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/features2d/features2d.hpp \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/miniflann.hpp \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/defines.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/config.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/flann.hpp \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/flann_base.hpp \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/general.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/defines.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/matrix.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/params.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/any.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/saving.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/nn_index.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/result_set.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/all_indices.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/kdtree_index.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/dynamic_bitset.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/dist.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/heap.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/allocator.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/random.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/kdtree_single_index.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/kmeans_index.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/logger.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/composite_index.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/linear_index.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/hierarchical_clustering_index.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/lsh_index.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/lsh_table.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/autotuned_index.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/ground_truth.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/index_testing.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/timer.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/sampling.h \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/calib3d/calib3d.hpp \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/objdetect/objdetect.hpp \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/legacy/compat.hpp \
- ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/core/internal.hpp \
- ../../../addons/ofxOpenCv/src/ofxCvImage.h \
- ../../../addons/ofxOpenCv/src/ofxCvGrayscaleImage.h \
- ../../../addons/ofxOpenCv/src/ofxCvBlob.h \
- ../../../addons/ofxOpenCv/src/ofxCvColorImage.h \
- ../../../addons/ofxOpenCv/src/ofxCvFloatImage.h \
- ../../../addons/ofxOpenCv/src/ofxCvShortImage.h \
- ../../../addons/ofxOpenCv/src/ofxCvContourFinder.h \
- ../../../addons/ofxOpenCv/src/ofxCvHaarFinder.h \
- ../../../addons/ofxAxisGrabber/src/ofxAxisGrabber.h \
- ../../../addons/ofxHttpUtils/src/ofxHttpUtils.h \
- ../../../libs/poco/include/Poco/Net/HTTPResponse.h \
- ../../../libs/poco/include/Poco/Net/Net.h \
- ../../../libs/poco/include/Poco/Net/HTTPMessage.h \
- ../../../libs/poco/include/Poco/Net/MessageHeader.h \
- ../../../libs/poco/include/Poco/Net/NameValueCollection.h \
- ../../../libs/poco/include/Poco/String.h \
- ../../../libs/poco/include/Poco/Ascii.h \
- ../../../libs/poco/include/Poco/Net/HTTPCookie.h \
- ../../../libs/poco/include/Poco/Net/HTTPBasicCredentials.h \
- ../../../addons/ofxHttpUtils/src/ofxHttpTypes.h
+ ../../../libs/openFrameworks/3d/ofEasyCam.h \
+ /home/aren/Code/openFrameworks/apps/myApps/ScotchOARKit/src/ofApp.h \
+ /home/aren/Code/openFrameworks/addons/ofxGamepad/src/ofxGamepad.h \
+ /home/aren/Code/openFrameworks/addons/ofxGamepad/src/ofxGamepadConfigs.h \
+ /home/aren/Code/openFrameworks/addons/ofxGamepad/src/ofxGamepadHandler.h \
+ /home/aren/Code/openFrameworks/addons/ofxGamepad/src/ofxGamepad.h \
+ /home/aren/Code/openFrameworks/addons/ofxGamepad/src/ofxGamepadLinux.h \
+ /home/aren/Code/openFrameworks/addons/ofxGui/src/ofxGui.h \
+ /home/aren/Code/openFrameworks/addons/ofxGui/src/ofxToggle.h \
+ /home/aren/Code/openFrameworks/addons/ofxGui/src/ofxBaseGui.h \
+ /home/aren/Code/openFrameworks/addons/ofxGui/src/ofxSlider.h \
+ /home/aren/Code/openFrameworks/addons/ofxGui/src/ofxSliderGroup.h \
+ /home/aren/Code/openFrameworks/addons/ofxGui/src/ofxGuiGroup.h \
+ /home/aren/Code/openFrameworks/addons/ofxGui/src/ofxButton.h \
+ /home/aren/Code/openFrameworks/addons/ofxGui/src/ofxPanel.h \
+ /home/aren/Code/openFrameworks/addons/ofxGui/src/ofxLabel.h \
+ /home/aren/Code/openFrameworks/addons/ofxNetwork/src/ofxNetwork.h \
+ /home/aren/Code/openFrameworks/addons/ofxNetwork/src/ofxTCPClient.h \
+ /home/aren/Code/openFrameworks/addons/ofxNetwork/src/ofxTCPManager.h \
+ /home/aren/Code/openFrameworks/addons/ofxNetwork/src/ofxTCPServer.h \
+ /home/aren/Code/openFrameworks/addons/ofxNetwork/src/ofxUDPManager.h \
+ /home/aren/Code/openFrameworks/addons/ofxOpenCv/src/ofxOpenCv.h \
+ /home/aren/Code/openFrameworks/addons/ofxOpenCv/src/ofxCvConstants.h \
+ /usr/include/opencv/cv.h \
+ /home/aren/Code/openFrameworks/addons/ofxOpenCv/src/ofxCvImage.h \
+ /home/aren/Code/openFrameworks/addons/ofxOpenCv/src/ofxCvGrayscaleImage.h \
+ /home/aren/Code/openFrameworks/addons/ofxOpenCv/src/ofxCvBlob.h \
+ /home/aren/Code/openFrameworks/addons/ofxOpenCv/src/ofxCvColorImage.h \
+ /home/aren/Code/openFrameworks/addons/ofxOpenCv/src/ofxCvFloatImage.h \
+ /home/aren/Code/openFrameworks/addons/ofxOpenCv/src/ofxCvShortImage.h \
+ /home/aren/Code/openFrameworks/addons/ofxOpenCv/src/ofxCvContourFinder.h \
+ /home/aren/Code/openFrameworks/addons/ofxOpenCv/src/ofxCvHaarFinder.h
 
 ../../../libs/openFrameworks/ofMain.h:
 
@@ -416,24 +383,6 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
 ../../../libs/tess2/include/tesselator.h:
 
 ../../../libs/openFrameworks/utils/ofFileUtils.h:
-
-../../../libs/poco/include/Poco/File.h:
-
-../../../libs/poco/include/Poco/Foundation.h:
-
-../../../libs/poco/include/Poco/Config.h:
-
-../../../libs/poco/include/Poco/Platform.h:
-
-../../../libs/poco/include/Poco/Platform_POSIX.h:
-
-../../../libs/poco/include/Poco/Bugcheck.h:
-
-../../../libs/poco/include/Poco/Types.h:
-
-../../../libs/poco/include/Poco/Timestamp.h:
-
-../../../libs/poco/include/Poco/File_UNIX.h:
 
 ../../../libs/openFrameworks/utils/ofLog.h:
 
@@ -451,6 +400,48 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
 
 ../../../libs/openFrameworks/math/ofVec4f.h:
 
+../../../libs/openFrameworks/utils/ofSystemUtils.h:
+
+../../../libs/openFrameworks/utils/ofURLFileLoader.h:
+
+../../../libs/openFrameworks/events/ofEvents.h:
+
+../../../libs/openFrameworks/events/ofEventUtils.h:
+
+../../../libs/openFrameworks/events/ofEvent.h:
+
+../../../libs/openFrameworks/utils/ofTimer.h:
+
+../../../libs/openFrameworks/utils/ofFpsCounter.h:
+
+../../../libs/openFrameworks/utils/ofUtils.h:
+
+../../../libs/utf8cpp/include/utf8.h:
+
+../../../libs/utf8cpp/include/utf8/checked.h:
+
+../../../libs/utf8cpp/include/utf8/core.h:
+
+../../../libs/utf8cpp/include/utf8/unchecked.h:
+
+../../../libs/openFrameworks/utils/ofThread.h:
+
+../../../libs/poco/include/Poco/AtomicCounter.h:
+
+../../../libs/poco/include/Poco/Foundation.h:
+
+../../../libs/poco/include/Poco/Config.h:
+
+../../../libs/poco/include/Poco/Platform.h:
+
+../../../libs/poco/include/Poco/Platform_POSIX.h:
+
+../../../libs/poco/include/Poco/Alignment.h:
+
+../../../libs/poco/include/Poco/Bugcheck.h:
+
+../../../libs/poco/include/Poco/Types.h:
+
 ../../../libs/poco/include/Poco/Mutex.h:
 
 ../../../libs/poco/include/Poco/Exception.h:
@@ -459,13 +450,11 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
 
 ../../../libs/poco/include/Poco/Mutex_POSIX.h:
 
-../../../libs/openFrameworks/utils/ofSystemUtils.h:
-
-../../../libs/openFrameworks/utils/ofThread.h:
-
-../../../libs/poco/include/Poco/AtomicCounter.h:
-
 ../../../libs/poco/include/Poco/Thread.h:
+
+../../../libs/poco/include/Poco/Event.h:
+
+../../../libs/poco/include/Poco/Event_POSIX.h:
 
 ../../../libs/poco/include/Poco/Thread_POSIX.h:
 
@@ -473,65 +462,21 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
 
 ../../../libs/poco/include/Poco/SignalHandler.h:
 
-../../../libs/poco/include/Poco/Event.h:
-
-../../../libs/poco/include/Poco/Event_POSIX.h:
-
 ../../../libs/poco/include/Poco/RefCountedObject.h:
 
 ../../../libs/poco/include/Poco/AutoPtr.h:
 
-../../../libs/openFrameworks/utils/ofURLFileLoader.h:
-
-../../../libs/openFrameworks/events/ofEvents.h:
-
-../../../libs/openFrameworks/events/ofEventUtils.h:
-
-../../../libs/poco/include/Poco/PriorityEvent.h:
-
-../../../libs/poco/include/Poco/AbstractEvent.h:
-
-../../../libs/poco/include/Poco/SingletonHolder.h:
-
 ../../../libs/poco/include/Poco/SharedPtr.h:
 
-../../../libs/poco/include/Poco/ActiveResult.h:
-
-../../../libs/poco/include/Poco/ActiveMethod.h:
-
-../../../libs/poco/include/Poco/ActiveRunnable.h:
-
-../../../libs/poco/include/Poco/ActiveStarter.h:
-
-../../../libs/poco/include/Poco/ThreadPool.h:
-
-../../../libs/poco/include/Poco/PriorityStrategy.h:
-
-../../../libs/poco/include/Poco/NotificationStrategy.h:
-
-../../../libs/poco/include/Poco/AbstractPriorityDelegate.h:
-
-../../../libs/poco/include/Poco/AbstractDelegate.h:
-
-../../../libs/poco/include/Poco/PriorityDelegate.h:
-
-../../../libs/poco/include/Poco/PriorityExpire.h:
-
-../../../libs/poco/include/Poco/FunctionPriorityDelegate.h:
-
-../../../libs/openFrameworks/events/ofDelegate.h:
-
-../../../libs/poco/include/Poco/Condition.h:
-
-../../../libs/poco/include/Poco/ScopedUnlock.h:
-
-../../../libs/openFrameworks/utils/ofUtils.h:
-
-../../../libs/poco/include/Poco/Path.h:
+../../../libs/openFrameworks/utils/ofThreadChannel.h:
 
 ../../../libs/openFrameworks/types/ofBaseTypes.h:
 
 ../../../libs/openFrameworks/types/ofRectangle.h:
+
+../../../libs/openFrameworks/math/ofMatrix4x4.h:
+
+../../../libs/openFrameworks/math/ofQuaternion.h:
 
 ../../../libs/openFrameworks/3d/ofMesh.h:
 
@@ -539,11 +484,11 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
 
 ../../../libs/openFrameworks/graphics/ofPixels.h:
 
-../../../libs/openFrameworks/math/ofMatrix4x4.h:
-
-../../../libs/openFrameworks/math/ofQuaternion.h:
-
 ../../../libs/openFrameworks/utils/ofXml.h:
+
+../../../libs/openFrameworks/types/ofParameter.h:
+
+../../../libs/openFrameworks/types/ofParameterGroup.h:
 
 ../../../libs/poco/include/Poco/DOM/Document.h:
 
@@ -635,12 +580,6 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
 
 ../../../libs/poco/include/Poco/DOM/NodeList.h:
 
-../../../libs/openFrameworks/types/ofParameter.h:
-
-../../../libs/openFrameworks/types/ofParameterGroup.h:
-
-../../../libs/poco/include/Poco/Any.h:
-
 ../../../libs/openFrameworks/math/ofVectorMath.h:
 
 ../../../libs/openFrameworks/math/ofMatrix3x3.h:
@@ -659,31 +598,45 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
 
 ../../../libs/openFrameworks/gl/ofGLUtils.h:
 
+../../../libs/openFrameworks/gl/ofBufferObject.h:
+
 ../../../libs/openFrameworks/gl/ofGLRenderer.h:
 
 ../../../libs/openFrameworks/graphics/ofPolyline.h:
-
-../../../libs/openFrameworks/graphics/ofGraphics.h:
-
-../../../libs/openFrameworks/utils/ofMatrixStack.h:
-
-../../../libs/openFrameworks/gl/ofLight.h:
-
-../../../libs/openFrameworks/3d/ofNode.h:
-
-../../../libs/openFrameworks/3d/of3dUtils.h:
 
 ../../../libs/openFrameworks/graphics/of3dGraphics.h:
 
 ../../../libs/openFrameworks/3d/of3dPrimitives.h:
 
+../../../libs/openFrameworks/3d/ofNode.h:
+
+../../../libs/openFrameworks/3d/of3dUtils.h:
+
+../../../libs/openFrameworks/app/ofAppRunner.h:
+
+../../../libs/openFrameworks/app/ofWindowSettings.h:
+
+../../../libs/openFrameworks/app/ofMainLoop.h:
+
+../../../libs/openFrameworks/app/ofAppBaseWindow.h:
+
+../../../libs/openFrameworks/app/ofBaseApp.h:
+
+../../../libs/openFrameworks/graphics/ofBitmapFont.h:
+
+../../../libs/openFrameworks/utils/ofMatrixStack.h:
+
+../../../libs/openFrameworks/graphics/ofGraphics.h:
+
+../../../libs/openFrameworks/graphics/ofPath.h:
+
+../../../libs/openFrameworks/graphics/ofTessellator.h:
+
+../../../libs/openFrameworks/gl/ofLight.h:
+
 ../../../libs/openFrameworks/gl/ofMaterial.h:
 
 ../../../libs/openFrameworks/gl/ofShader.h:
-
-../../../libs/poco/include/Poco/RegularExpression.h:
-
-../../../libs/openFrameworks/app/ofAppBaseWindow.h:
 
 ../../../libs/openFrameworks/gl/ofGLProgrammableRenderer.h:
 
@@ -705,25 +658,25 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
 
 /usr/include/cairo/cairo.h:
 
-../../../libs/openFrameworks/graphics/ofPath.h:
-
-../../../libs/openFrameworks/graphics/ofTessellator.h:
-
 ../../../libs/openFrameworks/graphics/ofImage.h:
 
 ../../../libs/openFrameworks/graphics/ofRendererCollection.h:
 
 ../../../libs/openFrameworks/graphics/ofTrueTypeFont.h:
 
-../../../libs/openFrameworks/app/ofBaseApp.h:
+../../../libs/openFrameworks/app/ofAppGLFWWindow.h:
 
-../../../libs/openFrameworks/app/ofAppRunner.h:
+../../../libs/glfw/include/GLFW/glfw3.h:
+
+../../../libs/openFrameworks/app/ofAppGlutWindow.h:
 
 ../../../libs/openFrameworks/sound/ofSoundStream.h:
 
 ../../../libs/openFrameworks/sound/ofBaseSoundStream.h:
 
 ../../../libs/openFrameworks/sound/ofRtAudioSoundStream.h:
+
+../../../libs/openFrameworks/sound/ofSoundBuffer.h:
 
 ../../../libs/openFrameworks/sound/ofSoundPlayer.h:
 
@@ -736,6 +689,8 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
 ../../../libs/kiss/include/kiss_fftr.h:
 
 ../../../libs/kiss/include/kiss_fft.h:
+
+../../../libs/openFrameworks/sound/ofSoundBuffer.h:
 
 ../../../libs/openFrameworks/video/ofVideoGrabber.h:
 
@@ -1073,6 +1028,68 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
 
 /usr/include/gstreamer-1.0/gst/gstcompat.h:
 
+/usr/include/gstreamer-1.0/gst/video/video.h:
+
+/usr/include/gstreamer-1.0/gst/video/video-format.h:
+
+/usr/include/gstreamer-1.0/gst/video/video-enumtypes.h:
+
+/usr/include/gstreamer-1.0/gst/video/video-tile.h:
+
+/usr/include/gstreamer-1.0/gst/video/video-chroma.h:
+
+/usr/include/gstreamer-1.0/gst/video/video-color.h:
+
+/usr/include/gstreamer-1.0/gst/video/video-dither.h:
+
+/usr/include/gstreamer-1.0/gst/video/video-info.h:
+
+/usr/include/gstreamer-1.0/gst/video/video-frame.h:
+
+/usr/include/gstreamer-1.0/gst/video/video-converter.h:
+
+/usr/include/gstreamer-1.0/gst/video/video-scaler.h:
+
+/usr/include/gstreamer-1.0/gst/video/video-resampler.h:
+
+/usr/include/gstreamer-1.0/gst/video/video-multiview.h:
+
+/usr/include/gstreamer-1.0/gst/video/colorbalancechannel.h:
+
+/usr/include/gstreamer-1.0/gst/video/colorbalance.h:
+
+/usr/include/gstreamer-1.0/gst/video/gstvideodecoder.h:
+
+/usr/include/gstreamer-1.0/gst/base/gstadapter.h:
+
+/usr/include/gstreamer-1.0/gst/video/gstvideoutils.h:
+
+/usr/include/gstreamer-1.0/gst/video/gstvideoencoder.h:
+
+/usr/include/gstreamer-1.0/gst/video/gstvideofilter.h:
+
+/usr/include/gstreamer-1.0/gst/base/gstbasetransform.h:
+
+/usr/include/gstreamer-1.0/gst/video/gstvideometa.h:
+
+/usr/include/gstreamer-1.0/gst/video/gstvideopool.h:
+
+/usr/include/gstreamer-1.0/gst/video/gstvideosink.h:
+
+/usr/include/gstreamer-1.0/gst/base/gstbasesink.h:
+
+/usr/include/gstreamer-1.0/gst/video/navigation.h:
+
+/usr/include/gstreamer-1.0/gst/video/video-blend.h:
+
+/usr/include/gstreamer-1.0/gst/video/video-event.h:
+
+/usr/include/gstreamer-1.0/gst/video/videoorientation.h:
+
+/usr/include/gstreamer-1.0/gst/video/video-overlay-composition.h:
+
+/usr/include/gstreamer-1.0/gst/video/videooverlay.h:
+
 ../../../libs/openFrameworks/video/ofVideoPlayer.h:
 
 ../../../libs/openFrameworks/video/ofGstVideoPlayer.h:
@@ -1081,184 +1098,64 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
 
 ../../../libs/openFrameworks/3d/ofEasyCam.h:
 
-src/ofApp.h:
+/home/aren/Code/openFrameworks/apps/myApps/ScotchOARKit/src/ofApp.h:
 
-../../../addons/ofxGamepad/src/ofxGamepad.h:
+/home/aren/Code/openFrameworks/addons/ofxGamepad/src/ofxGamepad.h:
 
-../../../addons/ofxGamepad/src/ofxGamepadConfigs.h:
+/home/aren/Code/openFrameworks/addons/ofxGamepad/src/ofxGamepadConfigs.h:
 
-../../../addons/ofxGamepad/src/ofxGamepadHandler.h:
+/home/aren/Code/openFrameworks/addons/ofxGamepad/src/ofxGamepadHandler.h:
 
-../../../addons/ofxGamepad/src/ofxGamepad.h:
+/home/aren/Code/openFrameworks/addons/ofxGamepad/src/ofxGamepad.h:
 
-../../../addons/ofxGamepad/src/ofxGamepadLinux.h:
+/home/aren/Code/openFrameworks/addons/ofxGamepad/src/ofxGamepadLinux.h:
 
-../../../addons/ofxGui/src/ofxGui.h:
+/home/aren/Code/openFrameworks/addons/ofxGui/src/ofxGui.h:
 
-../../../addons/ofxGui/src/ofxToggle.h:
+/home/aren/Code/openFrameworks/addons/ofxGui/src/ofxToggle.h:
 
-../../../addons/ofxGui/src/ofxBaseGui.h:
+/home/aren/Code/openFrameworks/addons/ofxGui/src/ofxBaseGui.h:
 
-../../../addons/ofxGui/src/ofxSlider.h:
+/home/aren/Code/openFrameworks/addons/ofxGui/src/ofxSlider.h:
 
-../../../addons/ofxGui/src/ofxSliderGroup.h:
+/home/aren/Code/openFrameworks/addons/ofxGui/src/ofxSliderGroup.h:
 
-../../../addons/ofxGui/src/ofxGuiGroup.h:
+/home/aren/Code/openFrameworks/addons/ofxGui/src/ofxGuiGroup.h:
 
-../../../addons/ofxGui/src/ofxButton.h:
+/home/aren/Code/openFrameworks/addons/ofxGui/src/ofxButton.h:
 
-../../../addons/ofxGui/src/ofxPanel.h:
+/home/aren/Code/openFrameworks/addons/ofxGui/src/ofxPanel.h:
 
-../../../addons/ofxGui/src/ofxLabel.h:
+/home/aren/Code/openFrameworks/addons/ofxGui/src/ofxLabel.h:
 
-../../../addons/ofxNetwork/src/ofxNetwork.h:
+/home/aren/Code/openFrameworks/addons/ofxNetwork/src/ofxNetwork.h:
 
-../../../addons/ofxNetwork/src/ofxTCPClient.h:
+/home/aren/Code/openFrameworks/addons/ofxNetwork/src/ofxTCPClient.h:
 
-../../../addons/ofxNetwork/src/ofxTCPManager.h:
+/home/aren/Code/openFrameworks/addons/ofxNetwork/src/ofxTCPManager.h:
 
-../../../addons/ofxNetwork/src/ofxTCPServer.h:
+/home/aren/Code/openFrameworks/addons/ofxNetwork/src/ofxTCPServer.h:
 
-../../../addons/ofxNetwork/src/ofxUDPManager.h:
+/home/aren/Code/openFrameworks/addons/ofxNetwork/src/ofxUDPManager.h:
 
-../../../addons/ofxOpenCv/src/ofxOpenCv.h:
+/home/aren/Code/openFrameworks/addons/ofxOpenCv/src/ofxOpenCv.h:
 
-../../../addons/ofxOpenCv/src/ofxCvConstants.h:
+/home/aren/Code/openFrameworks/addons/ofxOpenCv/src/ofxCvConstants.h:
 
-../../../addons/ofxOpenCv/libs/opencv/include/opencv/cv.h:
+/usr/include/opencv/cv.h:
 
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/core/core_c.h:
+/home/aren/Code/openFrameworks/addons/ofxOpenCv/src/ofxCvImage.h:
 
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/core/types_c.h:
+/home/aren/Code/openFrameworks/addons/ofxOpenCv/src/ofxCvGrayscaleImage.h:
 
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/core/core.hpp:
+/home/aren/Code/openFrameworks/addons/ofxOpenCv/src/ofxCvBlob.h:
 
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/core/version.hpp:
+/home/aren/Code/openFrameworks/addons/ofxOpenCv/src/ofxCvColorImage.h:
 
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/core/operations.hpp:
+/home/aren/Code/openFrameworks/addons/ofxOpenCv/src/ofxCvFloatImage.h:
 
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/core/mat.hpp:
+/home/aren/Code/openFrameworks/addons/ofxOpenCv/src/ofxCvShortImage.h:
 
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/imgproc/imgproc_c.h:
+/home/aren/Code/openFrameworks/addons/ofxOpenCv/src/ofxCvContourFinder.h:
 
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/imgproc/types_c.h:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/imgproc/imgproc.hpp:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/video/tracking.hpp:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/features2d/features2d.hpp:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/miniflann.hpp:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/defines.h:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/config.h:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/flann.hpp:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/flann_base.hpp:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/general.h:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/defines.h:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/matrix.h:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/params.h:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/any.h:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/saving.h:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/nn_index.h:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/result_set.h:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/all_indices.h:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/kdtree_index.h:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/dynamic_bitset.h:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/dist.h:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/heap.h:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/allocator.h:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/random.h:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/kdtree_single_index.h:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/kmeans_index.h:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/logger.h:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/composite_index.h:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/linear_index.h:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/hierarchical_clustering_index.h:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/lsh_index.h:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/lsh_table.h:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/autotuned_index.h:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/ground_truth.h:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/index_testing.h:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/timer.h:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/sampling.h:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/calib3d/calib3d.hpp:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/objdetect/objdetect.hpp:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/legacy/compat.hpp:
-
-../../../addons/ofxOpenCv/libs/opencv/include/opencv2/core/internal.hpp:
-
-../../../addons/ofxOpenCv/src/ofxCvImage.h:
-
-../../../addons/ofxOpenCv/src/ofxCvGrayscaleImage.h:
-
-../../../addons/ofxOpenCv/src/ofxCvBlob.h:
-
-../../../addons/ofxOpenCv/src/ofxCvColorImage.h:
-
-../../../addons/ofxOpenCv/src/ofxCvFloatImage.h:
-
-../../../addons/ofxOpenCv/src/ofxCvShortImage.h:
-
-../../../addons/ofxOpenCv/src/ofxCvContourFinder.h:
-
-../../../addons/ofxOpenCv/src/ofxCvHaarFinder.h:
-
-../../../addons/ofxAxisGrabber/src/ofxAxisGrabber.h:
-
-../../../addons/ofxHttpUtils/src/ofxHttpUtils.h:
-
-../../../libs/poco/include/Poco/Net/HTTPResponse.h:
-
-../../../libs/poco/include/Poco/Net/Net.h:
-
-../../../libs/poco/include/Poco/Net/HTTPMessage.h:
-
-../../../libs/poco/include/Poco/Net/MessageHeader.h:
-
-../../../libs/poco/include/Poco/Net/NameValueCollection.h:
-
-../../../libs/poco/include/Poco/String.h:
-
-../../../libs/poco/include/Poco/Ascii.h:
-
-../../../libs/poco/include/Poco/Net/HTTPCookie.h:
-
-../../../libs/poco/include/Poco/Net/HTTPBasicCredentials.h:
-
-../../../addons/ofxHttpUtils/src/ofxHttpTypes.h:
+/home/aren/Code/openFrameworks/addons/ofxOpenCv/src/ofxCvHaarFinder.h:

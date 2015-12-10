@@ -8,7 +8,7 @@ void ofApp::setup(){
     //ofApp::textboxsetup();
     ofApp::uisetup();
     ofApp::gamepadsetup();
-    ofApp::camerasetup();
+    //ofApp::camerasetup();
 }
 //--------------------------------------------------------------
 void ofApp::exit(){
@@ -38,7 +38,6 @@ void ofApp::update(){
     {
        connectButton.setName("Disconnect");
     }
-    grabber.update();
 }
 
 //--------------------------------------------------------------
@@ -50,8 +49,6 @@ void ofApp::draw(){
 	ofPopMatrix();
 **/
     ofxGamepadHandler::get()->draw(200,200);
-
-    grabber.draw(0,0);
 
     if( bHide )
     {

@@ -1,14 +1,5 @@
-ofxXmlSettings
 ofxOpenCv
-ofxKinect
 ofxGui
-ofxSvg
-ofxAssimpModelLoader
-ofx3DModelLoader
-ofxVectorGraphics
 ofxNetwork
-ofxThreadedImageLoader
-ofxOsc
 ofxGamepad
-ofxAxisGrabber
 ofxHttpUtils
