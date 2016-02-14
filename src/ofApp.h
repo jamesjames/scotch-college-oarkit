@@ -4,6 +4,7 @@
 #include <libssh/libssh.h>
 #include <errno.h>
 #include <string.h>
+#include <iostream>
 
 #include "ofxGamepad.h"
 #include "ofxGamepadHandler.h"
@@ -11,32 +12,32 @@
 #include "ofxNetwork.h"
 #include "ofMain.h"
 #include "ofxOpenCv.h"
-#include "ofGstUtils.h"
+#include "ofxDatGui.h"
+#include "ofxMyIP.h"
+#include "ofxGLFWJoystick.h"
 
 class ofApp : public ofBaseApp{
-
 	public:
-	    //core OpenFrameworks functions
+		//core OpenFrameworks functions
 		void setup();
 		void update();
 		void draw();
-        void exit();
+		void exit();
 
-        //setup functions
-        void uisetup();
-        void gamepadsetup();
-        void textboxsetup();
-        void camerasetup();
-        void tcpsetup();
-        void setIP(string newIP);
-        void resetIP(string newIP);
+		//setup functions
+		void uisetup();
+		void gamepadsetup();
+		void textboxsetup();
+		void camerasetup();
+		void tcpsetup();
+		void ipsetup();
 
-        //Gamepad listeners
-        void axisChanged(ofxGamepadAxisEvent &e);
-        void buttonPressed(ofxGamepadButtonEvent &e);
-        void buttonReleased(ofxGamepadButtonEvent &e);
+		//Gamepad Events
+		void axisChanged(ofxGamepadAxisEvent &e);
+		void buttonPressed(ofxGamepadButtonEvent &e);
+		void buttonReleased(ofxGamepadButtonEvent &e);
 
-        //input listeners
+		//Input Events
 		void keyPressed(int key, string IP);
 		void keyReleased(int key);
 		void mouseMoved(int x, int y );
@@ -47,27 +48,20 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 
-        //ui listener
-		void connectButtonPressed();
-		void playButtonPressed();
-		void disconnectButtonPressed();
+		//Gui Events
+		void DatGuiButtonEvent(ofxDatGuiButtonEvent e);
+		void DatGuiTextInputEvent(ofxDatGuiTextInputEvent e);
 
-        //ui variable
-        bool bHide;
+		//Gui Definitions
+		//ofxDatGuiButton* iptext;
+		vector<ofxDatGuiComponent*> components;
+		ofxDatGuiValuePlotter* plotter;
 
-        //textbox functions
-		void	drawText();
-		void	typeKey(int key);
-		string	text;
-		int		position;
-		int		cursorx, cursory;
 
-        //ui definitions
-		ofxButton connectButton;
-		ofxButton disconnectButton;
-        ofxButton playButton;
-        ofxPanel networkcontrol;
+		//Network Definitions
+		ofxTCPClient tcpClient;
 
-        //network definitions
-        ofxTCPClient tcpClient;
+	private:
+    	ofxMyIP myip;
+    	string result;
 };

@@ -1,5 +1,10 @@
-ofxOpenCv
-ofxGui
-ofxNetwork
+ofxAssets
+ofxDatGui
 ofxGamepad
+ofxGui
 ofxHttpUtils
+ofxNetwork
+ofxOpenCv
+ofxVectorGraphics
+ofxMyIP
+ofxGLFWJoystick
