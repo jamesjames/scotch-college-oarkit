@@ -1,155 +1,60 @@
-#!/usr/bin/env python
+#Connection details
+TCP_IP = "localhost"
+TCP_PORT = 5006
 
-"""
-The MIT License (MIT)
+connect = True #Set to true to connect to Pi
 
-Copyright (c) Sat May 23 2015 Aren Leishman, Andrew Schaff, James Oakey, James Barr
+#Ensure that we can import all of the libraries in BotLib
+import sys
+sys.path.insert(0, 'BotLib/')
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the "Software"), to deal in
-the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-the Software, and to permit persons to whom the Software is furnished to do so,
-subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-IN AN ACTION OF CONTRACT, TORTOR OTHERWISE, ARISING FROM, OUT OF OR IN
-CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-"""
-
-
-"""
-Constructed using the pygame.joystick library: https://www.pygame.org/docs/ref/joystick.html
-'map' function from: https://mail.python.org/pipermail/tutor/2013-August/097291.html
-
-Game Controller Button Map
-0 - Square
-1 - Cross/X
-2 - Circle/O
-3 - Triangle
-4 - L1
-5 - R1
-6 - L2
-7 - R2
-8 - SELECT
-9 - START
-10 - L Joystick Press
-11 - R Joystick Press
-12 - Home/PS
-"""
+import GamepadInterface as GP #Import the gamepad interface
 
 import socket
-import pygame
-from time import sleep
 
-TCP_IP = '192.168.100.1'
-TCP_PORT = 5005
-BUFFER_SIZE = 1024
-MESSAGE = "System online"
+#Connect to server if 'connect' is True
+if connect:
+    conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    conn.connect((TCP_IP, TCP_PORT))
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect((TCP_IP, TCP_PORT))
-#s.send(MESSAGE)
+#Send the gamepad data to the Pi
+def usegamepad():
+    while True:
+        try:
+            gamepadData = GP.getState()[1]
+            print gamepadData
+            if connect:
+                conn.send("G" + gamepadData)
+                
+                while not conn.recv(1024): pass #Wait until the acknoledgement comes
+            
+        except KeyboardInterrupt:
+            print "\nGamepad input halted"
+            break
 
-
-#Pygame stuff
-pygame.init()
-#background_colour = (255,255,255)
-
-#screen = pygame.display.set_mode((500, 400), 0, 32)
-#pygame.display.set_caption('Controller Status')
-#screen.fill(background_colour)
-
-#pygame.display.flip()
-# set up fonts
-#basicFont = pygame.font.SysFont(None, 48)
-
-# set up the text
-#text = basicFont.render('Hello world!', True, (255,255,0), (255,0,0))
-
-
-def stop():
-	pygame.quit()
-	exit()
-
-buttonNames = {0 : "Square",
-			 1 : "Cross/X",
-			 2 : "Circle/O",
-			 3 : "Triangle",
-			 4 : "L1",
-			 5 : "R1",
-			 6 : "L2",
-			 7 : "R2",
-			 8 : "Select",
-			 9 : "Start",
-			 10 : "R Joystick",
-			 11 : "L Joystick",
-			 12 : "Home/PS"
-			 }
-
-#Map functions to the corresponding indices here
-buttonMap = ["", #Square
-                 "", #Cross/X
-                 "", #Circle/O
-                 "", #Triangle
-                 "", #L1
-                 "", #R1
-                 "", #L2
-                 "", #R2
-                 "", #Select
-                 "", #Start
-                 "", #Right Joystick
-                 "", #Left Joystick
-                 stop  #Home/PS
-                 ]
-
-hatState = []
-buttonState = []
-
-pygame.init()
-pygame.joystick.init()
-joystick = pygame.joystick.Joystick(0)
-
-joystick.init() #Initialize joystick for use
-
-servoPos = [0,0,0]
-
-def map(x, in_min, in_max, out_min, out_max):
-        return x
-
-for button in range(0,12):
-        buttonState.append([button + 1, 0])
+#Send manual commands
+def sendManualCmd():
+    while True:
+        try:
+            if connect:
+                conn.send(raw_input("Input command: "))
+                
+        except KeyboardInterrupt:
+            return
+        
+#Close the connection
+def close():
+    global conn
+    conn.close()
 
 
-while True:
-        for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                        stop()
+#usegamepad()
+sendManualCmd()
 
+if raw_input("\nDo you want to stop (y/n)?: ").lower() == "y":
+    GP.stopPygame()
+    
+    if connect:
+        conn.send("BREAK")
 
-        #Send positions of all axes [Right stick Vertical, Right Stick Horizontal, Left Stick Vertical, Left Stick Horizontal, Hat Vertical, Hat Horizontal]
-        positions = [joystick.get_axis(0), joystick.get_axis(1), joystick.get_axis(2), joystick.get_axis(3), joystick.get_hat(0)[0], joystick.get_hat(0)[1]]
-
-        for button in range(0,12):
-                positions.append(joystick.get_button(button))
-
-        #s.send(str(positions))
-        print (positions)
-        encode = str(positions)
-        sendpos = str.encode(encode)
-        s.send(sendpos)
-
-        sleep(0.1) #Debounce controls
-
-
-
-
-
-#s.close()
+    close()
