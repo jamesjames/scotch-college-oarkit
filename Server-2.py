@@ -13,7 +13,6 @@ import socket
 import time
 import yaml
 import sys
-import sys
 sys.path.insert(0, 'BotLib/') #Allows us to import stuff from BotLib
 
 import MotorPrefs
