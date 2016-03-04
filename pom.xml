@@ -10,6 +10,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <natives.version>0.0.6</natives.version>
         <json-simple.version>1.1.1</json-simple.version>
+        <serverLoc>Server-2.py</serverLoc>
     </properties>
     <repositories>
         <repository>
@@ -52,6 +53,22 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>write-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <outputFile>${project.build.outputDirectory}/com/scotch/OARKit/assets/properties/default.properties</outputFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>2.3</version>
@@ -72,6 +89,13 @@
                             <directory>Python/src/</directory>
                             <filtering>false</filtering>
 
+                        </resource>
+                        <resource>
+                            <directory>Java/src/</directory>
+                            <filtering>false</filtering>
+                            <excludes>
+                                <exclude>**/*.java</exclude>
+                            </excludes>
                         </resource>
                     </resources>
                 </configuration>

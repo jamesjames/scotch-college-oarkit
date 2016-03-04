@@ -7,7 +7,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import org.python.util.PythonInterpreter;
+
+import java.io.IOException;
 
 public class Main extends Application {
 
@@ -21,13 +22,9 @@ public class Main extends Application {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         if (args.length > 0 && args[0].equals("server")){
-            PythonInterpreter interp = new PythonInterpreter();
-            interp.exec("import sys");
-            //ALLOWS US TO PASS ARGS
-            //interp.exec("sys.argv = ['debug']");
-            interp.execfile("com/scotch/OARKit/python/Server-2.py");
+            new Server();
         }else{
             launch(args);
         }

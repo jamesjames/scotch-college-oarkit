@@ -13,8 +13,9 @@ RunServer = True    #Run the server = True, Use a local command interface = Fals
 import socket
 #import yaml
 import sys
-sys.path.insert(0, 'com/scotch/OARKit/python/BotLib/') #Allows us to import stuff from BotLib
+sys.path.insert(0, 'python') #Allows us to import stuff from BotLib
 
+##MotorPrefs = imp.load_source('MotorPrefs', './python/MotorPrefs.py')
 import MotorPrefs
 
 MotorPrefs.isSimulation = OnRobot #Simulation flag
