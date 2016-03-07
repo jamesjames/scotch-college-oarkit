@@ -1,7 +1,8 @@
 package com.scotch.OARKit.java;
 
+import com.scotch.OARKit.java.Command.BaseCommand;
+import com.scotch.OARKit.java.Command.Commands;
 import com.scotch.OARKit.java.helpers.ServerConnect;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -38,7 +39,7 @@ public class Controller implements Initializable, EventHandler{
             consoleLog.setText("Inside Dev Environment - Console Will Log but Commands will be ignored!!");
         }
 
-        restartNginx.setOnAction(event -> serverConnect.sendData("EHello"));
+        restartNginx.setOnAction(event -> new Commands(BaseCommand.ECHO,"Hello").runCommand());
     }
 
     @Override
