@@ -20,7 +20,7 @@ public class Controller implements Initializable, EventHandler{
     public static ServerConnect serverConnect;
     //FOR CAMERA
     @FXML
-    WebView webView;
+    WebView CameraWebView;
     WebEngine engine;
     @FXML
     Label consoleLog;
@@ -32,10 +32,11 @@ public class Controller implements Initializable, EventHandler{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //System.out.println(p.getProperty("insideDev"));
         if(Main.properties.getProperty("insideDev").equals("true")){
-            engine = webView.getEngine();
-            engine.loadContent("Inside Dev Environment - No Camera :(");
+            System.out.println("Inside Dev Enviroment");
+            engine = CameraWebView.getEngine();
+            engine.load("http://www.google.com");
+            //engine.loadContent("");
             consoleLog.setText("Inside Dev Environment - Console Will Log but Commands will be ignored!!");
         }
 

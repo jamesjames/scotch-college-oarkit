@@ -9,9 +9,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-/**
- * Created by Campbell Millar on 5/03/2016.
- */
 public class ServerConnect {
     //FOR DEFAULT CONNECTION
     private Socket socket;
@@ -57,8 +54,8 @@ public class ServerConnect {
     public void socketClose(){
         try {
             socket.close();
-        } catch (IOException e) {
-            System.err.println("Problem Closing Socket - Is the server still up?");
+        } catch (Exception e) {
+            //System.err.println("Problem Closing Socket - Is the server still up?");
         }
     }
 

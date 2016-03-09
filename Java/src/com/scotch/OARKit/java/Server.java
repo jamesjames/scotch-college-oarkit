@@ -6,9 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-/**
- * Created by Campbell Millar on 4/03/2016.
- */
 public class Server {
     Server() throws IOException {
         PythonInterpreter interp = new PythonInterpreter();

@@ -2,9 +2,6 @@ package com.scotch.OARKit.java.Command;
 
 import com.scotch.OARKit.java.Controller;
 
-/**
- * Created by Campbell Millar on 7/03/2016.
- */
 public class Commands {
     String command = BaseCommand.BLANK.command;
     String args ="";
