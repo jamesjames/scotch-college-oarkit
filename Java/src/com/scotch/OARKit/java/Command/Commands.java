@@ -22,5 +22,6 @@ public class Commands {
     }
     public void runCommand(){
         Controller.serverConnect.sendData(fetchCommand());
+        System.out.println("Command Sent "+command+" With args "+args);
     }
 }

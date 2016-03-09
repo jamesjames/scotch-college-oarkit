@@ -2,7 +2,9 @@ package com.scotch.OARKit.java;
 
 import com.scotch.OARKit.java.Command.BaseCommand;
 import com.scotch.OARKit.java.Command.Commands;
+import com.scotch.OARKit.java.Command.Interpreter;
 import com.scotch.OARKit.java.helpers.ServerConnect;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -28,6 +30,8 @@ public class Controller implements Initializable, EventHandler{
     TextField consoleTextField;
     @FXML
     Button restartNginx;
+    @FXML
+    Button sendButton;
 
 
     @Override
@@ -40,7 +44,11 @@ public class Controller implements Initializable, EventHandler{
             consoleLog.setText("Inside Dev Environment - Console Will Log but Commands will be ignored!!");
         }
 
-        restartNginx.setOnAction(event -> new Commands(BaseCommand.ECHO,"Hello").runCommand());
+        restartNginx.setOnAction(event -> new Interpreter("print hello").returnCommand().runCommand());
+        sendButton.setOnAction(event -> {
+            new Interpreter(consoleTextField.getText()).returnCommand().runCommand();
+            consoleTextField.setText("");
+        });
     }
 
     @Override
