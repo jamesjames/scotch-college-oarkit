@@ -26,6 +26,7 @@ public class Main extends Application {
         primaryStage.setTitle("Scotch OAR Kit");
         primaryStage.setScene(new Scene(root, 480, 700));
         primaryStage.show();
+
     }
 
 
