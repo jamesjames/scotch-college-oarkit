@@ -3,9 +3,6 @@ package com.scotch.OARKit.java.Command;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Campbell Millar on 7/03/2016.
- */
 public class Interpreter {
     BaseCommand baseCommand = BaseCommand.BLANK;
     String command = "";
