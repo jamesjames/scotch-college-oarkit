@@ -11,10 +11,10 @@ public enum BaseCommand {
     public String[] alias;
     public int args;
     public String localizedName;
-    BaseCommand(String command, String loclocalizedName, String[] alias, int args){
+    BaseCommand(String command, String localizedName, String[] alias, int args){
         this.command = command;
         this.alias = alias;
         this.args = args;
-        this.localizedName = loclocalizedName;
+        this.localizedName = localizedName;
     }
 }
