@@ -17,6 +17,7 @@ public class Main extends Application {
     public void stop(){
         System.out.println("Quitting Application");
         Controller.serverConnect.socketClose();
+        Controller.running = false;
         // Save file
     }
 
@@ -31,6 +32,7 @@ public class Main extends Application {
 
 
     public static void main(String[] args) throws IOException {
+        System.out.println(System.getProperty("os.name"));
         properties = new Properties();
         properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("com/scotch/OARKit/assets/properties/default.properties"));
         if (args.length > 0 && args[0].equals("server")){
