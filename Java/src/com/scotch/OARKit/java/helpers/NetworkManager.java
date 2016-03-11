@@ -23,7 +23,6 @@ public class NetworkManager {
             case "Mac OS X":
                 signalStrength = macSignalStrength();
         }
-        System.out.println(signalStrength);
         return signalStrength;
     }
 
