@@ -15,7 +15,7 @@ public class ServerConnect {
     PrintWriter out;
     BufferedReader in;
     BufferedReader stdIn;
-
+    public static boolean connected = false;
     public ServerConnect(){
         if(Main.properties.getProperty("insideDev").equals("true")){
             try {
@@ -24,6 +24,7 @@ public class ServerConnect {
                 setUp();
             } catch (IOException e) {
                 System.err.println("Problem Connecting to Local Host - Is the server up?");
+                System.err.println("Please Specify Your Own IP");
             }
         }else{
             try {
@@ -32,36 +33,52 @@ public class ServerConnect {
                 setUp();
             } catch (IOException e) {
                 System.err.println("Problem Connecting to Default Remote Host - Is the server up?");
+                System.err.println("Please Specify Your Own IP");
             }
         }
     }
     //FOR DIFFERING IP BUT SAME PORT - 5006
-    @Deprecated
-    ServerConnect(String ip){
-
+    public ServerConnect(String ip){
+        try {
+            socket = new Socket(ip,5006);
+            System.out.println("Connecting to Server...");
+            setUp();
+        } catch (IOException e) {
+            System.err.println("Problem Connecting to Specified Host - Is the server up or have you type correctly?");
+        }
     }
     //FOR DIFFERING IP AND PORT
     @Deprecated
-    ServerConnect(String ip, String port){
+    public ServerConnect(String ip, String port){
 
     }
     private void setUp() throws IOException {
          out = new PrintWriter(socket.getOutputStream(), true);
          in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
          stdIn = new BufferedReader(new InputStreamReader(System.in));
+        connected = true;
     }
 
     public void socketClose(){
         try {
             socket.close();
+            out.close();
+            in.close();
+            stdIn.close();
+            connected = false;
         } catch (Exception e) {
-            //System.err.println("Problem Closing Socket - Is the server still up?");
+            System.err.println("Problem Closing Socket - Is the server still up?");
         }
     }
 
     public boolean sendData(String data){
-        out.print(data);
-        out.flush();
-        return true;
+        if(connected){
+            out.print(data);
+            out.flush();
+            return true;
+        }else {
+            System.err.println("Error - Socket is not connected :(");
+            return false;
+        }
     }
 }
