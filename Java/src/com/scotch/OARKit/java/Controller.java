@@ -13,6 +13,9 @@ import javafx.scene.control.*;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -23,7 +26,7 @@ public class Controller implements Initializable{
     WebView CameraWebView;
     WebEngine engine;
     @FXML
-    Label consoleLog;
+    TextArea consoleLog;
     @FXML
     TextField consoleTextField;
     @FXML
@@ -35,16 +38,28 @@ public class Controller implements Initializable{
     @FXML
     TextField connectIP;
 
+    Console console;
+    PrintStream ps;
+    //Keep old output system
+    PrintStream out;
+    //PrintStream err;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        out = System.out;
+        //err = System.err;
+        console = new Console(consoleLog);
+        ps = new PrintStream(console, true);
+        redirectOutput(ps);
+        serverConnect = new ServerConnect();
 
         if(Main.properties.getProperty("insideDev").equals("true")){
             System.out.println("Inside Dev Enviroment");
             engine = CameraWebView.getEngine();
             engine.load("http://www.google.com");
             //engine.loadContent("");
-            consoleLog.setText("Inside Dev Environment - Console Will Log but Commands will be ignored!!");
+            consoleLog.setText("Inside Dev Environment - Console Will Log but Commands will be ignored!!\n");
         }
         createEvents();
         if(ServerConnect.connected&&Main.properties.getProperty("insideDev").equals("false")){
@@ -70,5 +85,25 @@ public class Controller implements Initializable{
                 System.out.println("Connected to new Server " + connectIP.getText());
             }
         });
+    }
+    //Defines Output Stream
+    private class Console extends OutputStream {
+
+        private TextArea txtArea;
+
+        public Console(TextArea txtArea) {
+            this.txtArea = txtArea;
+        }
+
+        @Override
+        public void write(int b) throws IOException {
+            txtArea.appendText(String.valueOf((char) b));
+            out.print(String.valueOf((char) b));
+        }
+
+    }
+    public void redirectOutput(PrintStream printStream){
+        System.setOut(printStream);
+        System.setErr(printStream);
     }
 }

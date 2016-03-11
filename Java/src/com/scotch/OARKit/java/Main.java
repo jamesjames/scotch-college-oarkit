@@ -36,7 +36,7 @@ public class Main extends Application {
         if (args.length > 0 && args[0].equals("server")){
             new Server();
         }else{
-            Controller.serverConnect = new ServerConnect();
+
             launch(args);
 
         }

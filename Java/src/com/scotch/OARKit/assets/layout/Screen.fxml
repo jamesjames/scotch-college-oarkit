@@ -44,7 +44,7 @@
                       <children>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                           <children>
-                            <Label fx:id="consoleLog" alignment="TOP_LEFT" prefHeight="174.0" prefWidth="478.0" text="Something has gone wrong..." AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                            <TextArea fx:id="consoleLog"  prefHeight="174.0" prefWidth="478.0" text="Something has gone wrong..." AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                           </children>
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
