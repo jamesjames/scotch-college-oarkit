@@ -12,7 +12,7 @@ public class Interpreter {
     public Interpreter(String command){
         this.command = command;
         phaseBase();
-        phaseArgs();
+
     }
     private void phaseBase(){
         String stringBase = command.split(" ")[0];
@@ -21,6 +21,7 @@ public class Interpreter {
                 //System.out.println(BaseCommand.values()[i].alias[t]);
                 if(BaseCommand.values()[i].alias[t].equals(stringBase.toLowerCase())){
                     baseCommand = BaseCommand.values()[i];
+                    phaseArgs();
                 }
             }
         }

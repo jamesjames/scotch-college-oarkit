@@ -21,7 +21,7 @@ import java.io.PrintStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Controller implements Initializable{
+public class Controller implements Initializable, Runnable{
 
     public static boolean running = true;
 
@@ -48,23 +48,23 @@ public class Controller implements Initializable{
     //Keep old output system
     PrintStream out;
     //PrintStream err;
-
+    NetworkManager networkManager;
     @FXML
     ProgressBar StrengthBar;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        networkManager = new NetworkManager();
         out = System.out;
         //err = System.err;
         console = new Console(consoleLog);
         ps = new PrintStream(console, true);
         redirectOutput(ps);
         serverConnect = new ServerConnect();
-
-        new Thread(() -> update()).start();
+        engine = CameraWebView.getEngine();
+        new Thread(this).start();
         if(Main.properties.getProperty("insideDev").equals("true")){
             System.out.println("Inside Dev Enviroment");
-            engine = CameraWebView.getEngine();
             engine.load("http://www.google.com");
             //engine.loadContent("");
             consoleLog.setText("Inside Dev Environment - Console Will Log but Commands will be ignored!!\n");
@@ -94,6 +94,18 @@ public class Controller implements Initializable{
             }
         });
     }
+
+    @Override
+    public void run() {
+        while(running) try {
+            networkManager.update();
+            StrengthBar.setProgress(networkManager.getSignalStrength());
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     //Defines Output Stream
     private class Console extends OutputStream {
 
@@ -114,15 +126,5 @@ public class Controller implements Initializable{
         System.setOut(printStream);
         System.setErr(printStream);
     }
-    public void update() {
-        while(running) try {
-            float signalStrength = NetworkManager.getStrength();
-            StrengthBar.setProgress(signalStrength);
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
 
 }
