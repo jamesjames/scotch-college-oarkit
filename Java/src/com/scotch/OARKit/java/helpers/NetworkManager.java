@@ -22,12 +22,10 @@ public class NetworkManager {
 
     }
     public void update(){
-        if(OS.toUpperCase().contains("MAC")){
-            macSignalStrength();
+        if(OS.toUpperCase().contains("X")){
+            nixSignalStrength();
         } else if(OS.toUpperCase().contains("WINDOWS")){
             windowsSignalStrength();
-        } else if(OS.toUpperCase().contains("NIX")){
-
         }
     }
 
@@ -64,20 +62,33 @@ public class NetworkManager {
             System.out.println("Not on WiFi");
         }
     }
-    private void macSignalStrength(){
+    private void nixSignalStrength(){
         float strength = 0;
-
         try {
             String s = null;
-            Process p = Runtime.getRuntime().exec("/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I");
+            if(OS.toUpperCase().contains("MAC")){
+                Process p = Runtime.getRuntime().exec("/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I");
 
-            BufferedReader stdInput = new BufferedReader(new
-                    InputStreamReader(p.getInputStream()));
+                BufferedReader stdInput = new BufferedReader(new
+                        InputStreamReader(p.getInputStream()));
 
-            // read the output from the command and assign the strength
-            while ((s = stdInput.readLine()) != null) {
-                if (s.toLowerCase().contains("agrCtlRSSI".toLowerCase())){
-                    strength = Float.parseFloat(s.substring(17));
+                // read the output from the command and assign the strength
+                while ((s = stdInput.readLine()) != null) {
+                    if (s.toLowerCase().contains("agrCtlRSSI".toLowerCase())){
+                        strength = Float.parseFloat(s.substring(17));
+                    }
+                }
+            } else if(OS.toUpperCase().contains("X")){
+                Process p = Runtime.getRuntime().exec("iwconfig");
+
+                BufferedReader stdInput = new BufferedReader(new
+                        InputStreamReader(p.getInputStream()));
+
+                // read the output from the command and assign the strength
+                while ((s = stdInput.readLine()) != null) {
+                    if (s.toLowerCase().contains("Signal level=".toLowerCase())){
+                        strength = Float.parseFloat(s.substring(43, 46));
+                    }
                 }
             }
         }
@@ -88,10 +99,11 @@ public class NetworkManager {
 
         if(strength <= -100)
             strength = 0;
-        else if(strength >= -50)
-            strength = 100;
+        else if(strength >= 0)
+            strength = 1;
         else
-            strength = 2 * (strength + 100);
+            //make strength into percentage, -100 dbm being 0% and 0 dbm being 100%. Noting that the progressbar uses 0-1.
+            strength = 1-((strength*-1)/100);
         signalStrength = strength;
     }
 }
