@@ -5,6 +5,7 @@ package com.scotch.OARKit.java.helpers;
  */
 
 // TODO add a connection manager window
+import com.scotch.OARKit.java.Controller;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -59,7 +60,8 @@ public class NetworkManager {
             strength =Math.abs(strength/100);
             signalStrength = strength;
         } else {
-            System.out.println("Not on WiFi");
+            signalStrength = -1;
+            return;
         }
     }
     private void nixSignalStrength(){
@@ -89,6 +91,10 @@ public class NetworkManager {
                     if (s.toLowerCase().contains("Signal level=".toLowerCase())){
                         strength = Float.parseFloat(s.substring(43, 46));
                     }
+                }
+                if (strength == 0){
+                    signalStrength = -1;
+                    return;
                 }
             }
         }

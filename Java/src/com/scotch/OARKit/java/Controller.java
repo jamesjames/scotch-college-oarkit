@@ -51,6 +51,8 @@ public class Controller implements Initializable, Runnable{
     NetworkManager networkManager;
     @FXML
     ProgressBar StrengthBar;
+    @FXML
+    Label notConnectedLabel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -100,6 +102,12 @@ public class Controller implements Initializable, Runnable{
         while(running) try {
             networkManager.update();
             StrengthBar.setProgress(networkManager.getSignalStrength());
+            if (networkManager.getSignalStrength() == -1){
+                notConnectedLabel.setVisible(true);
+                System.out.println("Not connected to wifi.");
+            } else {
+                notConnectedLabel.setVisible(false);
+            }
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -126,5 +134,4 @@ public class Controller implements Initializable, Runnable{
         System.setOut(printStream);
         System.setErr(printStream);
     }
-
 }
