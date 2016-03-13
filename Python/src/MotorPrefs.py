@@ -104,7 +104,7 @@ class Tank():
         self.steering = (0,0)
 
     def __str__(self):
-        return "Left Speed: " + str(LeftTrack.getSpeed()) + "\nRight Speed: " + str(RightTrack.getSpeed())
+        return "Left Speed: " + str(self.LeftTrack.getSpeed()) + "\nRight Speed: " + str(self.RightTrack.getSpeed())
 
     def AllStop(self):
         self.LeftTrack.setSpeed(0)

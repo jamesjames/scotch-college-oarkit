@@ -3,6 +3,7 @@ To Do
      - Manual control of each servo
      - Reimport functionality
      - Change to base-20?
+     - Move to Java
 """
 
 #Some flags for testing
@@ -10,11 +11,18 @@ OnRobot = False  #Testing Software = False, Using hardware = True
 RunServer = True    #Run the server = True, Use a local command interface = False
 
 import socket
-import time
-import yaml
+#import yaml
 import sys
-sys.path.insert(0, 'BotLib/') #Allows us to import stuff from BotLib
+from java.util import Properties
+from java.lang import Thread
+from java.net import InetAddress;
+sys.path.insert(0, 'python') #Allows us to import stuff from BotLib
 
+x = Properties()
+x.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("com/scotch/OARKit/assets/properties/default.properties"))
+#print(x.getProperty("insideDev"))
+
+##MotorPrefs = imp.load_source('MotorPrefs', './python/MotorPrefs.py')
 import MotorPrefs
 
 MotorPrefs.isSimulation = OnRobot #Simulation flag
@@ -57,10 +65,13 @@ buttonController = MotorPrefs.ActionController(buttonBindings)
 class ConnectionObject():
     def __init__(self, TCP_IP = None, TCP_PORT = 5006):
         #Automatically assign the IP if the field is left empty
-        if OnRobot:
-            TCP_IP = "192.168.100.1"
+        if x.getProperty("insideDev") == "false":
+            # MAKE SURE THAT THE INET INTERFACE IS THE MAIN ONE
+            TCP_IP = InetAddress.getLocalHost().getHostAddress()
+            print("Running outside of Dev - IP = "+TCP_IP)
         else:
             TCP_IP = 'localhost'
+            print("Running in Dev")
             
         self.TCP_IP = TCP_IP
         self.TCP_PORT = TCP_PORT
@@ -167,8 +178,11 @@ def decodeIncomingData(data):
             print data[0] + " is not recognized as a valid flag" #Print an error of the command isn't recognized
 
     except:
-        print "Command execution failed"
+        print("Command execution failed")
 
+if "debug" in str(sys.argv):
+    print("Starting server in Debug Mode")
+    RunServer = False
 
 run = True
 while run:

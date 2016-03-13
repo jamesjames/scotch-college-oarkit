@@ -1,4 +1,5 @@
-import pygame
+## BROKEN IN JYTHON (BUT WE HAVE A JAVA TESTER)
+#import pygame
 
 """ Not used
 #These variables store speeds
