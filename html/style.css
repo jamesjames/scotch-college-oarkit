@@ -1,18 +1,20 @@
 /* DO NOT PULL OR EDIT, I KNOW ITS TERRIBLE RIGHT NOW BUT THATS FOR A GOOD REASON. WILL BE FIXED VERY SOON. */
 
+
 body{
   background-color: black;
 }
 
 .cameraStream{
-  background-color: grey;
+  background-color: green;
   color: green;
-  height: 90%;
-  width: 90%;
-  padd
+  width: 640px;
+  height: 480px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .cameraStream img{
-  height: 89%;
-  width: 89%;
+
 }
