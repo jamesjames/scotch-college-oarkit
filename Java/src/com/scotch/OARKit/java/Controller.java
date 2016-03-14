@@ -5,6 +5,7 @@ import com.scotch.OARKit.java.Command.Commands;
 import com.scotch.OARKit.java.Command.Interpreter;
 import com.scotch.OARKit.java.helpers.NetworkManager;
 import com.scotch.OARKit.java.helpers.ServerConnect;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -26,7 +27,6 @@ public class Controller implements Initializable, Runnable{
     public static boolean running = true;
 
     public static ServerConnect serverConnect;
-    //FOR CAMERA
     @FXML
     WebView CameraWebView;
     WebEngine engine;
@@ -42,6 +42,12 @@ public class Controller implements Initializable, Runnable{
     ToggleButton connectButton;
     @FXML
     TextField connectIP;
+    @FXML
+    ProgressBar StrengthBar;
+    @FXML
+    Label notConnectedLabel;
+    @FXML
+    Label StrengthLabel;
 
     Console console;
     PrintStream ps;
@@ -49,10 +55,6 @@ public class Controller implements Initializable, Runnable{
     PrintStream out;
     //PrintStream err;
     NetworkManager networkManager;
-    @FXML
-    ProgressBar StrengthBar;
-    @FXML
-    Label notConnectedLabel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -101,12 +103,15 @@ public class Controller implements Initializable, Runnable{
     public void run() {
         while(running) try {
             networkManager.update();
-            StrengthBar.setProgress(networkManager.getSignalStrength());
+            Platform.runLater(() -> StrengthBar.setProgress(networkManager.getSignalStrength()));
+            Platform.runLater(() -> StrengthLabel.setText("Strength:" + networkManager.getRawSignalStrength() + " Dbm"));
             if (networkManager.getSignalStrength() == -1){
                 notConnectedLabel.setVisible(true);
+                StrengthLabel.setVisible(false);
                 System.out.println("Not connected to wifi.");
             } else {
                 notConnectedLabel.setVisible(false);
+                StrengthLabel.setVisible(true);
             }
             Thread.sleep(1000);
         } catch (InterruptedException e) {

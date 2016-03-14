@@ -17,6 +17,8 @@ import java.io.*;
 
 public class NetworkManager {
     private float signalStrength;
+    private float rawSignalStrength;
+
     private String OS;
     public NetworkManager(){
         OS = System.getProperty("os.name");
@@ -30,6 +32,7 @@ public class NetworkManager {
         }
     }
 
+    public float getRawSignalStrength(){return rawSignalStrength;}
     public float getSignalStrength() {
         return signalStrength;
     }
@@ -56,6 +59,7 @@ public class NetworkManager {
             e.printStackTrace();
         }
         System.out.println(strength);
+        rawSignalStrength = -100-(strength*-1);
         if(strength != 0) {
             strength =Math.abs(strength/100);
             signalStrength = strength;
@@ -78,6 +82,11 @@ public class NetworkManager {
                 while ((s = stdInput.readLine()) != null) {
                     if (s.toLowerCase().contains("agrCtlRSSI".toLowerCase())){
                         strength = Float.parseFloat(s.substring(17));
+                        rawSignalStrength = strength;
+                    }
+                    if (strength == 0){
+                        signalStrength = -1;
+                        return;
                     }
                 }
             } else if(OS.toUpperCase().contains("X")){
@@ -90,6 +99,7 @@ public class NetworkManager {
                 while ((s = stdInput.readLine()) != null) {
                     if (s.toLowerCase().contains("Signal level=".toLowerCase())){
                         strength = Float.parseFloat(s.substring(43, 46));
+                        rawSignalStrength = strength;
                     }
                 }
                 if (strength == 0){
@@ -109,7 +119,7 @@ public class NetworkManager {
             strength = 1;
         else
             //make strength into percentage, -100 dbm being 0% and 0 dbm being 100%. Noting that the progressbar uses 0-1.
-            strength = 1-((strength*-1)/100);
+            strength = 1-(Math.abs(strength)/100);
         signalStrength = strength;
     }
 }
