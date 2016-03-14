@@ -10,10 +10,15 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import javafx.stage.Stage;
+
 import java.lang.Thread;
 
 import java.io.IOException;
@@ -48,6 +53,8 @@ public class Controller implements Initializable, Runnable{
     Label notConnectedLabel;
     @FXML
     Label StrengthLabel;
+    @FXML
+    Button addNewConfiguration;
 
     Console console;
     PrintStream ps;
@@ -82,10 +89,12 @@ public class Controller implements Initializable, Runnable{
 
     public void createEvents(){
         restartNginx.setOnAction(event -> new Interpreter("print hello").returnCommand().runCommand());
+
         sendButton.setOnAction(event -> {
             new Interpreter(consoleTextField.getText()).returnCommand().runCommand();
             consoleTextField.setText("");
         });
+
         connectButton.setOnAction(event -> {
             if (ServerConnect.connected){
                 connectButton.setSelected(false);
@@ -97,6 +106,19 @@ public class Controller implements Initializable, Runnable{
                 System.out.println("Connected to new Server " + connectIP.getText());
             }
         });
+
+        addNewConfiguration.setOnAction(event -> {
+            try {
+                Stage NetWindow = new Stage();
+                Parent NetRoot = FXMLLoader.load(getClass().getClassLoader().getResource("com/scotch/OARKit/assets/layout/NetworkManager.fxml"));
+                NetWindow.setTitle("NetworkManager");
+                NetWindow.setScene(new Scene(NetRoot, 120, 420));
+                NetWindow.show();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        });
+
     }
 
     @Override
@@ -104,7 +126,7 @@ public class Controller implements Initializable, Runnable{
         while(running) try {
             networkManager.update();
             Platform.runLater(() -> StrengthBar.setProgress(networkManager.getSignalStrength()));
-            Platform.runLater(() -> StrengthLabel.setText("Strength:" + networkManager.getRawSignalStrength() + " Dbm"));
+            Platform.runLater(() -> StrengthLabel.setText("Strength: " + networkManager.getRawSignalStrength() + " Dbm"));
             if (networkManager.getSignalStrength() == -1){
                 notConnectedLabel.setVisible(true);
                 StrengthLabel.setVisible(false);
