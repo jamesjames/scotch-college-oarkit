@@ -58,14 +58,13 @@ public class NetworkManager {
             System.out.println("Windows Wifi has had an error.");
             e.printStackTrace();
         }
-        System.out.println(strength);
+        //System.out.println(strength);
         rawSignalStrength = -100-(strength*-1);
         if(strength != 0) {
             strength =Math.abs(strength/100);
             signalStrength = strength;
         } else {
             signalStrength = -1;
-            return;
         }
     }
     private void nixSignalStrength(){

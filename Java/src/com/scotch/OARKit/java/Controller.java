@@ -106,12 +106,13 @@ public class Controller implements Initializable, Runnable{
             Platform.runLater(() -> StrengthBar.setProgress(networkManager.getSignalStrength()));
             Platform.runLater(() -> StrengthLabel.setText("Strength:" + networkManager.getRawSignalStrength() + " Dbm"));
             if (networkManager.getSignalStrength() == -1){
-                notConnectedLabel.setVisible(true);
-                StrengthLabel.setVisible(false);
-                System.out.println("Not connected to wifi.");
+                Platform.runLater(() ->notConnectedLabel.setVisible(true));
+                Platform.runLater(() ->StrengthLabel.setVisible(false));
+                //REPEATS THE OUTPUT
+                //System.out.println("Not connected to wifi.");
             } else {
-                notConnectedLabel.setVisible(false);
-                StrengthLabel.setVisible(true);
+                Platform.runLater(() ->notConnectedLabel.setVisible(false));
+                Platform.runLater(() ->StrengthLabel.setVisible(true));
             }
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -130,7 +131,7 @@ public class Controller implements Initializable, Runnable{
 
         @Override
         public void write(int b) throws IOException {
-            txtArea.appendText(String.valueOf((char) b));
+            Platform.runLater(() -> txtArea.appendText(String.valueOf((char) b)));
             out.print(String.valueOf((char) b));
         }
 
