@@ -112,7 +112,7 @@ public class Controller implements Initializable, Runnable{
                 Stage NetWindow = new Stage();
                 Parent NetRoot = FXMLLoader.load(getClass().getClassLoader().getResource("com/scotch/OARKit/assets/layout/NetworkManager.fxml"));
                 NetWindow.setTitle("NetworkManager");
-                NetWindow.setScene(new Scene(NetRoot, 120, 420));
+                NetWindow.setScene(new Scene(NetRoot, 420, 120));
                 NetWindow.show();
             } catch (IOException e){
                 e.printStackTrace();
