@@ -4,26 +4,52 @@ package com.scotch.OARKit.java.helpers;
  * Created by Aren Leishman on 3/11/16.
  */
 
-// TODO add a connection manager window
-import com.scotch.OARKit.java.Controller;
-import javafx.event.Event;
-import javafx.event.EventHandler;
+// TODO add a connection manager backend.
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import java.io.*;
+import javafx.stage.Stage;
 
-public class NetworkManager {
+import java.io.*;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class NetworkManager implements Initializable {
     private float signalStrength;
     private float rawSignalStrength;
-
     private String OS;
+    @FXML
+    Stage NetWindow;
+    @FXML
+    Button CancelButton;
+    @FXML
+    Button SaveButton;
+    @FXML
+    TextField NameField;
+    @FXML
+    TextField IPField;
+    @FXML
+    TextField PortField;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        createEvents();
+    }
+
+    public void createEvents(){
+        CancelButton.setOnAction(event -> {
+            NetWindow = (Stage) CancelButton.getScene().getWindow();
+            NetWindow.close();
+        });
+    }
+
     public NetworkManager(){
         OS = System.getProperty("os.name");
 
     }
+
     public void update(){
         if(OS.toUpperCase().contains("X")){
             nixSignalStrength();
@@ -33,9 +59,8 @@ public class NetworkManager {
     }
 
     public float getRawSignalStrength(){return rawSignalStrength;}
-    public float getSignalStrength() {
-        return signalStrength;
-    }
+
+    public float getSignalStrength() {return signalStrength;}
 
     private void windowsSignalStrength(){
         float strength = 0;
@@ -67,6 +92,7 @@ public class NetworkManager {
             signalStrength = -1;
         }
     }
+
     private void nixSignalStrength(){
         float strength = 0;
         try {

@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.web.WebView?>
 
-<SplitPane dividerPositions="0.45714285714" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="700.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.scotch.OARKit.java.Controller">
+<SplitPane dividerPositions="0.45714285714" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="700.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.scotch.OARKit.java.Controller">
   <items>
   <TabPane prefHeight="480.0" prefWidth="480.0" tabClosingPolicy="UNAVAILABLE">
     <tabs>
@@ -77,10 +77,11 @@
                       <Label layoutX="6.0" layoutY="6.0" text="I.P" />
                       <TextField fx:id="connectIP" layoutX="31.0" layoutY="1.0" prefHeight="26.0" prefWidth="135.0" text="192.168.0.1" />
                       <ToggleButton fx:id="connectButton" layoutX="166.0" layoutY="1.0" mnemonicParsing="false" text="Connect" />
-                      <ProgressBar fx:id="StrengthBar" layoutX="109.0" layoutY="32.0" prefHeight="24.0" prefWidth="113.0" progress="0.0" />
-                                    <Label layoutX="6.0" layoutY="36.0" text="Signal Strength:" />
-                                    <Label fx:id="notConnectedLabel" layoutY="56.0" text="Not Connected To Wifi." visible="false" />
-                                    <Label fx:id="StrengthLabel" layoutX="6.0" layoutY="56.0" text="Signal Strength" />
+                      <ProgressBar fx:id="StrengthBar" layoutX="119.0" layoutY="64.0" prefHeight="24.0" prefWidth="113.0" progress="0.0" />
+                                    <Label layoutX="6.0" layoutY="68.0" text="Signal Strength:" />
+                                    <Label fx:id="notConnectedLabel" layoutX="6.0" layoutY="88.0" text="Not Connected To Wifi." visible="false" />
+                                    <Label fx:id="StrengthLabel" layoutX="6.0" layoutY="88.0" text="Signal Strength" />
+                                    <Button fx:id="addNewConfiguration" layoutX="35.0" layoutY="30.0" mnemonicParsing="false" text="Add New Configuration" />
                     </children>
                   </AnchorPane>
                 <GridPane prefHeight="114.0" prefWidth="478.0">
