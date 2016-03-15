@@ -57,7 +57,8 @@ public class Main extends Application {
             loadLib("/jinput-wintab.dll");
         } else if(os.contains("mac")){
             loadLib("/libjinput-osx.jnilib");
-        } else if(os.contains("NUX")){
+        } else if(os.contains("nux")){
+            //If this gives an Exception, update the maven project libraries with package.
             loadLib("/libjinput-linux.so");
             loadLib("/libjinput-linux64.so");
         }else{
