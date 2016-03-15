@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <!--
 - Though UV4l is capable of accomodating multiple connections, when running on a Raspberry Pi 2, it seems that it can only handle one optimally.
@@ -10,8 +11,14 @@
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
-    <div class="cameraStream">
-      <img src="http://192.168.1.251:9090/stream/video.mjpeg">Camera stream not found. are you running the server?</img> <!-- your server url goes here -->
-    </div>
+    <div class="cameraStream" style="text-align: center;">
+      <img src="http://192.168.1.251:9090/stream/video.mjpeg" \> <!-- your server url goes here -->
+      <button type="button" onClick="refreshPage()">Click here if camera stops working</button>
+      <script>
+        function refreshPage(){
+        window.location.reload();
+        }
+      </script>
+      </div>
   </body>
 </html>
