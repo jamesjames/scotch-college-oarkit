@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.web.WebView?>
 
-<SplitPane dividerPositions="0.45714285714" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="700.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.scotch.OARKit.java.Controller">
+<SplitPane dividerPositions="0.45714285714" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="700.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.scotch.OARKit.java.Controller">
   <items>
   <TabPane prefHeight="480.0" prefWidth="480.0" tabClosingPolicy="UNAVAILABLE">
     <tabs>
@@ -115,6 +115,11 @@
               </AnchorPane>
             </content>
           </Tab>
+                  <Tab text="Controller">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                  </Tab>
         </tabs>
       </TabPane>
             <GridPane>

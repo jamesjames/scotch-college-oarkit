@@ -2,6 +2,7 @@ package com.scotch.OARKit.java;
 
 import com.scotch.OARKit.java.helpers.JInputJoystick;
 import com.scotch.OARKit.java.helpers.ServerConnect;
+import com.scotch.OARKit.java.helpers.gamepad;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -45,10 +46,11 @@ public class Main extends Application {
             new Server();
         }else{
             startLibraries();
+            gamepad gamepad = new gamepad();
+            gamepad.gamepad();
             launch(args);
             JInputJoystick joystick = new JInputJoystick(net.java.games.input.Controller.Type.STICK, net.java.games.input.Controller.Type.GAMEPAD);
         }
-
     }
     public static void startLibraries() throws IOException {
         String os = System.getProperty("os.name").toLowerCase();
