@@ -36,5 +36,6 @@ public class NativeLoader {
             tempdir = temp.toString().replace(name,"");
             //System.out.println(tempdir);
         }
+        System.setProperty("java.library.path", tempdir);
     }
 }

@@ -9,7 +9,6 @@
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/Java/src/com" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -26,5 +25,7 @@
     <orderEntry type="library" scope="RUNTIME" name="Maven: net.java.jinput:jinput-platform:natives-linux:2.0.6" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: net.java.jinput:jinput-platform:natives-osx:2.0.6" level="project" />
     <orderEntry type="library" name="Maven: net.java.jinput:jinput:2.0.6" level="project" />
+    <orderEntry type="library" name="jinput-2.0.6" level="project" />
+    <orderEntry type="library" name="jutils-1.0.0" level="project" />
   </component>
 </module>

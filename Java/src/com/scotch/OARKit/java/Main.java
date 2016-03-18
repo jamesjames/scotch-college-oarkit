@@ -1,5 +1,6 @@
 package com.scotch.OARKit.java;
 
+import com.scotch.OARKit.java.helpers.JInputJoystick;
 import com.scotch.OARKit.java.helpers.ServerConnect;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -45,6 +46,7 @@ public class Main extends Application {
         }else{
             startLibraries();
             launch(args);
+            JInputJoystick joystick = new JInputJoystick(net.java.games.input.Controller.Type.STICK, net.java.games.input.Controller.Type.GAMEPAD);
         }
 
     }
@@ -66,6 +68,7 @@ public class Main extends Application {
         }else{
             System.out.println("Your OS is Not Supported! Please report FULL log to ScotchOARKit on GitHub");
             System.exit(0);
-        }     
+        }
+
     }
 }
