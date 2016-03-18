@@ -117,7 +117,20 @@
           </Tab>
                   <Tab text="Controller">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <ProgressBar fx:id="LeftX" layoutX="29.0" layoutY="22.0" prefHeight="20.0" prefWidth="195.0" progress="0.0" />
+                              <ProgressBar fx:id="LeftY" layoutX="29.0" layoutY="42.0" prefHeight="20.0" prefWidth="195.0" progress="0.0" />
+                              <Label layoutX="11.0" layoutY="6.0" text="Left Stick" />
+                              <Label layoutX="11.0" layoutY="24.0" text="X:" />
+                              <Label layoutX="11.0" layoutY="44.0" text="Y:" />
+                              <ProgressBar fx:id="RightX" layoutX="29.0" layoutY="86.0" prefHeight="20.0" prefWidth="195.0" progress="0.0" />
+                              <ProgressBar fx:id="RightY" layoutX="29.0" layoutY="106.0" prefHeight="20.0" prefWidth="195.0" progress="0.0" />
+                              <Label layoutX="11.0" layoutY="70.0" text="Right Stick" />
+                              <Label layoutX="11.0" layoutY="88.0" text="X:" />
+                              <Label layoutX="11.0" layoutY="108.0" text="Y:" />
+                           </children>
+                        </AnchorPane>
                     </content>
                   </Tab>
         </tabs>

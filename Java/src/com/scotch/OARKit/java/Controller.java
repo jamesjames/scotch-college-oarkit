@@ -57,6 +57,15 @@ public class Controller implements Initializable, Runnable{
     @FXML
     Button addNewConfiguration;
 
+    @FXML
+    ProgressBar LeftX;
+    @FXML
+    ProgressBar LeftY;
+    @FXML
+    ProgressBar RightX;
+    @FXML
+    ProgressBar RightY;
+
     Console console;
     PrintStream ps;
     //Keep old output system
