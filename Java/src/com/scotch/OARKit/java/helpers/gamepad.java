@@ -8,7 +8,7 @@ import net.java.games.input.Controller;
  */
 public class gamepad {
 
-    private static boolean connected = true;
+    public static boolean connected = true;
 
     public int leftstickx;
     public int leftsticky;
@@ -18,22 +18,29 @@ public class gamepad {
 
     private int numberOfButtons;
 
+    JInputJoystick gamepad;
+
     public void gamepad(){
-        JInputJoystick gamepad = new JInputJoystick(Controller.Type.STICK, Controller.Type.GAMEPAD);
+        gamepad = new JInputJoystick(Controller.Type.STICK, Controller.Type.GAMEPAD);
         numberOfButtons = gamepad.getNumberOfButtons();
+
         // Check if the controller was found.
         if( !gamepad.isControllerConnected() ){
             connected = false;
             System.out.println("No controller found!");
+        } else {
+            System.out.println("Controller found");
+            System.out.println("This controller has " + numberOfButtons + " buttons");
         }
-        System.out.println("Controller found");
-        System.out.println("This controller has " + numberOfButtons + " buttons");
-        while (connected){
-            if( !gamepad.pollController() ) {
-                System.out.println("Controller disconnected!");
-                // Do some stuff.
-            }
+    }
 
+    public void pollgamepad(){
+        if( !gamepad.pollController() ) {
+            System.out.println("Controller disconnected!");
+            // Do some stuff.
+        } else {
+            // TODO poll all the axis and set them to variables
+            System.out.println(gamepad.getXAxisPercentage());
         }
     }
 }

@@ -46,10 +46,7 @@ public class Main extends Application {
             new Server();
         }else{
             startLibraries();
-            gamepad gamepad = new gamepad();
-            gamepad.gamepad();
             launch(args);
-            JInputJoystick joystick = new JInputJoystick(net.java.games.input.Controller.Type.STICK, net.java.games.input.Controller.Type.GAMEPAD);
         }
     }
     public static void startLibraries() throws IOException {

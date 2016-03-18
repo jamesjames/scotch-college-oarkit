@@ -5,6 +5,7 @@ import com.scotch.OARKit.java.Command.Commands;
 import com.scotch.OARKit.java.Command.Interpreter;
 import com.scotch.OARKit.java.helpers.NetworkManager;
 import com.scotch.OARKit.java.helpers.ServerConnect;
+import com.scotch.OARKit.java.helpers.gamepad;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -63,9 +64,13 @@ public class Controller implements Initializable, Runnable{
     //PrintStream err;
     NetworkManager networkManager;
 
+    gamepad gamepad;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         networkManager = new NetworkManager();
+        gamepad = new gamepad();
+        gamepad.gamepad();
         out = System.out;
         //err = System.err;
         console = new Console(consoleLog);
@@ -135,6 +140,9 @@ public class Controller implements Initializable, Runnable{
             } else {
                 Platform.runLater(() ->notConnectedLabel.setVisible(false));
                 Platform.runLater(() ->StrengthLabel.setVisible(true));
+            }
+            if (gamepad.connected){
+                gamepad.pollgamepad();
             }
             Thread.sleep(1000);
         } catch (InterruptedException e) {
