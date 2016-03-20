@@ -10,11 +10,11 @@ public class gamepad {
 
     public static boolean connected = true;
 
-    public int leftstickx;
-    public int leftsticky;
+    public float leftstickx;
+    public float leftsticky;
 
-    public int rightstickx;
-    public int rightsticky;
+    public float rightstickx;
+    public float rightsticky;
 
     private int numberOfButtons;
 
@@ -40,7 +40,11 @@ public class gamepad {
             // Do some stuff.
         } else {
             // TODO poll all the axis and set them to variables
-            System.out.println(gamepad.getXAxisPercentage());
+            leftstickx = gamepad.getX_LeftJoystick_Percentage();
+            leftsticky = gamepad.getY_LeftJoystick_Percentage();
+
+            rightstickx = gamepad.getX_RightJoystick_Percentage();
+            rightsticky = gamepad.getY_RightJoystick_Percentage();
         }
     }
 }

@@ -152,8 +152,13 @@ public class Controller implements Initializable, Runnable{
             }
             if (gamepad.connected){
                 gamepad.pollgamepad();
+                Platform.runLater(() -> LeftX.setProgress(gamepad.leftstickx/100));
+                Platform.runLater(() -> LeftY.setProgress(gamepad.leftsticky/100));
+
+                Platform.runLater(() -> RightX.setProgress(gamepad.rightstickx/100));
+                Platform.runLater(() -> RightY.setProgress(gamepad.rightsticky/100));
             }
-            Thread.sleep(1000);
+            Thread.sleep(100);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
