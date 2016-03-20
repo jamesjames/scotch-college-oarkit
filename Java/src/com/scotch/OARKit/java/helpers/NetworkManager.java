@@ -13,7 +13,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.*;
-import java.net.URL;
+import java.net.*;
+import java.util.Enumeration;
 import java.util.ResourceBundle;
 
 public class NetworkManager implements Initializable {
@@ -45,7 +46,7 @@ public class NetworkManager implements Initializable {
         });
     }
 
-    public NetworkManager(){
+    public NetworkManager() throws IOException {
         OS = System.getProperty("os.name");
 
     }
@@ -57,6 +58,23 @@ public class NetworkManager implements Initializable {
             windowsSignalStrength();
         }
     }
+
+    /**public void checkNetwork() throws SocketException {
+        Enumeration e = NetworkInterface.getNetworkInterfaces();
+        int k=1;
+        while(e.hasMoreElements()) {
+            NetworkInterface n = (NetworkInterface) e.nextElement();
+            Enumeration ee = n.getInetAddresses();
+            while (ee.hasMoreElements()) {
+                InetAddress i = (InetAddress) ee.nextElement();
+                System.out.println(i.getHostAddress());
+                k=k+1;
+            }
+        }
+        if(k==1) {
+            signalStrength=-2;
+        }
+    }*/
 
     public float getRawSignalStrength(){return rawSignalStrength;}
 
