@@ -79,12 +79,15 @@ public class NetworkManager implements Initializable {
             Enumeration ee = n.getInetAddresses();
             while (ee.hasMoreElements()) {
                 InetAddress i = (InetAddress) ee.nextElement();
-                k++;
+                String f = i.toString();
+                if(f.contains(".")){
+                    k++;
+                }
             }
         }
         if(k==1) {
             ConnectionType = "Not Connected";
-           return false;
+            return false;
         }
         else{
             return true;
