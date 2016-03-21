@@ -18,6 +18,7 @@ import java.util.Enumeration;
 import java.util.ResourceBundle;
 
 public class NetworkManager implements Initializable {
+    private String ConnectionType;
     private float signalStrength;
     private float rawSignalStrength;
     private String OS;
@@ -51,36 +52,52 @@ public class NetworkManager implements Initializable {
 
     }
 
-    public void update(){
-        if(OS.toUpperCase().contains("X")){
-            nixSignalStrength();
-        } else if(OS.toUpperCase().contains("WINDOWS")){
-            windowsSignalStrength();
+    public void update() throws SocketException {
+        if(checkNetwork()) {
+            if (OS.toUpperCase().contains("X")) {
+                if(nixSignalStrength()){
+                    ConnectionType = "Wifi";
+                } else {
+                    ConnectionType = "Ethernet";
+
+                }
+            } else if (OS.toUpperCase().contains("WINDOWS")) {
+                if(windowsSignalStrength()){
+                    ConnectionType = "Wifi";
+                } else {
+                    ConnectionType = "Ethernet";
+                }
+            }
         }
     }
 
-    /**public void checkNetwork() throws SocketException {
+    public boolean checkNetwork() throws SocketException {
         Enumeration e = NetworkInterface.getNetworkInterfaces();
-        int k=1;
+        int k=0;
         while(e.hasMoreElements()) {
             NetworkInterface n = (NetworkInterface) e.nextElement();
             Enumeration ee = n.getInetAddresses();
             while (ee.hasMoreElements()) {
                 InetAddress i = (InetAddress) ee.nextElement();
-                System.out.println(i.getHostAddress());
-                k=k+1;
+                k++;
             }
         }
         if(k==1) {
-            signalStrength=-2;
+            ConnectionType = "Not Connected";
+           return false;
         }
-    }*/
+        else{
+            return true;
+        }
+    }
 
     public float getRawSignalStrength(){return rawSignalStrength;}
 
     public float getSignalStrength() {return signalStrength;}
 
-    private void windowsSignalStrength(){
+    public String getConnectionType() {return ConnectionType;}
+
+    private boolean windowsSignalStrength(){
         float strength = 0;
 
         try {
@@ -106,12 +123,14 @@ public class NetworkManager implements Initializable {
         if(strength != 0) {
             strength =Math.abs(strength/100);
             signalStrength = strength;
+            return true;
         } else {
             signalStrength = -1;
+            return false;
         }
     }
 
-    private void nixSignalStrength(){
+    private boolean nixSignalStrength(){
         float strength = 0;
         try {
             String s = null;
@@ -129,7 +148,7 @@ public class NetworkManager implements Initializable {
                     }
                     if (strength == 0){
                         signalStrength = -1;
-                        return;
+                        return false;
                     }
                 }
             } else if(OS.toUpperCase().contains("X")){
@@ -147,7 +166,7 @@ public class NetworkManager implements Initializable {
                 }
                 if (strength == 0){
                     signalStrength = -1;
-                    return;
+                    return false;
                 }
             }
         }
@@ -164,5 +183,6 @@ public class NetworkManager implements Initializable {
             //make strength into percentage, -100 dbm being 0% and 0 dbm being 100%. Noting that the progressbar uses 0-1.
             strength = 1-(Math.abs(strength)/100);
         signalStrength = strength;
+        return true;
     }
 }

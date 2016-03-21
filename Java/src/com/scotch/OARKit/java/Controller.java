@@ -34,9 +34,7 @@ public class Controller implements Initializable, Runnable{
     public static boolean running = true;
 
     public static ServerConnect serverConnect;
-    public Label ethernet;
-    public Label wifi4;
-    public Label wifi2;
+
     @FXML
     WebView CameraWebView;
     WebEngine engine;
@@ -55,11 +53,13 @@ public class Controller implements Initializable, Runnable{
     @FXML
     ProgressBar StrengthBar;
     @FXML
-    Label notConnectedLabel;
+    Label StrengthDBMLabel;
     @FXML
     Label StrengthLabel;
     @FXML
     Button addNewConfiguration;
+    @FXML
+    Label ConnectionType;
 
     @FXML
     ProgressBar LeftX;
@@ -146,25 +146,20 @@ public class Controller implements Initializable, Runnable{
     @Override
     public void run() {
         while(running) try {
-            networkManager.update();
+            try{networkManager.update();} catch (SocketException e) {}
             Platform.runLater(() -> StrengthBar.setProgress(networkManager.getSignalStrength()));
-            Platform.runLater(() -> StrengthLabel.setText("Strength: " + networkManager.getRawSignalStrength() + " Dbm"));
+            Platform.runLater(() -> StrengthDBMLabel.setText("Strength: " + networkManager.getRawSignalStrength() + " Dbm"));
+            Platform.runLater(() -> ConnectionType.setText("Connection: " + networkManager.getConnectionType()));
             if (networkManager.getSignalStrength() == -1){
-                Platform.runLater(() ->notConnectedLabel.setVisible(true));
+                Platform.runLater(() ->StrengthDBMLabel.setVisible(false));
                 Platform.runLater(() ->StrengthBar.setVisible(false));
-                Platform.runLater(() ->wifi2.setVisible(false));
                 Platform.runLater(() ->StrengthLabel.setVisible(false));
-                Platform.runLater(() ->wifi4.setVisible(false));
-                Platform.runLater(() ->ethernet.setVisible(false));
                 //REPEATS THE OUTPUT
                 //System.out.println("Not connected to wifi.");
             } else {
-                Platform.runLater(() ->notConnectedLabel.setVisible(false));
+                Platform.runLater(() ->StrengthDBMLabel.setVisible(true));
                 Platform.runLater(() ->StrengthBar.setVisible(true));
-                Platform.runLater(() ->wifi2.setVisible(true));
                 Platform.runLater(() ->StrengthLabel.setVisible(true));
-                Platform.runLater(() ->wifi4.setVisible(true));
-                Platform.runLater(() ->ethernet.setVisible(false));
             }
             if (gamepad.connected){
                 gamepad.pollgamepad();
