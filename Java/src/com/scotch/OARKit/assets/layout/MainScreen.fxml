@@ -58,12 +58,7 @@
                                           <ToggleButton fx:id="off" layoutX="48.0" layoutY="14.0" mnemonicParsing="false" text="Off" toggleGroup="$test" />
                                        </children>
                                     </AnchorPane>
-                                    <MenuButton fx:id="ipSelector" layoutX="239.0" layoutY="1.0" mnemonicParsing="false">
-                                      <items>
-                                        <MenuItem fx:id="localHostip" mnemonicParsing="false" text="127.0.0.1" />
-                                        <MenuItem fx:id="ipPi" mnemonicParsing="false" text="192.168.0.1" />
-                                      </items>
-                                    </MenuButton>
+                                    <MenuButton fx:id="ipSelector" layoutX="239.0" layoutY="1.0" mnemonicParsing="false" />
                         <ToggleButton fx:id="connectButton" layoutX="166.0" layoutY="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="85.0" selected="true" text="Disconnect" />
                       </children>
                     </AnchorPane>

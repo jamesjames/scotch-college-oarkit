@@ -20,6 +20,7 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.lang.Thread;
 
 import java.io.IOException;
@@ -27,6 +28,8 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.SocketException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable, Runnable{
@@ -66,10 +69,6 @@ public class Controller implements Initializable, Runnable{
     ToggleButton off;
     @FXML
     MenuButton ipSelector;
-    @FXML
-    MenuItem localHostip;
-    @FXML
-    MenuItem ipPi;
 
     @FXML
     ProgressBar LeftX;
@@ -169,32 +168,32 @@ public class Controller implements Initializable, Runnable{
             }
         });
 
-        localHostip.setOnAction(event -> {
-            connectIP.setText("127.0.0.1");
-            if (ServerConnect.connected){
-                connectButton.setSelected(false);
-                System.out.println("Closing Socket");
-                serverConnect.socketClose();
-                connectButton.setText("Connect");
-            }
-        });
+        File folder = new File("com/scotch/OARKit/assets/servers");
+        File[] listOfFiles = folder.listFiles();
+        List<String> servers = new ArrayList<>();
 
-        ipPi.setOnAction(event -> {
-            connectIP.setText("192.168.100.1");
-            if (ServerConnect.connected){
-                connectButton.setSelected(false);
-                System.out.println("Closing Socket");
-                serverConnect.socketClose();
-                connectButton.setText("Connect");
-            }
-        });
+        for (int i = 0; i < listOfFiles.length; i++) {
+            //System.out.println(listOfFiles[i].getName().replace(".properties", ""));
+            servers.add(i, listOfFiles[i].getName().replace(".properties", ""));
+        }
 
-        /*ipSelector.setOnAction(event -> {
-            System.out.println("test");
-        });
+        for (int i = 0; i < servers.size(); i++) {
+            String serverName=servers.get(i);
+            MenuItem newServerName =new MenuItem(serverName);
+            newServerName.setId(serverName);
+            newServerName.setOnAction(event -> {
+                connectIP.setText(newServerName.getText());
+                if (ServerConnect.connected){
+                    connectButton.setSelected(false);
+                    System.out.println("Closing Socket");
+                    serverConnect.socketClose();
+                    connectButton.setText("Connect");
+                }
+            });
+            ipSelector.getItems().addAll(newServerName);
+        }
 
-
-        on.setOnAction(event -> {
+        /*on.setOnAction(event -> {
             on.setDisable(true);
             off.setDisable(false);
         });
