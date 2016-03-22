@@ -189,12 +189,12 @@ public class Controller implements Initializable, Runnable{
             }
         });
 
-        ipSelector.setOnAction(event -> {
+        /*ipSelector.setOnAction(event -> {
             System.out.println("test");
         });
 
 
-        /*on.setOnAction(event -> {
+        on.setOnAction(event -> {
             on.setDisable(true);
             off.setDisable(false);
         });
