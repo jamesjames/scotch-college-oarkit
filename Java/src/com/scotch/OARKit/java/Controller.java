@@ -60,6 +60,16 @@ public class Controller implements Initializable, Runnable{
     Button addNewConfiguration;
     @FXML
     Label ConnectionType;
+    @FXML
+    ToggleButton on;
+    @FXML
+    ToggleButton off;
+    @FXML
+    MenuButton ipSelector;
+    @FXML
+    MenuItem localHostip;
+    @FXML
+    MenuItem ipPi;
 
     @FXML
     ProgressBar LeftX;
@@ -70,6 +80,19 @@ public class Controller implements Initializable, Runnable{
     @FXML
     ProgressBar RightY;
 
+    @FXML
+    Stage NetWindow;
+    @FXML
+    Button CancelButton;
+    @FXML
+    Button SaveButton;
+    @FXML
+    TextField NameField;
+    @FXML
+    TextField IPField;
+    @FXML
+    TextField PortField;
+
     Console console;
     PrintStream ps;
     //Keep old output system
@@ -78,6 +101,8 @@ public class Controller implements Initializable, Runnable{
     NetworkManager networkManager;
 
     gamepad gamepad;
+
+    int port;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -99,6 +124,7 @@ public class Controller implements Initializable, Runnable{
         if(Main.properties.getProperty("insideDev").equals("true")){
             System.out.println("Inside Dev Enviroment");
             engine.load("http://www.google.com");
+            connectIP.setText("192.168.100.1");
             //engine.loadContent("");
             consoleLog.setText("Inside Dev Environment - Console Will Log but Commands will be ignored!!\n");
         }
@@ -122,10 +148,12 @@ public class Controller implements Initializable, Runnable{
                 connectButton.setSelected(false);
                 System.out.println("Closing Socket");
                 serverConnect.socketClose();
+                connectButton.setText("Connect");
             }else {
                 serverConnect = new ServerConnect(connectIP.getText());
                 engine.load("http://"+connectIP.getText());
                 System.out.println("Connected to new Server " + connectIP.getText());
+                connectButton.setText("Disconnect");
             }
         });
 
@@ -140,6 +168,41 @@ public class Controller implements Initializable, Runnable{
                 e.printStackTrace();
             }
         });
+
+        localHostip.setOnAction(event -> {
+            connectIP.setText("127.0.0.1");
+            if (ServerConnect.connected){
+                connectButton.setSelected(false);
+                System.out.println("Closing Socket");
+                serverConnect.socketClose();
+                connectButton.setText("Connect");
+            }
+        });
+
+        ipPi.setOnAction(event -> {
+            connectIP.setText("192.168.100.1");
+            if (ServerConnect.connected){
+                connectButton.setSelected(false);
+                System.out.println("Closing Socket");
+                serverConnect.socketClose();
+                connectButton.setText("Connect");
+            }
+        });
+
+        ipSelector.setOnAction(event -> {
+            System.out.println("test");
+        });
+
+
+        /*on.setOnAction(event -> {
+            on.setDisable(true);
+            off.setDisable(false);
+        });
+
+        off.setOnAction(event -> {
+            off.setDisable(true);
+            on.setDisable(false);
+        });/**/
 
     }
 

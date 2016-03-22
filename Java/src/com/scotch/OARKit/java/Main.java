@@ -32,7 +32,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("com/scotch/OARKit/assets/layout/MainScreen.fxml"));
         primaryStage.setTitle("Scotch OAR Kit");
-        primaryStage.setScene(new Scene(root, 480, 700));
+        primaryStage.setScene(new Scene(root, 1024, 768));
         primaryStage.show();
 
     }
