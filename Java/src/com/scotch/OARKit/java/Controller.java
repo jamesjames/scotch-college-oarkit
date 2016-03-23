@@ -20,16 +20,14 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
-import java.io.File;
+import java.io.*;
 import java.lang.Thread;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintStream;
 import java.net.SocketException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable, Runnable{
@@ -51,8 +49,10 @@ public class Controller implements Initializable, Runnable{
     Button sendButton;
     @FXML
     ToggleButton connectButton;
+    public static ToggleButton connectButton1;
     @FXML
     TextField connectIP;
+    public static TextField connectIP1;
     @FXML
     ProgressBar StrengthBar;
     @FXML
@@ -69,6 +69,7 @@ public class Controller implements Initializable, Runnable{
     ToggleButton off;
     @FXML
     MenuButton ipSelector;
+    public  static MenuButton ipSelector1;
 
     @FXML
     ProgressBar LeftX;
@@ -105,6 +106,10 @@ public class Controller implements Initializable, Runnable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        createEvents();
+        ipSelector1 = ipSelector;
+        connectIP1 = connectIP;
+        connectButton1 = connectButton;
         try {
             networkManager = new NetworkManager();
         } catch (IOException e) {
@@ -127,7 +132,6 @@ public class Controller implements Initializable, Runnable{
             //engine.loadContent("");
             consoleLog.setText("Inside Dev Environment - Console Will Log but Commands will be ignored!!\n");
         }
-        createEvents();
         if(ServerConnect.connected&&Main.properties.getProperty("insideDev").equals("false")){
             connectButton.setSelected(true);
             engine.load("http://192.168.100.1");
@@ -168,6 +172,7 @@ public class Controller implements Initializable, Runnable{
             }
         });
 
+
         File folder = new File("com/scotch/OARKit/assets/servers");
         File[] listOfFiles = folder.listFiles();
         List<String> servers = new ArrayList<>();
@@ -190,7 +195,7 @@ public class Controller implements Initializable, Runnable{
                     connectButton.setText("Connect");
                 }
             });
-            ipSelector.getItems().addAll(newServerName);
+            Platform.runLater(() -> ipSelector.getItems().addAll(newServerName));
         }
 
         /*on.setOnAction(event -> {
@@ -201,6 +206,28 @@ public class Controller implements Initializable, Runnable{
         off.setOnAction(event -> {
             off.setDisable(true);
             on.setDisable(false);
+        });/**/
+
+        /*CancelButton.setOnAction(event -> {
+            NetWindow = (Stage) CancelButton.getScene().getWindow();
+            NetWindow.close();
+        });
+
+        SaveButton.setOnAction(event -> {
+            Properties props = new Properties();
+            props.setProperty("serverName",NameField.getText());
+            props.setProperty("serverIP",IPField.getText());
+            props.setProperty("serverPort",PortField.getText());
+            System.out.println(props);
+            File f = new File(NameField.getText()+".properties");
+            /*try {
+                OutputStream out = new FileOutputStream(f);
+                out.write(props.);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }/**
+            NetWindow = (Stage) SaveButton.getScene().getWindow();
+            NetWindow.close();
         });/**/
 
     }

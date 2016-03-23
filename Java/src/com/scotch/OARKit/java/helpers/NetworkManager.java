@@ -6,15 +6,19 @@ package com.scotch.OARKit.java.helpers;
 
 // TODO add a connection manager backend.
 
+import com.scotch.OARKit.java.Controller;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.*;
 import java.util.Enumeration;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class NetworkManager implements Initializable {
@@ -22,6 +26,7 @@ public class NetworkManager implements Initializable {
     private float signalStrength;
     private float rawSignalStrength;
     private String OS;
+
     @FXML
     Stage NetWindow;
     @FXML
@@ -34,6 +39,10 @@ public class NetworkManager implements Initializable {
     TextField IPField;
     @FXML
     TextField PortField;
+    @FXML
+    ToggleButton connectButton;
+    @FXML
+    TextField connectIP;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -45,11 +54,49 @@ public class NetworkManager implements Initializable {
             NetWindow = (Stage) CancelButton.getScene().getWindow();
             NetWindow.close();
         });
+
+        SaveButton.setOnAction(event -> {
+            Properties props = new Properties();
+            props.setProperty("serverName",NameField.getText());
+            props.setProperty("serverIP",IPField.getText());
+            props.setProperty("serverPort",PortField.getText());
+            System.out.println(props);
+            String path = "com/scotch/OARKit/assets/servers/"+NameField.getText()+".properties";
+
+            File f = new File(path);
+            try {
+                f.createNewFile();
+                FileWriter writer = new FileWriter(f);
+                writer.write("serverName='"+NameField.getText()+"'");
+                writer.write("\n"+"serverIP="+IPField.getText());
+                writer.write("\n"+"serverPort="+PortField.getText());
+                writer.flush();
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            NetWindow = (Stage) SaveButton.getScene().getWindow();
+            NetWindow.close();
+
+            String serverName=NameField.getText();
+            MenuItem newServerName =new MenuItem(serverName);
+            newServerName.setId(serverName);
+            newServerName.setOnAction(event1 -> {
+                Platform.runLater(() -> Controller.connectIP1.setText(newServerName.getText()));
+                if (ServerConnect.connected) {
+                    Platform.runLater(() -> Controller.connectButton1.setSelected(false));
+                    System.out.println("Closing Socket");
+                    Controller.serverConnect.socketClose();
+                    Platform.runLater(() -> Controller.connectButton1.setText("Connect"));
+                }
+            });
+            Platform.runLater(() -> Controller.ipSelector1.getItems().addAll(newServerName));
+        });
     }
 
-    public NetworkManager() throws IOException {
+    public NetworkManager() throws IOException{
         OS = System.getProperty("os.name");
-
     }
 
     public void update() throws SocketException {
