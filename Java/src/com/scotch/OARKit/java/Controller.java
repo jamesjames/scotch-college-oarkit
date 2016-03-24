@@ -102,7 +102,8 @@ public class Controller implements Initializable, Runnable{
 
     gamepad gamepad;
 
-    int port;
+    String currentip;
+    int currentport;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -122,7 +123,6 @@ public class Controller implements Initializable, Runnable{
         console = new Console(consoleLog);
         ps = new PrintStream(console, true);
         redirectOutput(ps);
-        serverConnect = new ServerConnect();
         engine = CameraWebView.getEngine();
         new Thread(this).start();
         if(Main.properties.getProperty("insideDev").equals("true")){
@@ -147,16 +147,16 @@ public class Controller implements Initializable, Runnable{
         });
 
         connectButton.setOnAction(event -> {
-            if (ServerConnect.connected){
+            if (!ServerConnect.connected){
+                serverConnect = new ServerConnect(connectIP.getText(), 5006);
+                engine.load("http://"+connectIP.getText());
+                System.out.println("Connected to new Server " + connectIP.getText());
+                connectButton.setText("Disconnect");
+            }else {
                 connectButton.setSelected(false);
                 System.out.println("Closing Socket");
                 serverConnect.socketClose();
                 connectButton.setText("Connect");
-            }else {
-                serverConnect = new ServerConnect(connectIP.getText());
-                engine.load("http://"+connectIP.getText());
-                System.out.println("Connected to new Server " + connectIP.getText());
-                connectButton.setText("Disconnect");
             }
         });
 

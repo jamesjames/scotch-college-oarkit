@@ -1,8 +1,6 @@
 package com.scotch.OARKit.java.helpers;
 
-/**
- * Created by Aren Leishman on 3/11/16.
- */
+
 
 // TODO add a connection manager backend.
 

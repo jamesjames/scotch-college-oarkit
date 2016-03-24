@@ -17,7 +17,7 @@ public class ServerConnect {
     BufferedReader stdIn;
     public static boolean connected = false;
     public ServerConnect(){
-        if(Main.properties.getProperty("insideDev").equals("true")){
+        /*if(Main.properties.getProperty("insideDev").equals("true")){
             try {
                 socket = new Socket("localhost",5006);
                 System.out.println("Starting Server on Local Host");
@@ -35,16 +35,17 @@ public class ServerConnect {
                 System.err.println("Problem Connecting to Default Remote Host - Is the server up?");
                 System.err.println("Please Specify Your Own IP");
             }
-        }
+        }*/
+        System.out.println("this method is removed, please use ServerConnect(String ip, int port)");
     }
     //FOR DIFFERING IP BUT SAME PORT - 5006
-    public ServerConnect(String ip){
+    public ServerConnect(String ip, int port){
         try {
-            socket = new Socket(ip,5006);
+            socket = new Socket(ip,port);
             System.out.println("Connecting to Server...");
             setUp();
         } catch (IOException e) {
-            System.err.println("Problem Connecting to Specified Host - Is the server up or have you type correctly?");
+            System.err.println("Problem Connecting to Specified Host - Is the server up or is it configured correctly?");
         }
     }
     //FOR DIFFERING IP AND PORT

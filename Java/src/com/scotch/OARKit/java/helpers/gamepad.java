@@ -3,9 +3,7 @@ package com.scotch.OARKit.java.helpers;
 import com.scotch.OARKit.java.helpers.JInputJoystick;
 import net.java.games.input.Controller;
 
-/**
- * Created by Aren Leishman on 3/18/16.
- */
+
 public class gamepad {
 
     public static boolean connected = true;

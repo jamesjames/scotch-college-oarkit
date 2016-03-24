@@ -23,7 +23,9 @@ public class Main extends Application {
     @Override
     public void stop(){
         System.out.println("Quitting Application");
-        Controller.serverConnect.socketClose();
+        if (ServerConnect.connected) {
+            Controller.serverConnect.socketClose();
+        }
         Controller.running = false;
         // Save file
     }

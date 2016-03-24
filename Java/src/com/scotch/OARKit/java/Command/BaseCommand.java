@@ -6,7 +6,8 @@ import java.util.ArrayList;
 
 public enum BaseCommand {
     ECHO("E","Echo",new String[]{"print","echo"},1),
-    BLANK("","", new String[]{},0);
+    BLANK("","", new String[]{},0),
+    PI("P","Pi",new String[]{"Pi"},1);
     public String command;
     public String[] alias;
     public int args;
