@@ -80,19 +80,6 @@ public class Controller implements Initializable, Runnable{
     @FXML
     ProgressBar RightY;
 
-    @FXML
-    Stage NetWindow;
-    @FXML
-    Button CancelButton;
-    @FXML
-    Button SaveButton;
-    @FXML
-    TextField NameField;
-    @FXML
-    TextField IPField;
-    @FXML
-    TextField PortField;
-
     Console console;
     PrintStream ps;
     //Keep old output system

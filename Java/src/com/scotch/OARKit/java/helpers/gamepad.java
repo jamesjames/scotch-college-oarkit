@@ -1,7 +1,7 @@
 package com.scotch.OARKit.java.helpers;
 
 import com.scotch.OARKit.java.helpers.JInputJoystick;
-import net.java.games.input.Controller;
+import net.java.games.input.*;
 
 
 public class gamepad {
@@ -19,7 +19,7 @@ public class gamepad {
     JInputJoystick gamepad;
 
     public void gamepad(){
-        gamepad = new JInputJoystick(Controller.Type.STICK, Controller.Type.GAMEPAD);
+        gamepad = new JInputJoystick(Controller.Type.GAMEPAD, Controller.Type.STICK);
         numberOfButtons = gamepad.getNumberOfButtons();
 
         // Check if the controller was found.
@@ -27,8 +27,12 @@ public class gamepad {
             connected = false;
             System.out.println("No controller found!");
         } else {
-            System.out.println("Controller found");
+            System.out.println("Controller found, printing details:");
+            System.out.println(gamepad.getControllerName());
+            System.out.println(gamepad.getControllerType());
             System.out.println("This controller has " + numberOfButtons + " buttons");
+
+
         }
     }
 

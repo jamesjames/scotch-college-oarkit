@@ -34,6 +34,7 @@ import net.java.games.input.ControllerEnvironment;
 public class JInputJoystick {
 
     private Controller controller;
+    public Component[] components;
 
     // Controller buttons states
     private ArrayList<Boolean> buttonsValues;
@@ -164,7 +165,7 @@ public class JInputJoystick {
         if(!isControllerValid)
             return false;
 
-        Component[] components = controller.getComponents();
+        components = controller.getComponents();
 
         for(int i=0; i < components.length; i++) {
             Component component = components[i];
