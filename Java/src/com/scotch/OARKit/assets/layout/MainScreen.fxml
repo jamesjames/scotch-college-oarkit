@@ -64,8 +64,8 @@
                     <GridPane prefHeight="114.0" prefWidth="478.0">
                       <children>
                         <Button fx:id="restartNginx" mnemonicParsing="false" text="Nginx Server" GridPane.rowIndex="5" />
-                        <Button mnemonicParsing="false" text="Raspberry Pi" GridPane.rowIndex="4" />
-                        <Button mnemonicParsing="false" text="Ctl Server" GridPane.rowIndex="3" />
+                        <Button mnemonicParsing="false" text="Restart Raspberry Pi" GridPane.rowIndex="4" />
+                        <Button fx:id="StopServer" mnemonicParsing="false" text="Stop Ctl Server" GridPane.rowIndex="3" />
                         <Label text="Resets" GridPane.rowIndex="2" />
                       </children>
                       <columnConstraints>

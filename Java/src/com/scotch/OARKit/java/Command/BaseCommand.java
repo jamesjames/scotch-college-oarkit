@@ -9,7 +9,7 @@ public enum BaseCommand {
     BLANK("","", new String[]{},0),
     PI("P","Pi", new String[]{"Pi"},1),
     STOPSERVER("STOPSERVER","Stop Server", new String[]{"stopserver"},0), //interpreter cannot handle multi-character Commands Apparently.
-    GAMECONTROLLER("G","gamecontroller", new String[]{"gamecontroller"},1);
+    GAMECONTROLLER("G","Game Controller", new String[]{"gamecontroller"},1);
 
     public String command;
     public String[] alias;

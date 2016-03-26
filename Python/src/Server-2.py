@@ -13,6 +13,7 @@ RunServer = True    #Run the server = True, Use a local command interface = Fals
 import socket
 #import yaml
 import sys
+import time
 from java.util import Properties
 from java.lang import Thread
 from java.net import InetAddress;
@@ -199,6 +200,7 @@ while run:
             
             if "STOPSERVER" in data:
                 print "Server shutting down"
+                time.sleep(5)
                 run = False
                 break
 

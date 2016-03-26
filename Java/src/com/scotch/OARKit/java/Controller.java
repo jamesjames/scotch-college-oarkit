@@ -34,9 +34,12 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable, Runnable{
 
     public static boolean running = true;
+    public static boolean connected = false;
 
     public static ServerConnect serverConnect;
 
+    @FXML
+    Button StopServer;
     @FXML
     WebView CameraWebView;
     WebEngine engine;
@@ -129,6 +132,7 @@ public class Controller implements Initializable, Runnable{
 
     public void createEvents(){
         restartNginx.setOnAction(event -> new Interpreter("print hello").returnCommand().runCommand());
+        StopServer.setOnAction(event -> new Interpreter("stopserver").returnCommand().runCommand());
 
         sendButton.setOnAction(event -> {
             new Interpreter(consoleTextField.getText()).returnCommand().runCommand();
@@ -141,11 +145,13 @@ public class Controller implements Initializable, Runnable{
                 engine.load("http://"+connectIP.getText());
                 System.out.println("Connected to new Server " + connectIP.getText());
                 connectButton.setText("Disconnect");
+                connected = true;
             }else {
                 connectButton.setSelected(false);
                 System.out.println("Closing Socket");
                 serverConnect.socketClose();
                 connectButton.setText("Connect");
+                connected = false;
             }
         });
 
@@ -228,6 +234,7 @@ public class Controller implements Initializable, Runnable{
             Platform.runLater(() -> StrengthBar.setProgress(networkManager.getSignalStrength()));
             Platform.runLater(() -> StrengthDBMLabel.setText("Strength: " + networkManager.getRawSignalStrength() + " Dbm"));
             Platform.runLater(() -> ConnectionType.setText("Connection: " + networkManager.getConnectionType()));
+
             if (networkManager.getSignalStrength() == -1){
                 Platform.runLater(() ->StrengthDBMLabel.setVisible(false));
                 Platform.runLater(() ->StrengthBar.setVisible(false));
@@ -246,6 +253,10 @@ public class Controller implements Initializable, Runnable{
 
                 Platform.runLater(() -> RightX.setProgress(gamepad.rightstickx/100));
                 Platform.runLater(() -> RightY.setProgress(gamepad.rightsticky/100));
+            }
+            if (!connected){
+                Platform.runLater(() -> connectButton.setText("Connect"));
+                Platform.runLater(() -> connectButton.setSelected(false));
             }
             Thread.sleep(100);
         } catch (InterruptedException e) {
@@ -272,5 +283,8 @@ public class Controller implements Initializable, Runnable{
     public void redirectOutput(PrintStream printStream){
         System.setOut(printStream);
         System.setErr(printStream);
+    }
+    public static void disconnectServer(){
+        connected = false;
     }
 }

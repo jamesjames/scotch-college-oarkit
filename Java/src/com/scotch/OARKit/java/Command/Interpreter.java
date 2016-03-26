@@ -1,7 +1,13 @@
 package com.scotch.OARKit.java.Command;
 
+import com.scotch.OARKit.java.Controller;
+import javafx.application.Platform;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.scotch.OARKit.java.Controller.serverConnect;
+import static org.python.core.PySystemState.platform;
 
 public class Interpreter {
     BaseCommand baseCommand = BaseCommand.BLANK;
@@ -27,6 +33,19 @@ public class Interpreter {
         }
         if(baseCommand == BaseCommand.BLANK){
             System.err.println("ERROR - COMMAND NOT FOUND :O");
+        }
+        if(baseCommand == BaseCommand.STOPSERVER){
+            new java.util.Timer().schedule(
+                    new java.util.TimerTask() {
+                        @Override
+                        public void run() {
+                            System.out.println("Closing Socket");
+                            serverConnect.socketClose();
+                            Controller.disconnectServer();
+                        }
+                    },
+                    50
+            );
         }
     }
     private void phaseArgs(){
