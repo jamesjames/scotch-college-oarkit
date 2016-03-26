@@ -3,6 +3,7 @@ package com.scotch.OARKit.java;
 import com.scotch.OARKit.java.Command.BaseCommand;
 import com.scotch.OARKit.java.Command.Commands;
 import com.scotch.OARKit.java.Command.Interpreter;
+import com.scotch.OARKit.java.helpers.GetServerList;
 import com.scotch.OARKit.java.helpers.NetworkManager;
 import com.scotch.OARKit.java.helpers.ServerConnect;
 import com.scotch.OARKit.java.helpers.gamepad;
@@ -98,6 +99,7 @@ public class Controller implements Initializable, Runnable{
         ipSelector1 = ipSelector;
         connectIP1 = connectIP;
         connectButton1 = connectButton;
+        new GetServerList("com/scotch/OARKit/assets/properties/servers.sList");
         try {
             networkManager = new NetworkManager();
         } catch (IOException e) {

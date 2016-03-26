@@ -34,9 +34,11 @@ public class Interpreter {
             System.err.println("ERROR NOT SUFFICIENT ARGS, KILLING REQUEST");
             this.args = "";
             this.baseCommand = BaseCommand.BLANK;
-        } else {
+        } else if (baseCommand.args != 0){
             String stringArgs = command.split(" ",2)[1];
             this.args = stringArgs;
+        } else {
+            this.args = "";
         }
     }
     public Commands returnCommand(){
