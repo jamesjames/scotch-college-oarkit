@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.web.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
@@ -19,9 +24,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.web.WebView?>
 
-<SplitPane dividerPositions="0.5179233621755254" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="811.0" prefWidth="990.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.scotch.OARKit.java.Controller">
+<SplitPane dividerPositions="0.5179233621755254" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="811.0" prefWidth="990.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.scotch.OARKit.java.Controller">
   <items>
-      <TitledPane animated="false" collapsible="false" maxHeight="1.7976931348623157E308" prefHeight="259.0" prefWidth="926.0" text="Camera">
+      <TitledPane animated="false" collapsible="false" maxHeight="1.7976931348623157E308" pickOnBounds="false" prefHeight="259.0" prefWidth="926.0" text="Camera">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -40,14 +45,17 @@
                   <items>
                     <AnchorPane>
                       <children>
-                        <Label layoutX="6.0" layoutY="6.0" text="I.P" />
-                        <TextField fx:id="connectIP" layoutX="31.0" layoutY="1.0" prefHeight="26.0" prefWidth="135.0" text="192.168.0.1" />
-                        <ProgressBar fx:id="StrengthBar" layoutX="118.0" layoutY="83.0" prefHeight="24.0" prefWidth="113.0" progress="0.0" />
-                        <Label fx:id="StrengthLabel" layoutX="5.0" layoutY="88.0" text="Signal Strength:" />
-                        <Label fx:id="StrengthDBMLabel" layoutX="5.0" layoutY="108.0" text="Signal Strength" />
-                        <Button fx:id="addNewConfiguration" layoutX="35.0" layoutY="30.0" mnemonicParsing="false" text="Add New Configuration" />
-                        <Label fx:id="ConnectionType" layoutX="6.0" layoutY="63.0" text="Connection:" />
-                                    <AnchorPane disable="true" layoutX="23.0" layoutY="117.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="54.0" prefWidth="96.0" visible="false">
+                        <ProgressBar fx:id="StrengthBar" layoutX="119.0" layoutY="117.0" prefHeight="24.0" prefWidth="113.0" progress="0.0" />
+                        <Label fx:id="StrengthLabel" layoutX="6.0" layoutY="121.0" text="Signal Strength:" />
+                        <Label fx:id="StrengthDBMLabel" layoutX="6.0" layoutY="143.0" text="Signal Strength" />
+                        <Button fx:id="addNewConfiguration" layoutX="6.0" layoutY="5.0" mnemonicParsing="false" text="Manage Configurations" />
+                        <Label fx:id="ConnectionType" layoutX="6.0" layoutY="96.0" text="Connection:" />
+                                    <MenuButton fx:id="ipSelector" layoutX="239.0" layoutY="5.0" mnemonicParsing="false" />
+                        <ToggleButton fx:id="connectButton" layoutX="166.0" layoutY="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="85.0" text="Connect" />
+                                    <Label fx:id="nameLabel" layoutX="6.0" layoutY="35.0" text="Name:" />
+                                    <Label fx:id="ipLabel" layoutX="6.0" layoutY="53.0" text="IP:" />
+                                    <Label fx:id="portLabel" layoutX="6.0" layoutY="71.0" text="Port:" />
+                                    <AnchorPane disable="true" layoutX="123.0" layoutY="36.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="54.0" prefWidth="96.0" visible="false">
                                        <children>
                                           <ToggleButton fx:id="on" disable="true" layoutX="12.0" layoutY="14.0" mnemonicParsing="false" selected="true" text="On">
                                              <toggleGroup>
@@ -57,19 +65,18 @@
                                           <ToggleButton fx:id="off" layoutX="48.0" layoutY="14.0" mnemonicParsing="false" text="Off" toggleGroup="$test" />
                                        </children>
                                     </AnchorPane>
-                                    <MenuButton fx:id="ipSelector" layoutX="239.0" layoutY="1.0" mnemonicParsing="false" />
-                        <ToggleButton fx:id="connectButton" layoutX="166.0" layoutY="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="85.0" text="Connect" />
                       </children>
                     </AnchorPane>
-                    <GridPane prefHeight="114.0" prefWidth="478.0">
+                    <GridPane prefHeight="172.0" prefWidth="262.0">
                       <children>
-                        <Button fx:id="restartNginx" mnemonicParsing="false" text="Nginx Server" GridPane.rowIndex="5" />
-                        <Button mnemonicParsing="false" text="Restart Raspberry Pi" GridPane.rowIndex="4" />
-                        <Button fx:id="StopServer" mnemonicParsing="false" text="Stop Ctl Server" GridPane.rowIndex="3" />
-                        <Label text="Resets" GridPane.rowIndex="2" />
+                        <Button fx:id="restartNginx" mnemonicParsing="false" text="Nginx Server" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Button mnemonicParsing="false" text="Restart Raspberry Pi" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Button fx:id="StopServer" mnemonicParsing="false" text="Stop Ctl Server" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label text="Resets" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                       </children>
                       <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="6.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="277.0" minWidth="10.0" prefWidth="247.38964080810547" />
                       </columnConstraints>
                       <rowConstraints>
                         <RowConstraints />
@@ -114,13 +121,12 @@
             </Tab>
           </tabs>
         </TabPane>
-            <GridPane prefHeight="215.0" prefWidth="478.0">
+            <GridPane maxHeight="386.0" minHeight="386.0" prefHeight="386.0" prefWidth="478.0">
                <children>
-                  <TextArea fx:id="consoleLog" prefHeight="323.0" prefWidth="611.0" text="Something has gone wrong..." />
                   <GridPane prefHeight="56.0" prefWidth="543.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
                      <children>
                         <TextField fx:id="consoleTextField" prefHeight="41.0" prefWidth="511.0" />
-                        <Button fx:id="sendButton" mnemonicParsing="false" prefHeight="41.0" prefWidth="62.0" text="Send" GridPane.columnIndex="1" />
+                        <Button fx:id="sendButton" defaultButton="true" mnemonicParsing="false" prefHeight="41.0" prefWidth="62.0" text="Send" GridPane.columnIndex="1" />
                      </children>
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="638.1151733398438" />
@@ -130,6 +136,15 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                   </GridPane>
+                  <TitledPane animated="false" collapsible="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="330.0" minWidth="703.0" mouseTransparent="false" prefHeight="330.0" prefWidth="703.0" text="Console">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TextArea fx:id="consoleLog" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="303.0" minWidth="701.0" prefHeight="303.0" prefWidth="701.0" text="Something has gone wrong..." AnchorPane.bottomAnchor="-10.399999999999977" AnchorPane.leftAnchor="-10.399999999999977" AnchorPane.rightAnchor="-10.399999999999977" AnchorPane.topAnchor="-10.399999999999977" />
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </TitledPane>
                </children>
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

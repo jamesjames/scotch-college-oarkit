@@ -10,8 +10,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.python.antlr.ast.Delete;
 
 import java.io.*;
 import java.net.*;
@@ -32,15 +34,13 @@ public class NetworkManager implements Initializable {
     @FXML
     Button SaveButton;
     @FXML
+    Button DeleteButton;
+    @FXML
     TextField NameField;
     @FXML
     TextField IPField;
     @FXML
     TextField PortField;
-    @FXML
-    ToggleButton connectButton;
-    @FXML
-    TextField connectIP;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -48,6 +48,9 @@ public class NetworkManager implements Initializable {
     }
 
     public void createEvents(){
+        DeleteButton.setOnAction(event -> {
+        });/**/
+
         CancelButton.setOnAction(event -> {
             NetWindow = (Stage) CancelButton.getScene().getWindow();
             NetWindow.close();
@@ -72,16 +75,26 @@ public class NetworkManager implements Initializable {
                 writer.close();
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            }/**/
 
             NetWindow = (Stage) SaveButton.getScene().getWindow();
             NetWindow.close();
 
-            String serverName=NameField.getText();
+            /*String serverName=NameField.getText();
             MenuItem newServerName =new MenuItem(serverName);
             newServerName.setId(serverName);
             newServerName.setOnAction(event1 -> {
-                Platform.runLater(() -> Controller.connectIP1.setText(newServerName.getText()));
+                Properties prop = new Properties();
+                ClassLoader loader = Thread.currentThread().getContextClassLoader();
+                InputStream stream = loader.getResourceAsStream("com/scotch/OARKit/assets/servers/"+serverName+".properties");
+
+                try {
+                    prop.load(stream);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(prop);
+                Platform.runLater(() -> Controller.connectIP1.setText(prop.getProperty("serverIP")));
                 if (ServerConnect.connected) {
                     Platform.runLater(() -> Controller.connectButton1.setSelected(false));
                     System.out.println("Closing Socket");
@@ -89,7 +102,7 @@ public class NetworkManager implements Initializable {
                     Platform.runLater(() -> Controller.connectButton1.setText("Connect"));
                 }
             });
-            Platform.runLater(() -> Controller.ipSelector1.getItems().addAll(newServerName));
+            Platform.runLater(() -> Controller.ipSelector1.getItems().addAll(newServerName));/**/
         });
     }
 

@@ -21,7 +21,7 @@ public class GetServerList {
         stringFromFile = phaseStream();
         System.out.println(stringFromFile);
         phaseRaw();
-        System.out.println(codeMap.get("test2"));
+        System.out.println(codeMap);
     }
     private void openStream(){
         fileInputStream = this.getClass().getClassLoader().getResourceAsStream(filePath);

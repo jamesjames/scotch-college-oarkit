@@ -40,9 +40,9 @@ public class ServerConnect {
         System.out.println("This method going to be removed, please use ServerConnect(String ip, int port)");
     }
     //FOR DIFFERING IP BUT SAME PORT - 5006
-    public ServerConnect(String ip, int port){
+    public ServerConnect(String ip, String port){
         try {
-            socket = new Socket(ip,port);
+            socket = new Socket(ip, Integer.parseInt(port));
             System.out.println("Connecting to Server...");
             setUp();
         } catch (IOException e) {
