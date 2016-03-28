@@ -23,10 +23,7 @@ import java.lang.Thread;
 
 import java.net.SocketException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class Controller implements Initializable, Runnable{
 
@@ -52,9 +49,6 @@ public class Controller implements Initializable, Runnable{
     ToggleButton connectButton;
     public static ToggleButton connectButton1;
     @FXML
-    TextField connectIP;
-    public static TextField connectIP1;
-    @FXML
     ProgressBar StrengthBar;
     @FXML
     Label StrengthDBMLabel;
@@ -73,10 +67,13 @@ public class Controller implements Initializable, Runnable{
     public static MenuButton ipSelector1;
     @FXML
     Label nameLabel;
+    public static Label nameLabel1;
     @FXML
     Label ipLabel;
+    public static Label ipLabel1;
     @FXML
     Label portLabel;
+    public static Label portLabel1;
 
     @FXML
     ProgressBar LeftX;
@@ -99,11 +96,38 @@ public class Controller implements Initializable, Runnable{
     String currentip;
     int currentport;
 
-    public void ServerDisconnect() {
-        connectButton.setSelected(false);
+    public void print(String out) {
+        System.out.println(out);
+    }
+
+    public static void AddConfigToList(String serverName) {
+        MenuItem newServerName =new MenuItem(serverName);
+        newServerName.setId(serverName);
+        newServerName.setOnAction(event -> {
+            Properties props = new Properties();
+            ClassLoader loader = Thread.currentThread().getContextClassLoader();
+            InputStream stream = loader.getResourceAsStream("com/scotch/OARKit/assets/servers/"+serverName+".properties");
+            try {
+                props.load(stream);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println(props);
+            nameLabel1.setText("Name: "+props.getProperty("serverName"));
+            ipLabel1.setText("IP: "+props.getProperty("serverIP"));
+            portLabel1.setText("Port: "+props.getProperty("serverPort"));
+            if (ServerConnect.connected){
+                ServerDisconnect();
+            }
+        });
+        Platform.runLater(() -> ipSelector1.getItems().addAll(newServerName));
+    }
+
+    public static void ServerDisconnect() {
+        connectButton1.setSelected(false);
         System.out.println("Closing Socket");
         serverConnect.socketClose();
-        connectButton.setText("Connect");
+        connectButton1.setText("Connect");
         connected = false;
     }
 
@@ -131,9 +155,19 @@ public class Controller implements Initializable, Runnable{
             e.printStackTrace();
         }
         ipSelector1 = ipSelector;
-        connectIP1 = connectIP;
         connectButton1 = connectButton;
+        nameLabel1 = nameLabel;
+        ipLabel1 = ipLabel;
+        portLabel1 = portLabel;
         new GetServerList("com/scotch/OARKit/assets/properties/servers.sList");
+        String stringFromFile = GetServerList.stringFromFile;
+        //System.out.println(stringFromFile);
+        String[] serverList = stringFromFile.split("\n");
+        for (int i = 0; i < serverList.length; i++) {
+            print("Server "+(i+1)+": "+serverList[i]);
+            String[] server = serverList[i].split(", ");
+            print((i+1)+" "+String.valueOf(server));
+        }
         try {
             networkManager = new NetworkManager();
         } catch (IOException e) {
@@ -184,7 +218,6 @@ public class Controller implements Initializable, Runnable{
             }
         });
 
-
         File folder = new File("com/scotch/OARKit/assets/servers");
         File[] listOfFiles = folder.listFiles();
         List<String> servers = new ArrayList<>();
@@ -196,40 +229,23 @@ public class Controller implements Initializable, Runnable{
 
         for (int i = 0; i < servers.size(); i++) {
             String serverName=servers.get(i);
-            MenuItem newServerName =new MenuItem(serverName);
-            newServerName.setId(serverName);
-            newServerName.setOnAction(event -> {
+            AddConfigToList(serverName);
+        }/**/
+
+        connectButton.setOnAction(event -> {
+            if (!nameLabel.getText().equals("Name:")) {
                 Properties props = new Properties();
                 ClassLoader loader = Thread.currentThread().getContextClassLoader();
-                InputStream stream = loader.getResourceAsStream("com/scotch/OARKit/assets/servers/"+serverName+".properties");
+                InputStream stream = loader.getResourceAsStream("com/scotch/OARKit/assets/servers/"+nameLabel.getText().replace("Name: ", "")+".properties");
                 try {
                     props.load(stream);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                System.out.println(props);
-                nameLabel.setText("Name: "+props.getProperty("serverName"));
-                ipLabel.setText("IP: "+props.getProperty("serverIP"));
-                portLabel.setText("Port: "+props.getProperty("serverPort"));
-                if (ServerConnect.connected){
-                    ServerDisconnect();
-                }
-            });
-            Platform.runLater(() -> ipSelector.getItems().addAll(newServerName));
-
-
-        }/**/
-
-        connectButton.setOnAction(event -> {
-            Properties props = new Properties();
-            ClassLoader loader = Thread.currentThread().getContextClassLoader();
-            InputStream stream = loader.getResourceAsStream("com/scotch/OARKit/assets/servers/"+nameLabel.getText().replace("Name: ", "")+".properties");
-            try {
-                props.load(stream);
-            } catch (IOException e) {
-                e.printStackTrace();
+                ToggleServerConnection(props.getProperty("serverName"), props.getProperty("serverIP"), props.getProperty("serverPort"));
+            } else {
+                print("Please select a server");
             }
-            ToggleServerConnection(props.getProperty("serverName"), props.getProperty("serverIP"), props.getProperty("serverPort"));
         });
 
         /*on.setOnAction(event -> {

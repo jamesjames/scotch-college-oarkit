@@ -9,17 +9,21 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.python.antlr.ast.Delete;
 
 import java.io.*;
 import java.net.*;
-import java.util.Enumeration;
-import java.util.Properties;
-import java.util.ResourceBundle;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.*;
 
 public class NetworkManager implements Initializable {
     private String ConnectionType;
@@ -41,14 +45,92 @@ public class NetworkManager implements Initializable {
     TextField IPField;
     @FXML
     TextField PortField;
+    @FXML
+    MenuButton configSelector;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         createEvents();
     }
 
+    public static String errorType1;
+
+    public void error(String errorType) {
+        errorType1=errorType;
+        if (errorType.equals("Name")){
+            try {
+                Stage NetWindow = new Stage();
+                Parent NetRoot = FXMLLoader.load(getClass().getClassLoader().getResource("com/scotch/OARKit/assets/layout/NetworkManagerErrorMesageName.fxml"));
+                NetWindow.setTitle("Name Error");
+                NetWindow.setScene(new Scene(NetRoot, 224, 124));
+                NetWindow.setAlwaysOnTop(true);
+                NetWindow.setResizable(false);
+                NetWindow.show();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                Stage NetWindow = new Stage();
+                Parent NetRoot = FXMLLoader.load(getClass().getClassLoader().getResource("com/scotch/OARKit/assets/layout/NetworkManagerErrorMesage.fxml"));
+                NetWindow.setTitle(errorType + " Error");
+                NetWindow.setScene(new Scene(NetRoot, 165, 89));
+                NetWindow.setAlwaysOnTop(true);
+                NetWindow.setResizable(false);
+                NetWindow.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public void createEvents(){
+
+        File folder = new File("com/scotch/OARKit/assets/servers");
+        File[] listOfFiles = folder.listFiles();
+        List<String> servers = new ArrayList<>();
+
+        for (int i = 0; i < listOfFiles.length; i++) {
+            //System.out.println(listOfFiles[i].getName().replace(".properties", ""));
+            servers.add(i, listOfFiles[i].getName().replace(".properties", ""));
+        }
+
+        for (int i = 0; i < servers.size(); i++) {
+            String serverName = servers.get(i);
+            MenuItem newServerName = new MenuItem(serverName);
+            newServerName.setId(serverName);
+            newServerName.setOnAction(event -> {
+                Properties props = new Properties();
+                ClassLoader loader = Thread.currentThread().getContextClassLoader();
+                InputStream stream = loader.getResourceAsStream("com/scotch/OARKit/assets/servers/" + serverName + ".properties");
+                try {
+                    props.load(stream);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(props);
+                NameField.setText(props.getProperty("serverName"));
+                IPField.setText(props.getProperty("serverIP"));
+                PortField.setText(props.getProperty("serverPort"));
+
+            });
+            Platform.runLater(() -> configSelector.getItems().addAll(newServerName));
+        }
+
         DeleteButton.setOnAction(event -> {
+            //Path path = "com/scotch/OARKit/assets/servers/"+NameField.getText()+".properties";
+            Path path = FileSystems.getDefault().getPath("com/scotch/OARKit/assets/servers/"+NameField.getText()+".properties");
+            try {
+                Files.deleteIfExists(path);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Connection Deleted");
+            IPField.setText("");
+            PortField.setText("");
+            NameField.setText("");
+            NetWindow = (Stage) DeleteButton.getScene().getWindow();
+            NetWindow.close();
         });/**/
 
         CancelButton.setOnAction(event -> {
@@ -57,52 +139,39 @@ public class NetworkManager implements Initializable {
         });
 
         SaveButton.setOnAction(event -> {
-            Properties props = new Properties();
-            props.setProperty("serverName",NameField.getText());
-            props.setProperty("serverIP",IPField.getText());
-            props.setProperty("serverPort",PortField.getText());
-            System.out.println(props);
-            String path = "com/scotch/OARKit/assets/servers/"+NameField.getText()+".properties";
+            if (NameField.getText().isEmpty()||NameField.getText().contains(".")||NameField.getText().contains("/")||NameField.getText().contains(",")||NameField.getText().contains(";")||NameField.getText().contains("'")||NameField.getText().contains("[")||NameField.getText().contains("]")||NameField.getText().contains("(")||NameField.getText().contains(")")||NameField.getText().contains("\\")) {
+                error("Name");
+            } else if (IPField.getText().isEmpty()) {
+                error("IP");
+            } else if (PortField.getText().isEmpty()) {
+                error("Port");
+            } else {
+                Properties props = new Properties();
+                props.setProperty("serverName", NameField.getText());
+                props.setProperty("serverIP", IPField.getText());
+                props.setProperty("serverPort", PortField.getText());
+                System.out.println(props);
+                String path = "com/scotch/OARKit/assets/servers/" + NameField.getText() + ".properties";
 
-            File f = new File(path);
-            try {
-                f.createNewFile();
-                FileWriter writer = new FileWriter(f);
-                writer.write("serverName='"+NameField.getText()+"'");
-                writer.write("\n"+"serverIP="+IPField.getText());
-                writer.write("\n"+"serverPort="+PortField.getText());
-                writer.flush();
-                writer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }/**/
-
-            NetWindow = (Stage) SaveButton.getScene().getWindow();
-            NetWindow.close();
-
-            /*String serverName=NameField.getText();
-            MenuItem newServerName =new MenuItem(serverName);
-            newServerName.setId(serverName);
-            newServerName.setOnAction(event1 -> {
-                Properties prop = new Properties();
-                ClassLoader loader = Thread.currentThread().getContextClassLoader();
-                InputStream stream = loader.getResourceAsStream("com/scotch/OARKit/assets/servers/"+serverName+".properties");
-
+                File f = new File(path);
                 try {
-                    prop.load(stream);
+                    f.createNewFile();
+                    FileWriter writer = new FileWriter(f);
+                    writer.write("serverName=" + NameField.getText());
+                    writer.write("\n" + "serverIP=" + IPField.getText());
+                    writer.write("\n" + "serverPort=" + PortField.getText());
+                    writer.flush();
+                    writer.close();
                 } catch (IOException e) {
                     e.printStackTrace();
-                }
-                System.out.println(prop);
-                Platform.runLater(() -> Controller.connectIP1.setText(prop.getProperty("serverIP")));
-                if (ServerConnect.connected) {
-                    Platform.runLater(() -> Controller.connectButton1.setSelected(false));
-                    System.out.println("Closing Socket");
-                    Controller.serverConnect.socketClose();
-                    Platform.runLater(() -> Controller.connectButton1.setText("Connect"));
-                }
-            });
-            Platform.runLater(() -> Controller.ipSelector1.getItems().addAll(newServerName));/**/
+                }/**/
+
+                NetWindow = (Stage) SaveButton.getScene().getWindow();
+                NetWindow.close();
+
+                //String serverName=NameField.getText();
+                //Controller.AddConfigToList(serverName);
+            }
         });
     }
 

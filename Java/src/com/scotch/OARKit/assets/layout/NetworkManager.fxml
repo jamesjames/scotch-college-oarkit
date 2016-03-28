@@ -18,30 +18,11 @@
          <children>
             <GridPane maxHeight="182.0" maxWidth="356.0" minHeight="182.0" minWidth="338.0" prefHeight="182.0" prefWidth="338.0">
                <children>
-                  <GridPane GridPane.rowIndex="2">
-                     <children>
-                        <Button fx:id="SaveButton" defaultButton="true" mnemonicParsing="false" text="Save" GridPane.columnIndex="2">
-                           <effect>
-                              <ColorAdjust />
-                           </effect>
-                        </Button>
-                        <Button fx:id="CancelButton" cancelButton="true" mnemonicParsing="false" prefHeight="26.0" prefWidth="68.0" text="Cancel" />
-                        <Button fx:id="DeleteButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="65.0" text="Delete" GridPane.columnIndex="1" />
-                     </children>
-                     <columnConstraints>
-                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="203.0" minWidth="10.0" prefWidth="203.0" />
-                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="112.0" minWidth="10.0" prefWidth="77.0" />
-                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="98.0" minWidth="10.0" prefWidth="58.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                  </GridPane>
                   <GridPane GridPane.rowIndex="1">
                      <children>
-                        <TextField fx:id="PortField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <TextField fx:id="IPField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <TextField fx:id="NameField" GridPane.columnIndex="1" />
+                        <TextField fx:id="IPField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="PortField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <Label text="Port" GridPane.rowIndex="2" />
                         <Label text="I.P Address" GridPane.rowIndex="1" />
                         <Label text="Name" />
@@ -56,12 +37,26 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                   </GridPane>
-                  <MenuButton mnemonicParsing="false" text="Load Config To Edit">
-                     <items>
-                        <MenuItem mnemonicParsing="false" text="Action 1" />
-                        <MenuItem mnemonicParsing="false" text="Action 2" />
-                     </items>
-                  </MenuButton>
+                  <GridPane GridPane.rowIndex="2">
+                     <children>
+                        <Button fx:id="CancelButton" cancelButton="true" mnemonicParsing="false" prefHeight="26.0" prefWidth="68.0" text="Cancel" />
+                        <Button fx:id="DeleteButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="65.0" text="Delete" GridPane.columnIndex="1" />
+                        <Button fx:id="SaveButton" defaultButton="true" mnemonicParsing="false" text="Save" GridPane.columnIndex="2">
+                           <effect>
+                              <ColorAdjust />
+                           </effect>
+                        </Button>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="203.0" minWidth="10.0" prefWidth="203.0" />
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="112.0" minWidth="10.0" prefWidth="77.0" />
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="98.0" minWidth="10.0" prefWidth="58.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+                  <MenuButton fx:id="configSelector" mnemonicParsing="false" text="Load Config To Edit" />
                </children>
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

@@ -13,15 +13,15 @@ public class GetServerList {
     String filePath;
     InputStream fileInputStream;
     OutputStream fileOutPutStream;
-    String stringFromFile;
-    Map<String, String[]> codeMap = new HashMap<String, String[]>();
+    public static String stringFromFile;
+    Map<String, String[]> codeMap = new HashMap<>();
     public GetServerList(String filePath){
         this.filePath = filePath;
         openStream();
         stringFromFile = phaseStream();
-        System.out.println(stringFromFile);
+        //System.out.println(stringFromFile);
         phaseRaw();
-        System.out.println(codeMap);
+        //System.out.println(codeMap);
     }
     private void openStream(){
         fileInputStream = this.getClass().getClassLoader().getResourceAsStream(filePath);
