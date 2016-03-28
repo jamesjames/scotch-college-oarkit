@@ -139,11 +139,11 @@ public class NetworkManager implements Initializable {
         });
 
         SaveButton.setOnAction(event -> {
-            if (NameField.getText().isEmpty()||NameField.getText().contains(".")||NameField.getText().contains("/")||NameField.getText().contains(",")||NameField.getText().contains(";")||NameField.getText().contains("'")||NameField.getText().contains("[")||NameField.getText().contains("]")||NameField.getText().contains("(")||NameField.getText().contains(")")||NameField.getText().contains("\\")) {
+            if (NameField.getText().isEmpty()||!NameField.getText().matches("[a-zA-Z0-9 ]*")) {
                 error("Name");
-            } else if (IPField.getText().isEmpty()) {
+            } else if (IPField.getText().isEmpty()||!IPField.getText().matches("[0-9.]*")) {
                 error("IP");
-            } else if (PortField.getText().isEmpty()) {
+            } else if (PortField.getText().isEmpty()||!PortField.getText().matches("\\d{4}")) {
                 error("Port");
             } else {
                 Properties props = new Properties();
