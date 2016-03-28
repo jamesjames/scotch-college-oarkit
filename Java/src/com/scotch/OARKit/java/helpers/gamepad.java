@@ -1,5 +1,7 @@
 package com.scotch.OARKit.java.helpers;
 
+import com.kenai.jaffl.struct.Struct;
+import com.scotch.OARKit.java.Command.Interpreter;
 import com.scotch.OARKit.java.helpers.JInputJoystick;
 import net.java.games.input.*;
 
@@ -16,10 +18,11 @@ public class gamepad {
 
     private int numberOfButtons;
 
-    JInputJoystick gamepad;
+    private JInputJoystick gamepad;
 
     public void gamepad(){
         gamepad = new JInputJoystick(Controller.Type.GAMEPAD, Controller.Type.STICK);
+        gamepad.pollController();
         numberOfButtons = gamepad.getNumberOfButtons();
 
         // Check if the controller was found.
@@ -31,8 +34,6 @@ public class gamepad {
             System.out.println(gamepad.getControllerName());
             System.out.println(gamepad.getControllerType());
             System.out.println("This controller has " + numberOfButtons + " buttons");
-
-
         }
     }
 
@@ -47,6 +48,15 @@ public class gamepad {
 
             rightstickx = gamepad.getX_RightJoystick_Percentage();
             rightsticky = gamepad.getY_RightJoystick_Percentage();
+            createCommand();
         }
+    }
+    private void createCommand() {
+        if (ServerConnect.connected) {
+            new Interpreter("gamecontroller " + ConvertToHex(Math.round(leftstickx)) + ConvertToHex(Math.round(leftsticky)) + ConvertToHex(Math.round(rightstickx)) + ConvertToHex(Math.round(rightsticky)) + "77000000000000").returnCommand().runCommand();
+        }
+    }
+    private String ConvertToHex(int axis){
+        return Integer.toHexString(((axis) * 15)/100);
     }
 }

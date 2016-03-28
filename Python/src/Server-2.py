@@ -145,7 +145,7 @@ def interpretGamepadData(data):
     #Apply all button data
     buttonController.actOnCmd(buttonData)
     print robot
-    #print "Axis Data: " + str(axisData)
+    print "Axis Data: " + str(axisData)
     #print "Button Data: " + str(buttonData)
 
 s = "7F7777" + "0" * 11 + "1"
