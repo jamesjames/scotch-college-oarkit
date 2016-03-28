@@ -252,7 +252,6 @@ public class Controller implements Initializable, Runnable{
             on.setDisable(true);
             off.setDisable(false);
         });
-
         off.setOnAction(event -> {
             off.setDisable(true);
             on.setDisable(false);

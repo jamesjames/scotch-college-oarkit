@@ -169,9 +169,8 @@ public class JInputJoystick {
 
         for(int i=0; i < components.length; i++) {
             Component component = components[i];
-
             // Add states of the buttons
-            if(component.getName().contains("Button"))
+            if(!component.isAnalog())
                 if(component.getPollData() == 1.0f)
                     buttonsValues.add(Boolean.TRUE);
                 else
