@@ -4,19 +4,15 @@ package com.scotch.OARKit.java.helpers;
 
 // TODO add a connection manager backend.
 
-import com.scotch.OARKit.java.Controller;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.python.antlr.ast.Delete;
 
 import java.io.*;
 import java.net.*;
@@ -51,37 +47,6 @@ public class NetworkManager implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         createEvents();
-    }
-
-    public static String errorType1;
-
-    public void error(String errorType) {
-        errorType1=errorType;
-        if (errorType.equals("Name")){
-            try {
-                Stage NetWindow = new Stage();
-                Parent NetRoot = FXMLLoader.load(getClass().getClassLoader().getResource("com/scotch/OARKit/assets/layout/NetworkManagerErrorMesageName.fxml"));
-                NetWindow.setTitle("Name Error");
-                NetWindow.setScene(new Scene(NetRoot, 224, 124));
-                NetWindow.setAlwaysOnTop(true);
-                NetWindow.setResizable(false);
-                NetWindow.show();
-            } catch (IOException e){
-                e.printStackTrace();
-            }
-        } else {
-            try {
-                Stage NetWindow = new Stage();
-                Parent NetRoot = FXMLLoader.load(getClass().getClassLoader().getResource("com/scotch/OARKit/assets/layout/NetworkManagerErrorMesage.fxml"));
-                NetWindow.setTitle(errorType + " Error");
-                NetWindow.setScene(new Scene(NetRoot, 165, 89));
-                NetWindow.setAlwaysOnTop(true);
-                NetWindow.setResizable(false);
-                NetWindow.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     public void createEvents(){
@@ -140,11 +105,47 @@ public class NetworkManager implements Initializable {
 
         SaveButton.setOnAction(event -> {
             if (NameField.getText().isEmpty()||!NameField.getText().matches("[a-zA-Z0-9 ]*")) {
-                error("Name");
+                try {
+                    Stage NetWindow = new Stage();
+                    Parent NetRoot = FXMLLoader.load(getClass().getClassLoader().getResource("com/scotch/OARKit/java/NetworkManagerErrors/NetworkManagerErrorMessageName.fxml"));
+                    NetWindow.setTitle("Name Error");
+                    NetWindow.setScene(new Scene(NetRoot, 224, 124));
+                    NetWindow.setAlwaysOnTop(true);
+                    NetWindow.setResizable(false);
+                    NetWindow.initModality(Modality.WINDOW_MODAL);
+                    NetWindow.initOwner(SaveButton.getScene().getWindow());
+                    NetWindow.show();
+                } catch (IOException e){
+                    e.printStackTrace();
+                }
             } else if (IPField.getText().isEmpty()||!IPField.getText().matches("[0-9.]*")) {
-                error("IP");
+                try {
+                    Stage NetWindow = new Stage();
+                    Parent NetRoot = FXMLLoader.load(getClass().getClassLoader().getResource("com/scotch/OARKit/java/NetworkManagerErrors/NetworkManagerErrorMessageIP.fxml"));
+                    NetWindow.setTitle("IP Error");
+                    NetWindow.setScene(new Scene(NetRoot, 200, 117));
+                    NetWindow.setAlwaysOnTop(true);
+                    NetWindow.setResizable(false);
+                    NetWindow.initModality(Modality.WINDOW_MODAL);
+                    NetWindow.initOwner(SaveButton.getScene().getWindow());
+                    NetWindow.show();
+                } catch (IOException e){
+                    e.printStackTrace();
+                }
             } else if (PortField.getText().isEmpty()||!PortField.getText().matches("\\d{4}")) {
-                error("Port");
+                try {
+                    Stage NetWindow = new Stage();
+                    Parent NetRoot = FXMLLoader.load(getClass().getClassLoader().getResource("com/scotch/OARKit/java/NetworkManagerErrors/NetworkManagerErrorMessagePort.fxml"));
+                    NetWindow.setTitle("Port Error");
+                    NetWindow.setScene(new Scene(NetRoot, 200, 103));
+                    NetWindow.setAlwaysOnTop(true);
+                    NetWindow.setResizable(false);
+                    NetWindow.initModality(Modality.WINDOW_MODAL);
+                    NetWindow.initOwner(SaveButton.getScene().getWindow());
+                    NetWindow.show();
+                } catch (IOException e){
+                    e.printStackTrace();
+                }
             } else {
                 Properties props = new Properties();
                 props.setProperty("serverName", NameField.getText());

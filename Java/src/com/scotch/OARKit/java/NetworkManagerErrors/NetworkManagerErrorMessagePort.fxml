@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.scotch.OARKit.java.NetworkManagerErrors.NetworkManagerErrorMessagePort">
+   <children>
+      <Label layoutX="43.0" layoutY="13.0" text="Port Error" AnchorPane.leftAnchor="43.0" AnchorPane.topAnchor="13.0" />
+      <Label layoutX="5.0" layoutY="37.0" text="Please input a valid port" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+      <ImageView fitHeight="33.0" fitWidth="36.0" layoutX="2.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
+         <image>
+            <Image url="@../../assets/picture/warning-general-2.gif" />
+         </image>
+      </ImageView>
+      <Label layoutX="5.0" layoutY="54.0" prefWidth="157.0" text="NOTE: A valid port is a 4 digit long set of numbers" wrapText="true" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Label>
+      <Button fx:id="closeButton" defaultButton="true" layoutX="111.0" layoutY="70.0" mnemonicParsing="false" text="Close" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+   </children>
+</AnchorPane>

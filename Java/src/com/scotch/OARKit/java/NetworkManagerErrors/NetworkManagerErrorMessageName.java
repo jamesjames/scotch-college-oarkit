@@ -1,4 +1,4 @@
-package com.scotch.OARKit.java.helpers;
+package com.scotch.OARKit.java.NetworkManagerErrors;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class NetworkManagerErrorMesageName implements Initializable {
+public class NetworkManagerErrorMessageName implements Initializable {
 
     @FXML
     Stage NetWindow;

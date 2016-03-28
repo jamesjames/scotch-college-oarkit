@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -212,6 +213,8 @@ public class Controller implements Initializable, Runnable{
                 NetWindow.setScene(new Scene(NetRoot, 358, 191));
                 NetWindow.setAlwaysOnTop(true);
                 NetWindow.setResizable(false);
+                NetWindow.initModality(Modality.WINDOW_MODAL);
+                NetWindow.initOwner(addNewConfiguration.getScene().getWindow());
                 NetWindow.show();
             } catch (IOException e){
                 e.printStackTrace();
