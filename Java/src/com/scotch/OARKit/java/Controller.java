@@ -3,6 +3,8 @@ package com.scotch.OARKit.java;
 import com.scotch.OARKit.java.Command.BaseCommand;
 import com.scotch.OARKit.java.Command.Commands;
 import com.scotch.OARKit.java.Command.Interpreter;
+import com.scotch.OARKit.java.ServerList.GetServerList;
+import com.scotch.OARKit.java.ServerList.ServerList;
 import com.scotch.OARKit.java.helpers.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -160,9 +162,11 @@ public class Controller implements Initializable, Runnable{
         nameLabel1 = nameLabel;
         ipLabel1 = ipLabel;
         portLabel1 = portLabel;
-        new GetServerList("com/scotch/OARKit/assets/properties/servers.sList");
-        String stringFromFile = GetServerList.stringFromFile;
-        //System.out.println(stringFromFile);
+        GetServerList a= new GetServerList("com/scotch/OARKit/assets/properties/servers.sList");
+        String stringFromFile = a.stringFromFile;
+        //ASK ME TO SEE HOW THIS MAGICAL CLASS WORKS
+        System.out.println(ServerList.getIPAndPort(ServerList.getKeys()[0])[ServerList.IndexType.IP.index]);
+        //GetServerList.saveString("Heloo",new String[]{"192.168.1.15","5006"});
         String[] serverList = stringFromFile.split("\n");
         for (int i = 0; i < serverList.length; i++) {
             print("Server "+(i+1)+": "+serverList[i]);
