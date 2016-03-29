@@ -48,8 +48,9 @@ public class GetServerList {
             String x[] = v.split(", ");
             String[] temp = Arrays.copyOfRange(x, 1, x.length);
             codeMap.put(x[0],temp);
-            new ServerList(x[0],temp);
+            
         }
+        new ServerList(x[0],temp);
     }
     public static void saveString(String name, String[] data)  {
         String finalString = "\n"+name;
