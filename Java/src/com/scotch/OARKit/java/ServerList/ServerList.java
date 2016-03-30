@@ -16,7 +16,7 @@ public class ServerList {
             this.index = index;
         }
     }
-    public static Map<String, ArrayList<Object>> array = new HashMap<>();
+    public static Map<String, ArrayList<Object>> array = new LinkedHashMap<>();
     final String name;
     private ArrayList<String> data;
     public ServerList(String name, String[] data){
@@ -52,5 +52,30 @@ public class ServerList {
     public static String[] getKeys(){
         return Arrays.copyOf(array.keySet().toArray(),array.keySet().toArray().length,String[].class);
     }
+
+    //CHANGING/MODIFYING DATA
+    @Deprecated //DO NOT USE THIS METHOD (ONLY FOR BACK END)
+    public static void updateKey(String key, Object[] data){
+        array.put(key,new ArrayList<Object>(Arrays.asList(data)));
+        updateFile();
+    }
+    public static void changeData(String key, IndexType index, Object data){
+        ArrayList<Object> x = array.get(key);
+        x.set(index.index,data);
+        array.put(key,x);
+        updateFile();
+    }
+    public static void removeKey(String key){
+        array.remove(key);
+        updateFile();
+    }
+    public static void addKey(String key, String[] data){
+        new ServerList(key, data);
+        updateFile();
+    }
+    private static void updateFile(){
+        GetServerList.updateList();
+    }
+
 
 }
