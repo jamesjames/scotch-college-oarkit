@@ -67,7 +67,7 @@
                                     </AnchorPane>
                       </children>
                     </AnchorPane>
-                    <GridPane prefHeight="172.0" prefWidth="262.0">
+                    <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="172.0" prefWidth="277.0" SplitPane.resizableWithParent="false">
                       <children>
                         <Button fx:id="restartNginx" mnemonicParsing="false" text="Nginx Server" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                         <Button mnemonicParsing="false" text="Restart Raspberry Pi" GridPane.columnIndex="1" GridPane.rowIndex="4" />
@@ -125,18 +125,20 @@
                <children>
                   <GridPane prefHeight="56.0" prefWidth="543.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
                      <children>
-                        <TextField fx:id="consoleTextField" prefHeight="41.0" prefWidth="511.0" />
-                        <Button fx:id="sendButton" defaultButton="true" mnemonicParsing="false" prefHeight="41.0" prefWidth="62.0" text="Send" GridPane.columnIndex="1" />
+                        <TextField fx:id="consoleTextField" prefHeight="41.0" prefWidth="511.0" GridPane.columnIndex="1" />
+                        <Button fx:id="sendButton" defaultButton="true" mnemonicParsing="false" prefHeight="41.0" prefWidth="62.0" text="Send" GridPane.columnIndex="2" />
                      </children>
                      <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="638.1151733398438" />
-                        <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="62.0" minWidth="62.0" prefWidth="62.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="5.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" />
+                        <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="62.0" />
+                        <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="5.0" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                   </GridPane>
-                  <TitledPane animated="false" collapsible="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="330.0" minWidth="703.0" mouseTransparent="false" prefHeight="330.0" prefWidth="703.0" text="Console">
+                  <TitledPane fx:id="consoleTitle" animated="false" collapsible="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="330.0" minWidth="703.0" mouseTransparent="false" prefHeight="330.0" prefWidth="703.0" text="Console">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>

@@ -12,22 +12,22 @@ public class Logger {
     //TODO Move to a JavaFX
     public static void info(Object object) {
         String timeStamp = new SimpleDateFormat("[HH:mm:ss] ").format(Calendar.getInstance().getTime());
-        System.out.println((char) 27 + "[32m" + timeStamp + object);
+        System.out.println((char) 27 + "[info] " + timeStamp + object);
     }
 
     public static void error(Object object) {
         String timeStamp = new SimpleDateFormat("[HH:mm:ss] ").format(Calendar.getInstance().getTime());
-        System.err.println((char) 27 + "[31m" + timeStamp + object);
+        System.err.println((char) 27 + "[error] " + timeStamp + object);
     }
 
     public static void debug(Object object) {
         String timeStamp = new SimpleDateFormat("[HH:mm:ss] ").format(Calendar.getInstance().getTime());
-        System.out.println((char) 27 + "[34m" + timeStamp + object);
+        System.out.println((char) 27 + "[debug] " + timeStamp + object);
     }
 
     public static void warn(Object object) {
         String timeStamp = new SimpleDateFormat("[HH:mm:ss] ").format(Calendar.getInstance().getTime());
-        System.err.println((char) 27 + "[33m" + timeStamp + object);
+        System.err.println((char) 27 + "[warning] " + timeStamp + object);
     }
 
 }

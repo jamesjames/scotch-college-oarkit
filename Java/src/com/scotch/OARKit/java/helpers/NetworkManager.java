@@ -118,12 +118,12 @@ public class NetworkManager implements Initializable {
                 } catch (IOException e){
                     e.printStackTrace();
                 }
-            } else if (IPField.getText().isEmpty()||!IPField.getText().matches("[0-9.]*")) {
+            } else if (IPField.getText().isEmpty()||!IPField.getText().matches("^(?:(?:25[0-5]|2[0-4]\\d|1\\d\\d|\\d\\d|[1-9])\\.)(?:(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.){2}(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d?)$")) {
                 try {
                     Stage NetWindow = new Stage();
                     Parent NetRoot = FXMLLoader.load(getClass().getClassLoader().getResource("com/scotch/OARKit/java/NetworkManagerErrors/NetworkManagerErrorMessageIP.fxml"));
                     NetWindow.setTitle("IP Error");
-                    NetWindow.setScene(new Scene(NetRoot, 200, 117));
+                    NetWindow.setScene(new Scene(NetRoot, 212, 117));
                     NetWindow.setAlwaysOnTop(true);
                     NetWindow.setResizable(false);
                     NetWindow.initModality(Modality.WINDOW_MODAL);
