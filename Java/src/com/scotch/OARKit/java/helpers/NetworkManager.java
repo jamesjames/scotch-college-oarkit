@@ -74,10 +74,13 @@ public class NetworkManager implements Initializable {
 
         DeleteButton.setOnAction(event -> {
             //TODO add code to delete entry in server list
+            ServerList.removeKey(NameField.getText());
             System.out.println("Connection '"+NameField.getText()+"' Deleted");
             IPField.setText("");
             PortField.setText("");
             NameField.setText("");
+            AddConfigToList();
+            Controller.AddConfigToList();
         });/**/
 
         CancelButton.setOnAction(event -> {
@@ -132,7 +135,8 @@ public class NetworkManager implements Initializable {
                 String[] serverConfig = new String[2];
                 serverConfig[0] = IPField.getText();
                 serverConfig[1] = PortField.getText();
-                GetServerList.saveServer(NameField.getText(), serverConfig);
+                //GetServerList.saveServer(NameField.getText(), serverConfig);
+                ServerList.addKey(NameField.getText(),serverConfig);
                 NetWindow = (Stage) SaveButton.getScene().getWindow();
                 NetWindow.close();
                 Controller.AddConfigToList();

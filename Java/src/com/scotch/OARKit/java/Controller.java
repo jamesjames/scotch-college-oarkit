@@ -170,7 +170,7 @@ public class Controller implements Initializable, Runnable{
         currentTime1();
         GetServerList a= new GetServerList("com/scotch/OARKit/assets/properties/servers.sList");
         String stringFromFile = a.stringFromFile;
-        ServerList.addKey("sad",new String[]{"123.222.123.122","5003"});
+        //ServerList.addKey("sad",new String[]{"123.222.123.122","5003"});
         //ASK ME TO SEE HOW THIS MAGICAL CLASS WORKS
         //System.out.println(ServerList.getIPAndPort(ServerList.getKeys()[0])[1]);
         //GetServerList.saveString("Heloo",new String[]{"192.168.1.15","5006"});
