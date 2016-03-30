@@ -6,6 +6,7 @@ import com.scotch.OARKit.java.Command.Interpreter;
 import com.scotch.OARKit.java.ServerList.GetServerList;
 import com.scotch.OARKit.java.ServerList.ServerList;
 import com.scotch.OARKit.java.helpers.*;
+import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -20,12 +21,14 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.*;
 import java.lang.Thread;
 
 import java.net.SocketException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Controller implements Initializable, Runnable{
@@ -77,6 +80,8 @@ public class Controller implements Initializable, Runnable{
     @FXML
     Label portLabel;
     public static Label portLabel1;
+    @FXML
+    TitledPane consoleTitle;
 
     @FXML
     ProgressBar LeftX;
@@ -99,8 +104,12 @@ public class Controller implements Initializable, Runnable{
     String currentip;
     int currentport;
 
-    public void print(String out) {
-        System.out.println(out);
+    public void currentTime1() {
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+        Timeline currentTime;
+        currentTime = new Timeline(new KeyFrame(Duration.seconds(1), event -> consoleTitle.setText("Console - Time: "+format.format(Calendar.getInstance().getTime()))));
+        currentTime.setCycleCount(Animation.INDEFINITE);
+        currentTime.play();
     }
 
     public static void AddConfigToList(String serverName) {
@@ -162,17 +171,18 @@ public class Controller implements Initializable, Runnable{
         nameLabel1 = nameLabel;
         ipLabel1 = ipLabel;
         portLabel1 = portLabel;
+        currentTime1();
         GetServerList a= new GetServerList("com/scotch/OARKit/assets/properties/servers.sList");
         String stringFromFile = a.stringFromFile;
         //ASK ME TO SEE HOW THIS MAGICAL CLASS WORKS
         System.out.println(ServerList.getIPAndPort(ServerList.getKeys()[0])[ServerList.IndexType.IP.index]);
         //GetServerList.saveString("Heloo",new String[]{"192.168.1.15","5006"});
-        String[] serverList = stringFromFile.split("\n");
+        /*String[] serverList = stringFromFile.split("\n");
         for (int i = 0; i < serverList.length; i++) {
-            print("Server "+(i+1)+": "+serverList[i]);
+            System.out.println("Server "+(i+1)+": "+serverList[i]);
             String[] server = serverList[i].split(", ");
-            print((i+1)+" "+String.valueOf(server));
-        }
+            System.out.println((i+1)+" "+String.valueOf(server));
+        }/**/
         try {
             networkManager = new NetworkManager();
         } catch (IOException e) {
@@ -189,7 +199,7 @@ public class Controller implements Initializable, Runnable{
         new Thread(this).start();
         if(Main.properties.getProperty("insideDev").equals("true")){
             //System.out.println("Inside Dev Environment");
-            engine.load("http://www.google.com");
+            engine.load("https://coneqt-s.scotch.wa.edu.au/");
             //connectIP.setText("192.168.100.1");
             //engine.loadContent("");
             consoleLog.setText("Inside Dev Environment - Console Will Log but Commands will be ignored!!\n");
@@ -251,7 +261,7 @@ public class Controller implements Initializable, Runnable{
                 }
                 ToggleServerConnection(props.getProperty("serverName"), props.getProperty("serverIP"), props.getProperty("serverPort"));
             } else {
-                print("Please select a server");
+                System.out.println("Please select a server");
             }
         });
 
