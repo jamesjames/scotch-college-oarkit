@@ -1,9 +1,8 @@
 package com.scotch.OARKit.java.helpers;
 
-
-
-// TODO add a connection manager backend.
-
+import com.scotch.OARKit.java.Controller;
+import com.scotch.OARKit.java.ServerList.GetServerList;
+import com.scotch.OARKit.java.ServerList.ServerList;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,58 +43,41 @@ public class NetworkManager implements Initializable {
     @FXML
     MenuButton configSelector;
 
+    public void AddConfigToList() {
+        configSelector.getItems().clear();
+        String[] servers = ServerList.getKeys();
+
+        for (int i = 0; i < servers.length; i++) {
+            //System.out.println(servers[i]);
+            MenuItem newServerName =new MenuItem(servers[i]);
+            newServerName.setId(servers[i]);
+            final int finalI = i;
+            newServerName.setOnAction(event -> {
+                String ip = ServerList.getIPAndPort(servers[finalI])[0];
+                String port = ServerList.getIPAndPort(servers[finalI])[1];
+                //System.out.println(servers[finalI]+", "+ip+", "+port);
+                NameField.setText(servers[finalI]);
+                IPField.setText(ip);
+                PortField.setText(port);
+            });
+            Platform.runLater(() -> configSelector.getItems().addAll(newServerName));
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         createEvents();
+        AddConfigToList();
     }
 
     public void createEvents(){
 
-        File folder = new File("com/scotch/OARKit/assets/servers");
-        File[] listOfFiles = folder.listFiles();
-        List<String> servers = new ArrayList<>();
-
-        for (int i = 0; i < listOfFiles.length; i++) {
-            //System.out.println(listOfFiles[i].getName().replace(".properties", ""));
-            servers.add(i, listOfFiles[i].getName().replace(".properties", ""));
-        }
-
-        for (int i = 0; i < servers.size(); i++) {
-            String serverName = servers.get(i);
-            MenuItem newServerName = new MenuItem(serverName);
-            newServerName.setId(serverName);
-            newServerName.setOnAction(event -> {
-                Properties props = new Properties();
-                ClassLoader loader = Thread.currentThread().getContextClassLoader();
-                InputStream stream = loader.getResourceAsStream("com/scotch/OARKit/assets/servers/" + serverName + ".properties");
-                try {
-                    props.load(stream);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                System.out.println(props);
-                NameField.setText(props.getProperty("serverName"));
-                IPField.setText(props.getProperty("serverIP"));
-                PortField.setText(props.getProperty("serverPort"));
-
-            });
-            Platform.runLater(() -> configSelector.getItems().addAll(newServerName));
-        }
-
         DeleteButton.setOnAction(event -> {
-            //Path path = "com/scotch/OARKit/assets/servers/"+NameField.getText()+".properties";
-            Path path = FileSystems.getDefault().getPath("com/scotch/OARKit/assets/servers/"+NameField.getText()+".properties");
-            try {
-                Files.deleteIfExists(path);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            System.out.println("Connection Deleted");
+            //TODO add code to delete entry in server list
+            System.out.println("Connection '"+NameField.getText()+"' Deleted");
             IPField.setText("");
             PortField.setText("");
             NameField.setText("");
-            NetWindow = (Stage) DeleteButton.getScene().getWindow();
-            NetWindow.close();
         });/**/
 
         CancelButton.setOnAction(event -> {
@@ -147,31 +129,13 @@ public class NetworkManager implements Initializable {
                     e.printStackTrace();
                 }
             } else {
-                Properties props = new Properties();
-                props.setProperty("serverName", NameField.getText());
-                props.setProperty("serverIP", IPField.getText());
-                props.setProperty("serverPort", PortField.getText());
-                System.out.println(props);
-                String path = "com/scotch/OARKit/assets/servers/" + NameField.getText() + ".properties";
-
-                File f = new File(path);
-                try {
-                    f.createNewFile();
-                    FileWriter writer = new FileWriter(f);
-                    writer.write("serverName=" + NameField.getText());
-                    writer.write("\n" + "serverIP=" + IPField.getText());
-                    writer.write("\n" + "serverPort=" + PortField.getText());
-                    writer.flush();
-                    writer.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }/**/
-
+                String[] serverConfig = new String[2];
+                serverConfig[0] = IPField.getText();
+                serverConfig[1] = PortField.getText();
+                GetServerList.saveServer(NameField.getText(), serverConfig);
                 NetWindow = (Stage) SaveButton.getScene().getWindow();
                 NetWindow.close();
-
-                //String serverName=NameField.getText();
-                //Controller.AddConfigToList(serverName);
+                Controller.AddConfigToList();
             }
         });
     }

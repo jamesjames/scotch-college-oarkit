@@ -29,9 +29,9 @@ public class GetServerList {
         } catch (IOException | NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        System.out.println(stringFromFile);
+        //System.out.println(stringFromFile);
         phaseRaw();
-        System.out.println(codeMap.get("test2"));
+        //System.out.println(codeMap.get("test2"));
     }
     private void openStream(){
         fileInputStream = this.getClass().getClassLoader().getResourceAsStream(filePath);
@@ -51,7 +51,7 @@ public class GetServerList {
             new ServerList(x[0],temp);
         }
     }
-    public static void saveString(String name, String[] data)  {
+    public static void saveServer(String name, String[] data)  {
         String finalString = "\n"+name;
         for (String x:data) {
             finalString += ", "+x;

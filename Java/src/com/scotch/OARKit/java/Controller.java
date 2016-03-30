@@ -1,16 +1,11 @@
 package com.scotch.OARKit.java;
 
-import com.scotch.OARKit.java.Command.BaseCommand;
-import com.scotch.OARKit.java.Command.Commands;
 import com.scotch.OARKit.java.Command.Interpreter;
 import com.scotch.OARKit.java.ServerList.GetServerList;
 import com.scotch.OARKit.java.ServerList.ServerList;
 import com.scotch.OARKit.java.helpers.*;
 import javafx.animation.*;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -112,27 +107,28 @@ public class Controller implements Initializable, Runnable{
         currentTime.play();
     }
 
-    public static void AddConfigToList(String serverName) {
-        MenuItem newServerName =new MenuItem(serverName);
-        newServerName.setId(serverName);
-        newServerName.setOnAction(event -> {
-            Properties props = new Properties();
-            ClassLoader loader = Thread.currentThread().getContextClassLoader();
-            InputStream stream = loader.getResourceAsStream("com/scotch/OARKit/assets/servers/"+serverName+".properties");
-            try {
-                props.load(stream);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            System.out.println(props);
-            nameLabel1.setText("Name: "+props.getProperty("serverName"));
-            ipLabel1.setText("IP: "+props.getProperty("serverIP"));
-            portLabel1.setText("Port: "+props.getProperty("serverPort"));
-            if (ServerConnect.connected){
-                ServerDisconnect();
-            }
-        });
-        Platform.runLater(() -> ipSelector1.getItems().addAll(newServerName));
+    public static void AddConfigToList() {
+        ipSelector1.getItems().clear();
+        String[] servers = ServerList.getKeys();
+
+        for (int i = 0; i < servers.length; i++) {
+            //System.out.println(servers[i]);
+            MenuItem newServerName =new MenuItem(servers[i]);
+            newServerName.setId(servers[i]);
+            final int finalI = i;
+            newServerName.setOnAction(event -> {
+                String ip = ServerList.getIPAndPort(servers[finalI])[0];
+                String port = ServerList.getIPAndPort(servers[finalI])[1];
+                System.out.println(servers[finalI]+", "+ip+", "+port);
+                nameLabel1.setText("Name: "+servers[finalI]);
+                ipLabel1.setText("IP: "+ip);
+                portLabel1.setText("Port: "+port);
+                if (ServerConnect.connected){
+                    ServerDisconnect();
+                }
+            });
+            Platform.runLater(() -> ipSelector1.getItems().addAll(newServerName));
+        }
     }
 
     public static void ServerDisconnect() {
@@ -175,7 +171,7 @@ public class Controller implements Initializable, Runnable{
         GetServerList a= new GetServerList("com/scotch/OARKit/assets/properties/servers.sList");
         String stringFromFile = a.stringFromFile;
         //ASK ME TO SEE HOW THIS MAGICAL CLASS WORKS
-        System.out.println(ServerList.getIPAndPort(ServerList.getKeys()[0])[ServerList.IndexType.IP.index]);
+        //System.out.println(ServerList.getIPAndPort(ServerList.getKeys()[0])[1]);
         //GetServerList.saveString("Heloo",new String[]{"192.168.1.15","5006"});
         /*String[] serverList = stringFromFile.split("\n");
         for (int i = 0; i < serverList.length; i++) {
@@ -188,6 +184,7 @@ public class Controller implements Initializable, Runnable{
         } catch (IOException e) {
             e.printStackTrace();
         }
+        AddConfigToList();
         gamepad = new gamepad();
         gamepad.gamepad();
         out = System.out;
@@ -235,31 +232,9 @@ public class Controller implements Initializable, Runnable{
             }
         });
 
-        File folder = new File("com/scotch/OARKit/assets/servers");
-        File[] listOfFiles = folder.listFiles();
-        List<String> servers = new ArrayList<>();
-
-        for (int i = 0; i < listOfFiles.length; i++) {
-            //System.out.println(listOfFiles[i].getName().replace(".properties", ""));
-            servers.add(i, listOfFiles[i].getName().replace(".properties", ""));
-        }
-
-        for (int i = 0; i < servers.size(); i++) {
-            String serverName=servers.get(i);
-            AddConfigToList(serverName);
-        }/**/
-
         connectButton.setOnAction(event -> {
             if (!nameLabel.getText().equals("Name:")) {
-                Properties props = new Properties();
-                ClassLoader loader = Thread.currentThread().getContextClassLoader();
-                InputStream stream = loader.getResourceAsStream("com/scotch/OARKit/assets/servers/"+nameLabel.getText().replace("Name: ", "")+".properties");
-                try {
-                    props.load(stream);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                ToggleServerConnection(props.getProperty("serverName"), props.getProperty("serverIP"), props.getProperty("serverPort"));
+                ToggleServerConnection(nameLabel.getText().replace("Name: ", ""), ipLabel.getText().replace("IP: ", ""), portLabel.getText().replace("Port: ", ""));
             } else {
                 System.out.println("Please select a server");
             }
