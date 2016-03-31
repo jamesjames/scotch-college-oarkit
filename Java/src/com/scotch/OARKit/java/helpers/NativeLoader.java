@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Field;
+import java.util.Arrays;
 
 /**
  * Created by Campbell Millar/ZENOTON - LICENCED UNDER LGPL.
@@ -36,6 +38,31 @@ public class NativeLoader {
             tempdir = temp.toString().replace(name,"");
             //System.out.println(tempdir);
         }
-        System.setProperty("java.library.path", tempdir);
+        System.out.println(tempdir);
+        //System.setProperty("Djava.library.path", tempdir);
+        try {
+            addLibraryPath(tempdir);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public static void addLibraryPath(String pathToAdd) throws Exception{
+        final Field usrPathsField = ClassLoader.class.getDeclaredField("usr_paths");
+        usrPathsField.setAccessible(true);
+
+        //get array of paths
+        final String[] paths = (String[])usrPathsField.get(null);
+
+        //check if the path to add is already present
+        for(String path : paths) {
+            if(path.equals(pathToAdd)) {
+                return;
+            }
+        }
+
+        //add the new path
+        final String[] newPaths = Arrays.copyOf(paths, paths.length + 1);
+        newPaths[newPaths.length-1] = pathToAdd;
+        usrPathsField.set(null, newPaths);
     }
 }
