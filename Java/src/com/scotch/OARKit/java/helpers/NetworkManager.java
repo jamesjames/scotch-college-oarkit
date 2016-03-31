@@ -1,8 +1,7 @@
 package com.scotch.OARKit.java.helpers;
 
 import com.scotch.OARKit.java.Controller;
-import com.scotch.OARKit.java.ServerList.GetServerList;
-import com.scotch.OARKit.java.ServerList.ServerList;
+import com.scotch.OARKit.java.ServerList.*;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -81,6 +80,8 @@ public class NetworkManager implements Initializable {
             NameField.setText("");
             AddConfigToList();
             Controller.AddConfigToList();
+            NetWindow = (Stage) DeleteButton.getScene().getWindow();
+            NetWindow.close();
         });/**/
 
         CancelButton.setOnAction(event -> {
@@ -132,6 +133,7 @@ public class NetworkManager implements Initializable {
                     e.printStackTrace();
                 }
             } else {
+                GetServerList.updateList();
                 String[] serverConfig = new String[2];
                 serverConfig[0] = IPField.getText();
                 serverConfig[1] = PortField.getText();
@@ -140,6 +142,7 @@ public class NetworkManager implements Initializable {
                 NetWindow = (Stage) SaveButton.getScene().getWindow();
                 NetWindow.close();
                 Controller.AddConfigToList();
+                Controller.ServerDisconnect();
             }
         });
     }

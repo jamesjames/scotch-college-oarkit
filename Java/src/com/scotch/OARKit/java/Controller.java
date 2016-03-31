@@ -1,8 +1,7 @@
 package com.scotch.OARKit.java;
 
 import com.scotch.OARKit.java.Command.Interpreter;
-import com.scotch.OARKit.java.ServerList.GetServerList;
-import com.scotch.OARKit.java.ServerList.ServerList;
+import com.scotch.OARKit.java.ServerList.*;
 import com.scotch.OARKit.java.helpers.*;
 import javafx.animation.*;
 import javafx.application.Platform;
@@ -132,19 +131,23 @@ public class Controller implements Initializable, Runnable{
     }
 
     public static void ServerDisconnect() {
-        connectButton1.setSelected(false);
-        System.out.println("Closing Socket");
-        serverConnect.socketClose();
-        connectButton1.setText("Connect");
-        connected = false;
+        if (ServerConnect.connected) {
+            connectButton1.setSelected(false);
+            System.out.println("Closing Socket");
+            serverConnect.socketClose();
+            connectButton1.setText("Connect");
+            connected = false;
+        }
     }
 
     public void ServerConnect(String name, String ip, String port) {
-        serverConnect = new ServerConnect(ip, port);
-        engine.load("http://"+ip);
-        System.out.println("Connected to new Server "+name+" ("+ip+", "+port+")");
-        connectButton.setText("Disconnect");
-        connected = true;
+        if (!ServerConnect.connected){
+            serverConnect = new ServerConnect(ip, port);
+            engine.load("http://"+ip);
+            System.out.println("Connected to new Server "+name+" ("+ip+", "+port+")");
+            connectButton.setText("Disconnect");
+            connected = true;
+        }
     }
 
     public void ToggleServerConnection(String name, String ip, String port) {
@@ -168,18 +171,7 @@ public class Controller implements Initializable, Runnable{
         ipLabel1 = ipLabel;
         portLabel1 = portLabel;
         currentTime1();
-        GetServerList a= new GetServerList("com/scotch/OARKit/assets/properties/servers.sList");
-        String stringFromFile = a.stringFromFile;
-        //ServerList.addKey("sad",new String[]{"123.222.123.122","5003"});
-        //ASK ME TO SEE HOW THIS MAGICAL CLASS WORKS
-        //System.out.println(ServerList.getIPAndPort(ServerList.getKeys()[0])[1]);
-        //GetServerList.saveString("Heloo",new String[]{"192.168.1.15","5006"});
-        /*String[] serverList = stringFromFile.split("\n");
-        for (int i = 0; i < serverList.length; i++) {
-            System.out.println("Server "+(i+1)+": "+serverList[i]);
-            String[] server = serverList[i].split(", ");
-            System.out.println((i+1)+" "+String.valueOf(server));
-        }/**/
+        new GetServerList("com/scotch/OARKit/assets/properties/servers.sList");
         try {
             networkManager = new NetworkManager();
         } catch (IOException e) {
@@ -238,6 +230,7 @@ public class Controller implements Initializable, Runnable{
                 ToggleServerConnection(nameLabel.getText().replace("Name: ", ""), ipLabel.getText().replace("IP: ", ""), portLabel.getText().replace("Port: ", ""));
             } else {
                 System.out.println("Please select a server");
+                connectButton.setSelected(false);
             }
         });
 
