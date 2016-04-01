@@ -38,7 +38,7 @@
       </TitledPane>
     <SplitPane dividerPositions="0.2975708502024291" prefHeight="280.0" prefWidth="778.0" SplitPane.resizableWithParent="false">
       <items>
-        <TabPane maxHeight="386.0" maxWidth="301.0" minHeight="386.0" minWidth="277.0" prefHeight="386.0" prefWidth="301.0" tabClosingPolicy="UNAVAILABLE" SplitPane.resizableWithParent="false">
+        <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="386.0" prefWidth="290.0" tabClosingPolicy="UNAVAILABLE" SplitPane.resizableWithParent="false">
           <tabs>
             <Tab text="Networking">
               <content>
