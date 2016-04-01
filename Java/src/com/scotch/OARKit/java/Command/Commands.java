@@ -1,6 +1,7 @@
 package com.scotch.OARKit.java.Command;
 
 import com.scotch.OARKit.java.Controller;
+import com.scotch.OARKit.java.helpers.Logger;
 
 public class Commands {
     String command = BaseCommand.BLANK.command;
@@ -22,6 +23,6 @@ public class Commands {
     }
     public void runCommand(){
         Controller.serverConnect.sendData(fetchCommand());
-        System.out.println("Command Sent "+command+" With args "+args);
+        Logger.info("Command Sent "+command+" With args "+args);
     }
 }

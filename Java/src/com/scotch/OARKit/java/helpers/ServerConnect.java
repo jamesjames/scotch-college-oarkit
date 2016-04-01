@@ -21,7 +21,7 @@ public class ServerConnect {
         if(Main.properties.getProperty("insideDev").equals("true")){
             try {
                 socket = new Socket("localhost",5006);
-                System.out.println("Starting Server on Local Host");
+                Logger.info("Starting Server on Local Host");
                 setUp();
             } catch (IOException e) {
                 System.err.println("Problem Connecting to Local Host - Is the server up?");
@@ -30,20 +30,20 @@ public class ServerConnect {
         }else{
             try {
                 socket = new Socket("192.168.100.1",5006);
-                System.out.println("Starting Server on Default Remote");
+                Logger.info("Starting Server on Default Remote");
                 setUp();
             } catch (IOException e) {
                 System.err.println("Problem Connecting to Default Remote Host - Is the server up?");
                 System.err.println("Please Specify Your Own IP");
             }
         }
-        System.out.println("This method going to be removed, please use ServerConnect(String ip, int port)");
+        Logger.info("This method going to be removed, please use ServerConnect(String ip, int port)");
     }
     //FOR DIFFERING IP BUT SAME PORT - 5006
     public ServerConnect(String ip, String port){
         try {
             socket = new Socket(ip, Integer.parseInt(port));
-            System.out.println("Connecting to Server...");
+            Logger.info("Connecting to Server...");
             setUp();
         } catch (IOException e) {
             System.err.println("Problem Connecting to Specified Host - Is the server up or is it configured correctly?");

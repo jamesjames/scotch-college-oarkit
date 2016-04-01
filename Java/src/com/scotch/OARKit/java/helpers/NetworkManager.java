@@ -47,14 +47,14 @@ public class NetworkManager implements Initializable {
         String[] servers = ServerList.getKeys();
 
         for (int i = 0; i < servers.length; i++) {
-            //System.out.println(servers[i]);
+            //Logger.info(servers[i]);
             MenuItem newServerName =new MenuItem(servers[i]);
             newServerName.setId(servers[i]);
             final int finalI = i;
             newServerName.setOnAction(event -> {
                 String ip = ServerList.getIPAndPort(servers[finalI])[0];
                 String port = ServerList.getIPAndPort(servers[finalI])[1];
-                //System.out.println(servers[finalI]+", "+ip+", "+port);
+                //Logger.info(servers[finalI]+", "+ip+", "+port);
                 NameField.setText(servers[finalI]);
                 IPField.setText(ip);
                 PortField.setText(port);
@@ -74,7 +74,7 @@ public class NetworkManager implements Initializable {
         DeleteButton.setOnAction(event -> {
             //TODO add code to delete entry in server list
             ServerList.removeKey(NameField.getText());
-            System.out.println("Connection '"+NameField.getText()+"' Deleted");
+            Logger.info("Connection '"+NameField.getText()+"' Deleted");
             IPField.setText("");
             PortField.setText("");
             NameField.setText("");
@@ -217,10 +217,10 @@ public class NetworkManager implements Initializable {
         }
 
         catch (IOException e) {
-            System.out.println("Windows Wifi has had an error.");
+            Logger.info("Windows Wifi has had an error.");
             e.printStackTrace();
         }
-        //System.out.println(strength);
+        //Logger.info(strength);
         rawSignalStrength = -100-(strength*-1);
         if(strength != 0) {
             strength =Math.abs(strength/100);
@@ -273,7 +273,7 @@ public class NetworkManager implements Initializable {
             }
         }
         catch (IOException e) {
-            System.out.println("Mac Wifi has had an error.");
+            Logger.info("Mac Wifi has had an error.");
             e.printStackTrace();
         }
 

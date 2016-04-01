@@ -28,18 +28,18 @@ public class gamepad {
         // Check if the controller was found.
         if( !gamepad.isControllerConnected() ){
             connected = false;
-            System.out.println("No controller found!");
+            Logger.info("No controller found!");
         } else {
-            System.out.println("Controller found, printing details:");
-            System.out.println(gamepad.getControllerName());
-            System.out.println(gamepad.getControllerType());
-            System.out.println("This controller has " + numberOfButtons + " buttons");
+            Logger.info("Controller found, printing details:");
+            Logger.info(gamepad.getControllerName());
+            Logger.info(gamepad.getControllerType());
+            Logger.info("This controller has " + numberOfButtons + " buttons");
         }
     }
 
     public void pollgamepad(){
         if( !gamepad.pollController() ) {
-            System.out.println("Controller disconnected!");
+            Logger.info("Controller disconnected!");
             // Do some stuff.
         } else {
             // TODO poll all the axis and set them to variables

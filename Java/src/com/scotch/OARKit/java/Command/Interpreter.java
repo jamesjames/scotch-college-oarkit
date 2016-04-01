@@ -1,6 +1,7 @@
 package com.scotch.OARKit.java.Command;
 
 import com.scotch.OARKit.java.Controller;
+import com.scotch.OARKit.java.helpers.Logger;
 import javafx.application.Platform;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class Interpreter {
         String stringBase = command.split(" ")[0];
         for( int i = 0; i < BaseCommand.values().length; i++){
             for( int t = 0; t < BaseCommand.values()[i].alias.length; t++){
-                //System.out.println(BaseCommand.values()[i].alias[t]);
+                //Logger.info(BaseCommand.values()[i].alias[t]);
                 if(BaseCommand.values()[i].alias[t].equals(stringBase.toLowerCase())){
                     baseCommand = BaseCommand.values()[i];
                     phaseArgs();
@@ -39,7 +40,7 @@ public class Interpreter {
                     new java.util.TimerTask() {
                         @Override
                         public void run() {
-                            System.out.println("Closing Socket");
+                            Logger.info("Closing Socket");
                             serverConnect.socketClose();
                             Controller.disconnectServer();
                         }

@@ -19,7 +19,7 @@ public class NativeLoader {
         byte[] buffer = new byte[1024];
         int read = -1;
         File temp = new File(new File(System.getProperty("java.io.tmpdir")), name.replace("/",""));
-        System.out.println(temp);
+        Logger.info(temp);
         FileOutputStream fos = new FileOutputStream(temp);
 
         while((read = in.read(buffer)) != -1) {
@@ -30,15 +30,15 @@ public class NativeLoader {
         if (os.contains("win")){
             String tempname = name.replace("/","\\");
             //DEBUG INFO - NOT NEEDED
-            //System.out.println(tempname);
-            //System.out.println("Loaded Link " + name + " OS is " + os);
+            //Logger.info(tempname);
+            //Logger.info("Loaded Link " + name + " OS is " + os);
             tempdir = temp.toString().replace(tempname,"");
         }else{
-            //System.out.println("Loaded Link " + name + " OS is " + os);
+            //Logger.info("Loaded Link " + name + " OS is " + os);
             tempdir = temp.toString().replace(name,"");
-            //System.out.println(tempdir);
+            //Logger.info(tempdir);
         }
-        System.out.println(tempdir);
+        Logger.info(tempdir);
         //System.setProperty("Djava.library.path", tempdir);
         try {
             addLibraryPath(tempdir);

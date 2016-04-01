@@ -1,5 +1,7 @@
 package com.scotch.OARKit.java.ServerList;
 
+import com.scotch.OARKit.java.helpers.Logger;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -28,7 +30,7 @@ public class ServerList {
         if(index.index < 2){
             this.data.set(index.index,data);
         } else{
-            System.out.println("WARNING THIS FUNCTION DOES NOT SUPPORT THE CHANGE OF "+index.name());
+            Logger.info("WARNING THIS FUNCTION DOES NOT SUPPORT THE CHANGE OF "+index.name());
         }
     }
     public String getName() {

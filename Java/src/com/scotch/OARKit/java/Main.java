@@ -1,6 +1,7 @@
 package com.scotch.OARKit.java;
 
 import com.scotch.OARKit.java.helpers.JInputJoystick;
+import com.scotch.OARKit.java.helpers.Logger;
 import com.scotch.OARKit.java.helpers.ServerConnect;
 import com.scotch.OARKit.java.helpers.gamepad;
 import javafx.application.Application;
@@ -22,7 +23,7 @@ public class Main extends Application {
 
     @Override
     public void stop(){
-        System.out.println("Quitting Application");
+        Logger.info("Quitting Application");
         if (ServerConnect.connected) {
             Controller.serverConnect.socketClose();
         }
@@ -41,7 +42,7 @@ public class Main extends Application {
 
 
     public static void main(String[] args) throws IOException {
-        System.out.println(System.getProperty("os.name"));
+        Logger.info(System.getProperty("os.name"));
         properties = new Properties();
         properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("com/scotch/OARKit/assets/properties/default.properties"));
         if (args.length > 0 && args[0].equals("server")){
@@ -67,7 +68,7 @@ public class Main extends Application {
             loadLib("/libjinput-linux.so");
             loadLib("/libjinput-linux64.so");
         }else{
-            System.out.println("Your OS is Not Supported! Please report FULL log to ScotchOARKit on GitHub");
+            Logger.info("Your OS is Not Supported! Please report FULL log to ScotchOARKit on GitHub");
             System.exit(0);
         }
 

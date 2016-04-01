@@ -22,6 +22,8 @@ import java.lang.Thread;
 
 import java.net.SocketException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -111,14 +113,14 @@ public class Controller implements Initializable, Runnable{
         String[] servers = ServerList.getKeys();
 
         for (int i = 0; i < servers.length; i++) {
-            //System.out.println(servers[i]);
+            //Logger.info(servers[i]);
             MenuItem newServerName =new MenuItem(servers[i]);
             newServerName.setId(servers[i]);
             final int finalI = i;
             newServerName.setOnAction(event -> {
                 String ip = ServerList.getIPAndPort(servers[finalI])[0];
                 String port = ServerList.getIPAndPort(servers[finalI])[1];
-                System.out.println(servers[finalI]+", "+ip+", "+port);
+                Logger.info(servers[finalI]+", "+ip+", "+port);
                 nameLabel1.setText("Name: "+servers[finalI]);
                 ipLabel1.setText("IP: "+ip);
                 portLabel1.setText("Port: "+port);
@@ -133,7 +135,7 @@ public class Controller implements Initializable, Runnable{
     public static void ServerDisconnect() {
         if (ServerConnect.connected) {
             connectButton1.setSelected(false);
-            System.out.println("Closing Socket");
+            Logger.info("Closing Socket");
             serverConnect.socketClose();
             connectButton1.setText("Connect");
             connected = false;
@@ -144,7 +146,7 @@ public class Controller implements Initializable, Runnable{
         if (!ServerConnect.connected){
             serverConnect = new ServerConnect(ip, port);
             engine.load("http://"+ip);
-            System.out.println("Connected to new Server "+name+" ("+ip+", "+port+")");
+            Logger.info("Connected to new Server "+name+" ("+ip+", "+port+")");
             connectButton.setText("Disconnect");
             connected = true;
         }
@@ -185,10 +187,11 @@ public class Controller implements Initializable, Runnable{
         console = new Console(consoleLog);
         ps = new PrintStream(console, true);
         redirectOutput(ps);
+
         engine = CameraWebView.getEngine();
         new Thread(this).start();
         if(Main.properties.getProperty("insideDev").equals("true")){
-            //System.out.println("Inside Dev Environment");
+            //Logger.info("Inside Dev Environment");
             engine.load("https://coneqt-s.scotch.wa.edu.au/");
             //connectIP.setText("192.168.100.1");
             //engine.loadContent("");
@@ -229,7 +232,7 @@ public class Controller implements Initializable, Runnable{
             if (!nameLabel.getText().equals("Name:")) {
                 ToggleServerConnection(nameLabel.getText().replace("Name: ", ""), ipLabel.getText().replace("IP: ", ""), portLabel.getText().replace("Port: ", ""));
             } else {
-                System.out.println("Please select a server");
+                Logger.info("Please select a server");
                 connectButton.setSelected(false);
             }
         });
@@ -257,7 +260,7 @@ public class Controller implements Initializable, Runnable{
                 Platform.runLater(() ->StrengthBar.setVisible(false));
                 Platform.runLater(() ->StrengthLabel.setVisible(false));
                 //REPEATS THE OUTPUT
-                //System.out.println("Not connected to wifi.");
+                //Logger.info("Not connected to wifi.");
             } else {
                 Platform.runLater(() ->StrengthDBMLabel.setVisible(true));
                 Platform.runLater(() ->StrengthBar.setVisible(true));
@@ -290,13 +293,24 @@ public class Controller implements Initializable, Runnable{
     private class Console extends OutputStream {
 
         private TextArea txtArea;
+        File baseFile;
 
         public Console(TextArea txtArea) {
             this.txtArea = txtArea;
+            baseFile = new File(OSUtils.osAppData()+"/log.log");
+            if(!baseFile.exists()){
+                try {
+                    baseFile.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
+
 
         @Override
         public void write(int b) throws IOException {
+            Files.write(baseFile.toPath(),new String(new char[]{(char)b}).getBytes(),StandardOpenOption.APPEND);
             Platform.runLater(() -> txtArea.appendText(String.valueOf((char) b)));
             out.print(String.valueOf((char) b));
         }
