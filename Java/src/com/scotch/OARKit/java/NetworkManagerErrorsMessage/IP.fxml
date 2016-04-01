@@ -14,16 +14,16 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.scotch.OARKit.java.NetworkManagerErrors.NetworkManagerErrorMessagePort">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="130.0" prefWidth="212.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.scotch.OARKit.java.NetworkManagerErrorsMessage.IP">
    <children>
-      <Label layoutX="43.0" layoutY="13.0" text="Port Error" AnchorPane.leftAnchor="43.0" AnchorPane.topAnchor="13.0" />
-      <Label layoutX="5.0" layoutY="37.0" text="Please input a valid port" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+      <Label layoutX="43.0" layoutY="13.0" text="IP Error" AnchorPane.leftAnchor="46.0" AnchorPane.topAnchor="13.0" />
+      <Label layoutX="5.0" layoutY="37.0" text="Please input a valid IPv4" AnchorPane.bottomAnchor="71.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
       <ImageView fitHeight="33.0" fitWidth="36.0" layoutX="2.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
          <image>
-            <Image url="@../../assets/picture/warning-general-2.gif" />
+            <Image url="@../../assets/picture/warning-icon.png" />
          </image>
       </ImageView>
-      <Label layoutX="5.0" layoutY="54.0" prefWidth="157.0" text="NOTE: A valid port is a 4 digit long set of numbers" wrapText="true" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <Label layoutX="5.0" layoutY="54.0" text="NOTE: A valid IPv4 must be in the format (1-255).(0-255).(0-255).(0-255)" wrapText="true" AnchorPane.bottomAnchor="36.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <font>
             <Font size="12.0" />
          </font>

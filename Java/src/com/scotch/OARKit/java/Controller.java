@@ -5,6 +5,8 @@ import com.scotch.OARKit.java.ServerList.*;
 import com.scotch.OARKit.java.helpers.*;
 import javafx.animation.*;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -103,7 +105,7 @@ public class Controller implements Initializable, Runnable{
     public void currentTime1() {
         SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
         Timeline currentTime;
-        currentTime = new Timeline(new KeyFrame(Duration.seconds(1), event -> consoleTitle.setText("Console - Time: "+format.format(Calendar.getInstance().getTime()))));
+        currentTime = new Timeline(new KeyFrame(Duration.seconds(1), event -> consoleTitle.setText("Console - Time: " + format.format(Calendar.getInstance().getTime()))));
         currentTime.setCycleCount(Animation.INDEFINITE);
         currentTime.play();
     }
@@ -120,7 +122,7 @@ public class Controller implements Initializable, Runnable{
             newServerName.setOnAction(event -> {
                 String ip = ServerList.getIPAndPort(servers[finalI])[0];
                 String port = ServerList.getIPAndPort(servers[finalI])[1];
-                Logger.info(servers[finalI]+", "+ip+", "+port);
+                Logger.info("Loaded config '"+servers[finalI]+"' ("+ip+", "+port+")");
                 nameLabel1.setText("Name: "+servers[finalI]);
                 ipLabel1.setText("IP: "+ip);
                 portLabel1.setText("Port: "+port);
@@ -145,10 +147,12 @@ public class Controller implements Initializable, Runnable{
     public void ServerConnect(String name, String ip, String port) {
         if (!ServerConnect.connected){
             serverConnect = new ServerConnect(ip, port);
-            engine.load("http://"+ip);
-            Logger.info("Connected to new Server "+name+" ("+ip+", "+port+")");
-            connectButton.setText("Disconnect");
-            connected = true;
+            if (ServerConnect.connected == true) {
+                engine.load("http://"+ip);
+                Logger.info("Connected to new Server "+name+" ("+ip+", "+port+")");
+                connectButton.setText("Disconnect");
+                connected = true;
+            }
         }
     }
 
@@ -283,8 +287,8 @@ public class Controller implements Initializable, Runnable{
             } else {
                 sendButton.setDisable(true);
             }
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
+            //Thread.sleep(100);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

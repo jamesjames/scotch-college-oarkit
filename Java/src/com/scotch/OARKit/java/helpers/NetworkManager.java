@@ -14,9 +14,6 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.*;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.*;
 
 public class NetworkManager implements Initializable {
@@ -63,6 +60,22 @@ public class NetworkManager implements Initializable {
         }
     }
 
+    public void override() {
+        try {
+            Stage NetWindow = new Stage();
+            Parent NetRoot = FXMLLoader.load(getClass().getClassLoader().getResource("com/scotch/OARKit/java/NetworkManagerErrorsMessage/Default.fxml"));
+            NetWindow.setTitle("Defaults Error");
+            NetWindow.setScene(new Scene(NetRoot, 224, 111));
+            NetWindow.setAlwaysOnTop(true);
+            NetWindow.setResizable(false);
+            NetWindow.initModality(Modality.WINDOW_MODAL);
+            NetWindow.initOwner(SaveButton.getScene().getWindow());
+            NetWindow.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         createEvents();
@@ -72,16 +85,19 @@ public class NetworkManager implements Initializable {
     public void createEvents(){
 
         DeleteButton.setOnAction(event -> {
-            //TODO add code to delete entry in server list
-            ServerList.removeKey(NameField.getText());
-            Logger.info("Connection '"+NameField.getText()+"' Deleted");
-            IPField.setText("");
-            PortField.setText("");
-            NameField.setText("");
-            AddConfigToList();
-            Controller.AddConfigToList();
-            NetWindow = (Stage) DeleteButton.getScene().getWindow();
-            NetWindow.close();
+            if (NameField.getText().equals("localhost")||NameField.getText().equals("Pi")) {
+                override();
+            } else {
+                ServerList.removeKey(NameField.getText());
+                Logger.info("Connection '" + NameField.getText() + "' Deleted");
+                IPField.setText("");
+                PortField.setText("");
+                NameField.setText("");
+                AddConfigToList();
+                Controller.AddConfigToList();
+                NetWindow = (Stage) DeleteButton.getScene().getWindow();
+                NetWindow.close();
+            }
         });/**/
 
         CancelButton.setOnAction(event -> {
@@ -93,9 +109,9 @@ public class NetworkManager implements Initializable {
             if (NameField.getText().isEmpty()||!NameField.getText().matches("[a-zA-Z0-9 ]*")) {
                 try {
                     Stage NetWindow = new Stage();
-                    Parent NetRoot = FXMLLoader.load(getClass().getClassLoader().getResource("com/scotch/OARKit/java/NetworkManagerErrors/NetworkManagerErrorMessageName.fxml"));
+                    Parent NetRoot = FXMLLoader.load(getClass().getClassLoader().getResource("com/scotch/OARKit/java/NetworkManagerErrorsMessage/Name.fxml"));
                     NetWindow.setTitle("Name Error");
-                    NetWindow.setScene(new Scene(NetRoot, 224, 124));
+                    NetWindow.setScene(new Scene(NetRoot, 224, 137));
                     NetWindow.setAlwaysOnTop(true);
                     NetWindow.setResizable(false);
                     NetWindow.initModality(Modality.WINDOW_MODAL);
@@ -107,7 +123,7 @@ public class NetworkManager implements Initializable {
             } else if (IPField.getText().isEmpty()||!IPField.getText().matches("^(?:(?:25[0-5]|2[0-4]\\d|1\\d\\d|\\d\\d|[1-9])\\.)(?:(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.){2}(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d?)$")) {
                 try {
                     Stage NetWindow = new Stage();
-                    Parent NetRoot = FXMLLoader.load(getClass().getClassLoader().getResource("com/scotch/OARKit/java/NetworkManagerErrors/NetworkManagerErrorMessageIP.fxml"));
+                    Parent NetRoot = FXMLLoader.load(getClass().getClassLoader().getResource("com/scotch/OARKit/java/NetworkManagerErrorsMessage/IP.fxml"));
                     NetWindow.setTitle("IP Error");
                     NetWindow.setScene(new Scene(NetRoot, 212, 117));
                     NetWindow.setAlwaysOnTop(true);
@@ -121,7 +137,7 @@ public class NetworkManager implements Initializable {
             } else if (PortField.getText().isEmpty()||!PortField.getText().matches("\\d{4}")) {
                 try {
                     Stage NetWindow = new Stage();
-                    Parent NetRoot = FXMLLoader.load(getClass().getClassLoader().getResource("com/scotch/OARKit/java/NetworkManagerErrors/NetworkManagerErrorMessagePort.fxml"));
+                    Parent NetRoot = FXMLLoader.load(getClass().getClassLoader().getResource("com/scotch/OARKit/java/NetworkManagerErrorsMessage/Port.fxml"));
                     NetWindow.setTitle("Port Error");
                     NetWindow.setScene(new Scene(NetRoot, 200, 103));
                     NetWindow.setAlwaysOnTop(true);
@@ -129,9 +145,11 @@ public class NetworkManager implements Initializable {
                     NetWindow.initModality(Modality.WINDOW_MODAL);
                     NetWindow.initOwner(SaveButton.getScene().getWindow());
                     NetWindow.show();
-                } catch (IOException e){
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
+            } else if ((NameField.getText().equals("localhost")&&(!IPField.getText().equals("127.0.0.1")||!PortField.getText().equals("5006")))||(NameField.getText().equals("Pi")&&(!IPField.getText().equals("192.168.0.1")||!PortField.getText().equals("5000")))) {
+                override();
             } else {
                 GetServerList.updateList();
                 String[] serverConfig = new String[2];

@@ -20,7 +20,7 @@ public class ServerConnect {
     public ServerConnect(){
         if(Main.properties.getProperty("insideDev").equals("true")){
             try {
-                socket = new Socket("localhost",5006);
+                socket = new Socket("127.0.0.1",5006);
                 Logger.info("Starting Server on Local Host");
                 setUp();
             } catch (IOException e) {
@@ -55,9 +55,9 @@ public class ServerConnect {
 
     }
     private void setUp() throws IOException {
-         out = new PrintWriter(socket.getOutputStream(), true);
-         in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-         stdIn = new BufferedReader(new InputStreamReader(System.in));
+        out = new PrintWriter(socket.getOutputStream(), true);
+        in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        stdIn = new BufferedReader(new InputStreamReader(System.in));
         connected = true;
     }
 

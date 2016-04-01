@@ -40,7 +40,7 @@ public class gamepad {
     public void pollgamepad(){
         if( !gamepad.pollController() ) {
             Logger.info("Controller disconnected!");
-            // Do some stuff.
+            connected = false;
         } else {
             // TODO poll all the axis and set them to variables
             leftstickx = gamepad.getX_LeftJoystick_Percentage();

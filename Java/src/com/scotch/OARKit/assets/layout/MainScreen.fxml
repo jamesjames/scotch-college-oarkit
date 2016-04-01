@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
@@ -35,43 +36,64 @@
             </AnchorPane>
         </content>
       </TitledPane>
-    <SplitPane dividerPositions="0.2844" prefHeight="280.0" prefWidth="778.0" SplitPane.resizableWithParent="false">
+    <SplitPane dividerPositions="0.2975708502024291" prefHeight="280.0" prefWidth="778.0" SplitPane.resizableWithParent="false">
       <items>
-        <TabPane maxHeight="386.0" maxWidth="277.0" minHeight="386.0" minWidth="277.0" prefHeight="386.0" prefWidth="277.0" tabClosingPolicy="UNAVAILABLE" SplitPane.resizableWithParent="false">
+        <TabPane maxHeight="386.0" maxWidth="301.0" minHeight="386.0" minWidth="277.0" prefHeight="386.0" prefWidth="301.0" tabClosingPolicy="UNAVAILABLE" SplitPane.resizableWithParent="false">
           <tabs>
             <Tab text="Networking">
               <content>
-                <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+                <SplitPane dividerPositions="0.5368421052631579" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
                   <items>
-                    <AnchorPane>
+                    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="290.0">
                       <children>
-                        <ProgressBar fx:id="StrengthBar" layoutX="119.0" layoutY="117.0" prefHeight="24.0" prefWidth="113.0" progress="0.0" />
-                        <Label fx:id="StrengthLabel" layoutX="6.0" layoutY="121.0" text="Signal Strength:" />
-                        <Label fx:id="StrengthDBMLabel" layoutX="6.0" layoutY="143.0" text="Signal Strength" />
-                        <Button fx:id="addNewConfiguration" layoutX="6.0" layoutY="5.0" mnemonicParsing="false" text="Manage Configurations" />
-                        <Label fx:id="ConnectionType" layoutX="6.0" layoutY="96.0" text="Connection:" />
-                                    <MenuButton fx:id="ipSelector" layoutX="239.0" layoutY="5.0" mnemonicParsing="false" />
-                        <ToggleButton fx:id="connectButton" layoutX="166.0" layoutY="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="85.0" text="Connect" />
+                        <ProgressBar fx:id="StrengthBar" layoutX="119.0" layoutY="146.0" prefHeight="24.0" prefWidth="113.0" progress="0.0" />
+                        <Label fx:id="StrengthLabel" layoutX="6.0" layoutY="150.0" text="Signal Strength:" />
+                        <Label fx:id="StrengthDBMLabel" layoutX="6.0" layoutY="172.0" text="Signal Strength" />
+                        <Button fx:id="addNewConfiguration" layoutX="5.0" layoutY="5.0" mnemonicParsing="false" text="Manage Configurations">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></Button>
+                        <Label fx:id="ConnectionType" layoutX="6.0" layoutY="125.0" text="Connection:" />
+                                    <MenuButton fx:id="ipSelector" layoutX="169.0" layoutY="5.0" mnemonicParsing="false" text="Sellect Config" AnchorPane.rightAnchor="5.0">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></MenuButton>
+                        <ToggleButton fx:id="connectButton" layoutX="5.0" layoutY="93.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="85.0" text="Connect">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></ToggleButton>
                                     <Label fx:id="nameLabel" layoutX="6.0" layoutY="35.0" text="Name:" />
                                     <Label fx:id="ipLabel" layoutX="6.0" layoutY="53.0" text="IP:" />
                                     <Label fx:id="portLabel" layoutX="6.0" layoutY="71.0" text="Port:" />
                                     <AnchorPane disable="true" layoutX="123.0" layoutY="36.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="54.0" prefWidth="96.0" visible="false">
                                        <children>
-                                          <ToggleButton fx:id="on" disable="true" layoutX="12.0" layoutY="14.0" mnemonicParsing="false" selected="true" text="On">
+                                          <ToggleButton fx:id="on" disable="true" layoutX="12.0" layoutY="14.0" mnemonicParsing="false" mouseTransparent="false" selected="true" text="On">
                                              <toggleGroup>
-                                                <ToggleGroup fx:id="test" />
+                                                <ToggleGroup fx:id="test1" />
                                              </toggleGroup>
                                           </ToggleButton>
-                                          <ToggleButton fx:id="off" layoutX="48.0" layoutY="14.0" mnemonicParsing="false" text="Off" toggleGroup="$test" />
+                                          <ToggleButton fx:id="off" layoutX="48.0" layoutY="14.0" mnemonicParsing="false" text="Off">
+                                             <toggleGroup>
+                                                <ToggleGroup fx:id="test" />
+                                             </toggleGroup></ToggleButton>
                                        </children>
                                     </AnchorPane>
                       </children>
                     </AnchorPane>
                     <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="172.0" prefWidth="277.0" SplitPane.resizableWithParent="false">
                       <children>
-                        <Button fx:id="restartNginx" mnemonicParsing="false" text="Nginx Server" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Button mnemonicParsing="false" text="Restart Raspberry Pi" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Button fx:id="StopServer" mnemonicParsing="false" text="Stop Ctl Server" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Button fx:id="restartNginx" mnemonicParsing="false" text="Nginx Server" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></Button>
+                        <Button mnemonicParsing="false" text="Restart Raspberry Pi" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></Button>
+                        <Button fx:id="StopServer" mnemonicParsing="false" text="Stop Ctl Server" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></Button>
                         <Label text="Resets" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                       </children>
                       <columnConstraints>
@@ -119,6 +141,11 @@
                 </AnchorPane>
               </content>
             </Tab>
+                  <Tab text="Settings">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                  </Tab>
           </tabs>
         </TabPane>
             <GridPane maxHeight="386.0" minHeight="386.0" prefHeight="386.0" prefWidth="478.0">
@@ -126,7 +153,10 @@
                   <GridPane prefHeight="56.0" prefWidth="543.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
                      <children>
                         <TextField fx:id="consoleTextField" prefHeight="41.0" prefWidth="511.0" GridPane.columnIndex="1" />
-                        <Button fx:id="sendButton" defaultButton="true" mnemonicParsing="false" prefHeight="41.0" prefWidth="62.0" text="Send" GridPane.columnIndex="2" />
+                        <Button fx:id="sendButton" defaultButton="true" mnemonicParsing="false" prefHeight="41.0" prefWidth="62.0" text="Send" GridPane.columnIndex="2">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
                      </children>
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="5.0" />
