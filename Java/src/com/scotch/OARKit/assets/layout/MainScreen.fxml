@@ -54,7 +54,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor></Button>
                         <Label fx:id="ConnectionType" layoutX="6.0" layoutY="125.0" text="Connection:" />
-                                    <MenuButton fx:id="ipSelector" layoutX="169.0" layoutY="5.0" mnemonicParsing="false" text="Sellect Config" AnchorPane.rightAnchor="5.0">
+                                    <MenuButton fx:id="ipSelector" layoutX="169.0" layoutY="5.0" mnemonicParsing="false" text="Sellect Config" AnchorPane.leftAnchor="166.0">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor></MenuButton>
@@ -82,22 +82,21 @@
                     </AnchorPane>
                     <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="172.0" prefWidth="277.0" SplitPane.resizableWithParent="false">
                       <children>
-                        <Button fx:id="restartNginx" mnemonicParsing="false" text="Nginx Server" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                        <Button fx:id="restartNginx" mnemonicParsing="false" text="Nginx Server" GridPane.rowIndex="5">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor></Button>
-                        <Button mnemonicParsing="false" text="Restart Raspberry Pi" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                        <Button mnemonicParsing="false" text="Restart Raspberry Pi" GridPane.rowIndex="4">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor></Button>
-                        <Button fx:id="StopServer" mnemonicParsing="false" text="Stop Ctl Server" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <Button fx:id="StopServer" mnemonicParsing="false" text="Stop Ctl Server" GridPane.rowIndex="3">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor></Button>
-                        <Label text="Resets" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label text="Resets" GridPane.rowIndex="2" />
                       </children>
                       <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="6.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="277.0" minWidth="10.0" prefWidth="247.38964080810547" />
                       </columnConstraints>
                       <rowConstraints>

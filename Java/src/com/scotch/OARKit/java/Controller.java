@@ -196,7 +196,7 @@ public class Controller implements Initializable, Runnable{
         new Thread(this).start();
         if(Main.properties.getProperty("insideDev").equals("true")){
             //Logger.info("Inside Dev Environment");
-            engine.load("https://coneqt-s.scotch.wa.edu.au/");
+            engine.load("http://xkcd.com/353/");
             //connectIP.setText("192.168.100.1");
             //engine.loadContent("");
             consoleLog.setText("Inside Dev Environment - Console Will Log but Commands will be ignored!!\n");
