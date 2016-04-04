@@ -54,7 +54,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor></Button>
                         <Label fx:id="ConnectionType" layoutX="6.0" layoutY="125.0" text="Connection:" />
-                                    <MenuButton fx:id="ipSelector" layoutX="169.0" layoutY="5.0" mnemonicParsing="false" text="Sellect Config" AnchorPane.leftAnchor="166.0">
+                                    <MenuButton fx:id="ipSelector" layoutX="169.0" layoutY="5.0" mnemonicParsing="false" text="Select Config" AnchorPane.leftAnchor="166.0">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor></MenuButton>
