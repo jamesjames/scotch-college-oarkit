@@ -196,7 +196,7 @@ public class Controller implements Initializable, Runnable{
         new Thread(this).start();
         if(Main.properties.getProperty("insideDev").equals("true")){
             //Logger.info("Inside Dev Environment");
-            engine.load("http://c.xkcd.com/random/comic/");
+            engine.load("https://i.redditmedia.com/J3mJIH7RUqrmZ5KD_dWCJ-K8Mx-dJ2kSQWbsWqg4Fbc.jpg?w=557&s=ecd9c0b7d7023a17edd305e6af52cdae");
             //connectIP.setText("192.168.100.1");
             //engine.loadContent("");
             Logger.info("Inside Dev Environment - Console Will Log but Commands will be ignored!!");
