@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.*?>
 <?import java.lang.*?>
@@ -42,29 +43,61 @@
           <tabs>
             <Tab text="Networking">
               <content>
-                <SplitPane dividerPositions="0.5368421052631579" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+                <SplitPane dividerPositions="0.5779036827195467" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
                   <items>
-                    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="290.0">
+                    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="215.0" prefWidth="290.0">
                       <children>
-                        <ProgressBar fx:id="StrengthBar" layoutX="119.0" layoutY="146.0" prefHeight="24.0" prefWidth="113.0" progress="0.0" />
-                        <Label fx:id="StrengthLabel" layoutX="6.0" layoutY="150.0" text="Signal Strength:" />
-                        <Label fx:id="StrengthDBMLabel" layoutX="6.0" layoutY="172.0" text="Signal Strength" />
+                                    <GridPane layoutX="5.0" layoutY="144.0" AnchorPane.bottomAnchor="5.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="5.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="5.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                              <Label fx:id="ConnectionType" layoutX="5.0" layoutY="158.0" text="Connection:" />
+                                          <GridPane layoutX="6.0" layoutY="179.0" GridPane.rowIndex="2">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="113.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                    <ProgressBar fx:id="StrengthBar" layoutX="119.0" layoutY="179.0" prefHeight="24.0" prefWidth="113.0" progress="0.0" GridPane.columnIndex="1" />
+                                    <Label fx:id="StrengthLabel" layoutX="6.0" layoutY="183.0" text="Signal Strength:" />
+                                             </children>
+                                          </GridPane>
+                              <Label fx:id="StrengthDBMLabel" layoutX="6.0" layoutY="205.0" text="Signal Strength" GridPane.rowIndex="4" />
+                                       </children>
+                                    </GridPane>
                         <Button fx:id="addNewConfiguration" layoutX="5.0" layoutY="5.0" mnemonicParsing="false" text="Manage Configurations">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
-                                       </cursor></Button>
-                        <Label fx:id="ConnectionType" layoutX="6.0" layoutY="125.0" text="Connection:" />
-                                    <MenuButton fx:id="ipSelector" layoutX="169.0" layoutY="5.0" mnemonicParsing="false" text="Select Config" AnchorPane.leftAnchor="166.0">
+                                       </cursor>
+                                    </Button>
+                                    <MenuButton fx:id="ipSelector" layoutX="166.0" layoutY="5.0" mnemonicParsing="false" text="Select Config">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
-                                       </cursor></MenuButton>
-                        <ToggleButton fx:id="connectButton" layoutX="5.0" layoutY="93.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="85.0" text="Connect">
+                                       </cursor>
+                                    </MenuButton>
+                        <ToggleButton fx:id="connectButton" layoutX="5.0" layoutY="92.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="85.0" text="Connect">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
-                                       </cursor></ToggleButton>
-                                    <Label fx:id="nameLabel" layoutX="6.0" layoutY="35.0" text="Name:" />
-                                    <Label fx:id="ipLabel" layoutX="6.0" layoutY="53.0" text="IP:" />
-                                    <Label fx:id="portLabel" layoutX="6.0" layoutY="71.0" text="Port:" />
+                                       </cursor>
+                                    </ToggleButton>
+                                    <AnchorPane layoutX="5.0" layoutY="35.0">
+                                       <children>
+                                          <Label fx:id="ipLabel" layoutY="18.0" text="IP:" />
+                                          <Label fx:id="nameLabel" text="Name:" />
+                                          <Label fx:id="portLabel" layoutY="36.0" text="Port:" />
+                                       </children>
+                                    </AnchorPane>
                                     <AnchorPane disable="true" layoutX="123.0" layoutY="36.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="54.0" prefWidth="96.0" visible="false">
                                        <children>
                                           <ToggleButton fx:id="on" disable="true" layoutX="12.0" layoutY="14.0" mnemonicParsing="false" mouseTransparent="false" selected="true" text="On">
@@ -78,37 +111,47 @@
                                              </toggleGroup></ToggleButton>
                                        </children>
                                     </AnchorPane>
+                                    <Label fx:id="ServerConnectionStatus" layoutX="5.0" layoutY="123.0" text="Server:" />
                       </children>
                     </AnchorPane>
-                    <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="172.0" prefWidth="277.0" SplitPane.resizableWithParent="false">
-                      <children>
-                        <Button fx:id="restartNginx" mnemonicParsing="false" text="Nginx Server" GridPane.rowIndex="5">
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor></Button>
-                        <Button mnemonicParsing="false" text="Restart Raspberry Pi" GridPane.rowIndex="4">
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor></Button>
-                        <Button fx:id="StopServer" mnemonicParsing="false" text="Stop Ctl Server" GridPane.rowIndex="3">
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor></Button>
-                        <Label text="Resets" GridPane.rowIndex="2" />
-                      </children>
-                      <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="277.0" minWidth="10.0" prefWidth="247.38964080810547" />
-                      </columnConstraints>
-                      <rowConstraints>
-                        <RowConstraints />
-                        <RowConstraints />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      </rowConstraints>
-                    </GridPane>
+                              <AnchorPane SplitPane.resizableWithParent="false">
+                                 <children>
+                          <GridPane layoutX="5.0" layoutY="5.0" SplitPane.resizableWithParent="false">
+                            <children>
+                              <Button fx:id="restartNginx" mnemonicParsing="false" text="Nginx Server" GridPane.rowIndex="8">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
+                              <Button mnemonicParsing="false" text="Restart Raspberry Pi" GridPane.rowIndex="6">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
+                              <Button fx:id="StopServer" mnemonicParsing="false" text="Stop Ctl Server" GridPane.rowIndex="4">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
+                              <Label text="Resets" GridPane.rowIndex="2" />
+                            </children>
+                            <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="277.0" minWidth="10.0" prefWidth="247.38964080810547" />
+                            </columnConstraints>
+                            <rowConstraints>
+                              <RowConstraints />
+                              <RowConstraints />
+                              <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="5.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="5.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="5.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                          </GridPane>
+                                 </children>
+                              </AnchorPane>
                   </items>
                 </SplitPane>
               </content>
@@ -126,16 +169,155 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>
-                    <ProgressBar fx:id="LeftX" layoutX="29.0" layoutY="22.0" prefHeight="20.0" prefWidth="195.0" progress="0.0" />
-                    <ProgressBar fx:id="LeftY" layoutX="29.0" layoutY="42.0" prefHeight="20.0" prefWidth="195.0" progress="0.0" />
-                    <Label layoutX="11.0" layoutY="6.0" text="Left Stick" />
-                    <Label layoutX="11.0" layoutY="24.0" text="X:" />
-                    <Label layoutX="11.0" layoutY="44.0" text="Y:" />
-                    <ProgressBar fx:id="RightX" layoutX="29.0" layoutY="86.0" prefHeight="20.0" prefWidth="195.0" progress="0.0" />
-                    <ProgressBar fx:id="RightY" layoutX="29.0" layoutY="106.0" prefHeight="20.0" prefWidth="195.0" progress="0.0" />
-                    <Label layoutX="11.0" layoutY="70.0" text="Right Stick" />
-                    <Label layoutX="11.0" layoutY="88.0" text="X:" />
-                    <Label layoutX="11.0" layoutY="108.0" text="Y:" />
+                              <GridPane layoutX="5.0" layoutY="5.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="5.0" vgrow="SOMETIMES" />
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                    <RowConstraints prefHeight="23.0" vgrow="SOMETIMES" />
+                                    <RowConstraints prefHeight="23.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="5.0" vgrow="SOMETIMES" />
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                    <RowConstraints prefHeight="23.0" vgrow="SOMETIMES" />
+                                    <RowConstraints prefHeight="23.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <GridPane GridPane.rowIndex="4">
+                                       <children>
+                                          <Label text="Y:" />
+                                <ProgressBar fx:id="LeftY" prefHeight="20.0" prefWidth="195.0" progress="0.0" GridPane.columnIndex="1" />
+                                       </children>
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.86559295654297" minWidth="10.0" prefWidth="13.342927932739258" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.21836471557617" minWidth="10.0" prefWidth="186.65707206726074" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                    </GridPane>
+                                    <GridPane GridPane.rowIndex="7">
+                                       <children>
+                                          <Label text="X:" />
+                                <ProgressBar fx:id="RightX" prefHeight="20.0" prefWidth="195.0" progress="0.0" GridPane.columnIndex="1" />
+                                       </children>
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.86559295654297" minWidth="10.0" prefWidth="13.342927932739258" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.21836471557617" minWidth="10.0" prefWidth="186.65707206726074" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                    </GridPane>
+                                    <GridPane GridPane.rowIndex="3">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.86559295654297" minWidth="10.0" prefWidth="13.342927932739258" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.21836471557617" minWidth="10.0" prefWidth="186.65707206726074" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                <Label text="X:" />
+                                          <ProgressBar fx:id="LeftX" prefHeight="20.0" prefWidth="195.0" progress="0.0" GridPane.columnIndex="1" />
+                                       </children>
+                                    </GridPane>
+                          <Label layoutX="11.0" layoutY="6.0" text="Left Stick" GridPane.rowIndex="2" />
+                          <Label layoutX="11.0" layoutY="70.0" text="Right Stick" GridPane.rowIndex="6" />
+                                    <GridPane layoutX="15.0" layoutY="61.0" GridPane.rowIndex="8">
+                                       <children>
+                                          <Label text="Y:" />
+                                          <ProgressBar fx:id="RightY" prefHeight="20.0" prefWidth="195.0" progress="0.0" GridPane.columnIndex="1" />
+                                       </children>
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.86559295654297" minWidth="10.0" prefWidth="13.342927932739258" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.21836471557617" minWidth="10.0" prefWidth="186.65707206726074" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                    </GridPane>
+                                    <Label fx:id="ControllerStatus" text="Controller:" />
+                                 </children>
+                              </GridPane>
+                              <GridPane layoutX="18.0" layoutY="179.0" mouseTransparent="true">
+                                 <columnConstraints>
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="62.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <GridPane alignment="CENTER" layoutX="132.0" layoutY="178.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                       <columnConstraints>
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <ToggleButton fx:id="ButtonY" layoutX="69.0" layoutY="175.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" text="Y" GridPane.columnIndex="1" />
+                                          <ToggleButton fx:id="ButtonB" layoutX="69.0" layoutY="231.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" text="B" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                          <ToggleButton fx:id="ButtonA" layoutX="97.0" layoutY="203.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" text="A" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <ToggleButton fx:id="ButtonX" layoutX="41.0" layoutY="203.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" text="X" GridPane.rowIndex="1" />
+                                       </children>
+                                    </GridPane>
+                                    <GridPane alignment="CENTER" layoutX="20.0" layoutY="172.0" GridPane.rowIndex="2">
+                                       <children>
+                                          <ToggleButton fx:id="ButtonUp" layoutX="69.0" layoutY="175.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" text="/\" GridPane.columnIndex="1" />
+                                          <ToggleButton fx:id="ButtonDown" layoutX="69.0" layoutY="231.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" text="\\/" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <ToggleButton fx:id="ButtonRight" layoutX="97.0" layoutY="203.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" text="&gt;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                          <ToggleButton fx:id="ButtonLeft" layoutX="41.0" layoutY="203.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" text="&lt;" GridPane.rowIndex="1" />
+                                       </children>
+                                       <columnConstraints>
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                    </GridPane>
+                                    <GridPane>
+                                       <columnConstraints>
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <ToggleButton fx:id="ButtonL2" layoutX="42.0" layoutY="158.0" mnemonicParsing="false" text="L2" />
+                                          <ToggleButton fx:id="ButtonL1" layoutX="38.0" layoutY="188.0" mnemonicParsing="false" text="L1" GridPane.rowIndex="1" />
+                                       </children>
+                                    </GridPane>
+                                    <GridPane GridPane.columnIndex="2">
+                                       <columnConstraints>
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <ToggleButton fx:id="ButtonR2" layoutX="183.0" layoutY="153.0" mnemonicParsing="false" text="R2" />
+                                          <ToggleButton fx:id="ButtonR1" layoutX="182.0" layoutY="182.0" mnemonicParsing="false" text="R1" GridPane.rowIndex="1" />
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                              </GridPane>
                   </children>
                 </AnchorPane>
               </content>

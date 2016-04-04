@@ -25,8 +25,10 @@ public class Commands {
         return command + args;
     }
     public void runCommand(){
-        Controller.serverConnect.sendData(fetchCommand());
-        if(Interpreter.validCommand&&ServerConnect.connected) {
+        if(!ServerConnect.connected) {
+            Logger.error("Socket is not connected");
+        } else if(Interpreter.validCommand&&ServerConnect.connected) {
+            Controller.serverConnect.sendData(fetchCommand());
             Logger.info("Command Sent " + command + " With args " + args);
         }
     }

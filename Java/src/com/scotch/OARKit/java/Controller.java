@@ -3,6 +3,7 @@ package com.scotch.OARKit.java;
 import com.scotch.OARKit.java.Command.Interpreter;
 import com.scotch.OARKit.java.ServerList.*;
 import com.scotch.OARKit.java.helpers.*;
+import com.sun.xml.internal.bind.v2.TODO;
 import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -26,6 +27,8 @@ import java.net.SocketException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
+import java.text.FieldPosition;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -35,6 +38,39 @@ public class Controller implements Initializable, Runnable{
     public static boolean connected = false;
 
     public static ServerConnect serverConnect;
+
+    @FXML
+    ToggleButton ButtonY;
+    @FXML
+    ToggleButton ButtonB;
+    @FXML
+    ToggleButton ButtonA;
+    @FXML
+    ToggleButton ButtonX;
+
+    @FXML
+    ToggleButton ButtonUp;
+    @FXML
+    ToggleButton ButtonDown;
+    @FXML
+    ToggleButton ButtonRight;
+    @FXML
+    ToggleButton ButtonLeft;
+
+    @FXML
+    ToggleButton ButtonL1;
+    @FXML
+    ToggleButton ButtonL2;
+
+    @FXML
+    ToggleButton ButtonR1;
+    @FXML
+    ToggleButton ButtonR2;
+
+    @FXML
+    Label ServerConnectionStatus;
+    @FXML
+    Label ControllerStatus;
 
     @FXML
     Button StopServer;
@@ -108,6 +144,17 @@ public class Controller implements Initializable, Runnable{
         currentTime = new Timeline(new KeyFrame(Duration.seconds(1), event -> consoleTitle.setText("Console - Time: " + format.format(Calendar.getInstance().getTime()))));
         currentTime.setCycleCount(Animation.INDEFINITE);
         currentTime.play();
+    }
+
+    //this is meant to be called with in the running loop for each button on the controller and should provide feedback in the UI of what buttons are pressed. i don't know how to test if a button is pressed so i have used console input to test
+
+    public void controllerButtons(Boolean ButtonPressed, ToggleButton FeedBackViewer) {
+
+        if (ButtonPressed) {
+            FeedBackViewer.setSelected(true);
+        } else {
+            FeedBackViewer.setSelected(false);
+        }
     }
 
     public static void AddConfigToList() {
@@ -199,7 +246,7 @@ public class Controller implements Initializable, Runnable{
             engine.load("http://c.xkcd.com/random/comic/");
             //connectIP.setText("192.168.100.1");
             //engine.loadContent("");
-            Logger.info("Inside Dev Environment - Console Will Log but Commands will be ignored!!");
+            Logger.info("Inside Dev Environment");
         }
         if(ServerConnect.connected&&Main.properties.getProperty("insideDev").equals("false")){
             //connectButton.setSelected(true);
@@ -278,19 +325,37 @@ public class Controller implements Initializable, Runnable{
 
                 Platform.runLater(() -> RightX.setProgress(gamepad.rightstickx/100));
                 Platform.runLater(() -> RightY.setProgress(gamepad.rightsticky/100));
+                ControllerStatus.setText("Controller: Connected");
+            } else {
+                ControllerStatus.setText("Controller: Not Connected");
             }
             if (!connected){
                 Platform.runLater(() -> connectButton.setText("Connect"));
                 Platform.runLater(() -> connectButton.setSelected(false));
+                Platform.runLater(() -> ServerConnectionStatus.setText("Server: Not Connected"));
             } else if (connected){
                 Platform.runLater(() -> connectButton.setText("Disconnect"));
                 Platform.runLater(() -> connectButton.setSelected(true));
+                Platform.runLater(() -> ServerConnectionStatus.setText("Server: Connected"));
             }
             if (!consoleTextField.getText().isEmpty()) {
                 sendButton.setDisable(false);
             } else {
                 sendButton.setDisable(true);
             }
+            //these are to test the controller visual feedback using the console input field as a substitute for the controller input
+            controllerButtons(consoleTextField.getText().equals("A"), ButtonA);
+            controllerButtons(consoleTextField.getText().equals("B"), ButtonB);
+            controllerButtons(consoleTextField.getText().equals("X"), ButtonX);
+            controllerButtons(consoleTextField.getText().equals("Y"), ButtonY);
+            controllerButtons(consoleTextField.getText().equals("Up"), ButtonUp);
+            controllerButtons(consoleTextField.getText().equals("Down"), ButtonDown);
+            controllerButtons(consoleTextField.getText().equals("Left"), ButtonLeft);
+            controllerButtons(consoleTextField.getText().equals("Right"), ButtonRight);
+            controllerButtons(consoleTextField.getText().equals("R1"), ButtonR1);
+            controllerButtons(consoleTextField.getText().equals("R2"), ButtonR2);
+            controllerButtons(consoleTextField.getText().equals("L1"), ButtonL1);
+            controllerButtons(consoleTextField.getText().equals("L2"), ButtonL2);
             //Thread.sleep(100);
         } catch (Exception e) {
             e.printStackTrace();

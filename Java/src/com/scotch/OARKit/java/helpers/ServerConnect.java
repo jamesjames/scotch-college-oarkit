@@ -79,7 +79,7 @@ public class ServerConnect {
             out.flush();
             return true;
         } else {
-            Logger.error("Socket is not connected :(");
+            Logger.error("Socket is not connected");
             return false;
         }
     }
