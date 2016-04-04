@@ -24,8 +24,8 @@ public class ServerConnect {
                 Logger.info("Starting Server on Local Host");
                 setUp();
             } catch (IOException e) {
-                System.err.println("Problem Connecting to Local Host - Is the server up?");
-                System.err.println("Please Specify Your Own IP");
+                Logger.error("Problem Connecting to Local Host - Is the server up?");
+                Logger.error("Please Specify Your Own IP");
             }
         }else{
             try {
@@ -33,8 +33,8 @@ public class ServerConnect {
                 Logger.info("Starting Server on Default Remote");
                 setUp();
             } catch (IOException e) {
-                System.err.println("Problem Connecting to Default Remote Host - Is the server up?");
-                System.err.println("Please Specify Your Own IP");
+                Logger.error("Problem Connecting to Default Remote Host - Is the server up?");
+                Logger.error("Please Specify Your Own IP");
             }
         }
         Logger.info("This method going to be removed, please use ServerConnect(String ip, int port)");
@@ -46,7 +46,7 @@ public class ServerConnect {
             Logger.info("Connecting to Server...");
             setUp();
         } catch (IOException e) {
-            System.err.println("Problem Connecting to Specified Host - Is the server up or is it configured correctly?");
+            Logger.error("Problem Connecting to Specified Host - Is the server up or is it configured correctly?");
         }
     }
     //FOR DIFFERING IP AND SAME PORT - 5006
@@ -69,7 +69,7 @@ public class ServerConnect {
             stdIn.close();
             connected = false;
         } catch (Exception e) {
-            System.err.println("Problem Closing Socket - Is the server still up?");
+            Logger.error("Problem Closing Socket - Is the server still up?");
         }
     }
 
@@ -78,8 +78,8 @@ public class ServerConnect {
             out.print(data);
             out.flush();
             return true;
-        }else {
-            System.err.println("Error - Socket is not connected :(");
+        } else {
+            Logger.error("Socket is not connected :(");
             return false;
         }
     }

@@ -171,7 +171,7 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TextArea fx:id="consoleLog" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="303.0" minWidth="701.0" prefHeight="303.0" prefWidth="701.0" text="Something has gone wrong..." AnchorPane.bottomAnchor="-10.399999999999977" AnchorPane.leftAnchor="-10.399999999999977" AnchorPane.rightAnchor="-10.399999999999977" AnchorPane.topAnchor="-10.399999999999977" />
+                              <TextArea fx:id="consoleLog" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="303.0" minWidth="701.0" prefHeight="303.0" prefWidth="701.0" text="" AnchorPane.bottomAnchor="-10.399999999999977" AnchorPane.leftAnchor="-10.399999999999977" AnchorPane.rightAnchor="-10.399999999999977" AnchorPane.topAnchor="-10.399999999999977" />
                            </children>
                         </AnchorPane>
                     </content>

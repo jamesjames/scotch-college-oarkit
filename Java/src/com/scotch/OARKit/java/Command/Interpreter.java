@@ -11,7 +11,8 @@ import static com.scotch.OARKit.java.Controller.serverConnect;
 import static org.python.core.PySystemState.platform;
 
 public class Interpreter {
-    BaseCommand baseCommand = BaseCommand.BLANK;
+    public static BaseCommand baseCommand = BaseCommand.BLANK;
+    public static Boolean validCommand;
     String command = "";
     //TODO IMPLEMENT A LIST FOR ARGS
     //List<String> args = new ArrayList<String>();
@@ -22,6 +23,7 @@ public class Interpreter {
 
     }
     private void phaseBase(){
+        baseCommand = BaseCommand.BLANK;
         String stringBase = command.split(" ")[0];
         for( int i = 0; i < BaseCommand.values().length; i++){
             for( int t = 0; t < BaseCommand.values()[i].alias.length; t++){
@@ -32,8 +34,11 @@ public class Interpreter {
                 }
             }
         }
+        validCommand = !(baseCommand == BaseCommand.BLANK);
+        Logger.debug(validCommand);
+        Logger.debug(baseCommand == BaseCommand.BLANK);
         if(baseCommand == BaseCommand.BLANK){
-            System.err.println("ERROR - COMMAND NOT FOUND :O");
+            Logger.error("COMMAND NOT FOUND :O");
         }
         if(baseCommand == BaseCommand.STOPSERVER){
             new java.util.Timer().schedule(
@@ -51,7 +56,7 @@ public class Interpreter {
     }
     private void phaseArgs(){
         if (command.split(" ").length-1 != baseCommand.args){
-            System.err.println("ERROR NOT SUFFICIENT ARGS, KILLING REQUEST");
+            Logger.error("NOT SUFFICIENT ARGS, KILLING REQUEST");
             this.args = "";
             this.baseCommand = BaseCommand.BLANK;
         } else if (baseCommand.args != 0){

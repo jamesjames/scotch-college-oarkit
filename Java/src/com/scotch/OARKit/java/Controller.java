@@ -32,7 +32,7 @@ import java.util.*;
 public class Controller implements Initializable, Runnable{
 
     public static boolean running = true;
-    public static boolean connected = true;
+    public static boolean connected = false;
 
     public static ServerConnect serverConnect;
 
@@ -136,10 +136,10 @@ public class Controller implements Initializable, Runnable{
 
     public static void ServerDisconnect() {
         if (ServerConnect.connected) {
-            connectButton1.setSelected(false);
+            //connectButton1.setSelected(false);
             Logger.info("Closing Socket");
             serverConnect.socketClose();
-            connectButton1.setText("Connect");
+            //connectButton1.setText("Connect");
             connected = false;
         }
     }
@@ -150,7 +150,7 @@ public class Controller implements Initializable, Runnable{
             if (ServerConnect.connected == true) {
                 engine.load("http://"+ip);
                 Logger.info("Connected to new Server "+name+" ("+ip+", "+port+")");
-                connectButton.setText("Disconnect");
+                //connectButton.setText("Disconnect");
                 connected = true;
             }
         }
@@ -196,13 +196,14 @@ public class Controller implements Initializable, Runnable{
         new Thread(this).start();
         if(Main.properties.getProperty("insideDev").equals("true")){
             //Logger.info("Inside Dev Environment");
-            engine.load("http://xkcd.com/353/");
+            engine.load("http://c.xkcd.com/random/comic/");
             //connectIP.setText("192.168.100.1");
             //engine.loadContent("");
-            consoleLog.setText("Inside Dev Environment - Console Will Log but Commands will be ignored!!\n");
+            Logger.info("Inside Dev Environment - Console Will Log but Commands will be ignored!!");
         }
         if(ServerConnect.connected&&Main.properties.getProperty("insideDev").equals("false")){
-            connectButton.setSelected(true);
+            //connectButton.setSelected(true);
+            connected = true;
             engine.load("http://192.168.100.1");
         }
     }
@@ -237,7 +238,7 @@ public class Controller implements Initializable, Runnable{
                 ToggleServerConnection(nameLabel.getText().replace("Name: ", ""), ipLabel.getText().replace("IP: ", ""), portLabel.getText().replace("Port: ", ""));
             } else {
                 Logger.info("Please select a server");
-                connectButton.setSelected(false);
+                //connectButton.setSelected(false);
             }
         });
 
@@ -281,6 +282,9 @@ public class Controller implements Initializable, Runnable{
             if (!connected){
                 Platform.runLater(() -> connectButton.setText("Connect"));
                 Platform.runLater(() -> connectButton.setSelected(false));
+            } else if (connected){
+                Platform.runLater(() -> connectButton.setText("Disconnect"));
+                Platform.runLater(() -> connectButton.setSelected(true));
             }
             if (!consoleTextField.getText().isEmpty()) {
                 sendButton.setDisable(false);

@@ -1,6 +1,8 @@
 package com.scotch.OARKit.java.helpers;
 
 
+import com.scotch.OARKit.java.Main;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -21,8 +23,10 @@ public class Logger {
     }
 
     public static void debug(Object object) {
-        String timeStamp = new SimpleDateFormat("[HH:mm:ss] ").format(Calendar.getInstance().getTime());
-        System.out.println("[DEBUG] " + timeStamp + object);
+        if (Main.properties.getProperty("insideDev").equals("true")&&false) {
+            String timeStamp = new SimpleDateFormat("[HH:mm:ss] ").format(Calendar.getInstance().getTime());
+            System.out.println("[DEBUG] " + timeStamp + object);
+        }
     }
 
     public static void warn(Object object) {
