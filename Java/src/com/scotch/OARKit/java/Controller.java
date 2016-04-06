@@ -3,7 +3,6 @@ package com.scotch.OARKit.java;
 import com.scotch.OARKit.java.Command.Interpreter;
 import com.scotch.OARKit.java.ServerList.*;
 import com.scotch.OARKit.java.helpers.*;
-import com.sun.xml.internal.bind.v2.TODO;
 import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
