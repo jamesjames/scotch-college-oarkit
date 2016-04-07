@@ -39,6 +39,20 @@ public class Controller implements Initializable, Runnable{
     public static ServerConnect serverConnect;
 
     @FXML
+    ProgressBar LeftBackwardIndicator;
+    @FXML
+    ProgressBar LeftForwardIndicator;
+    @FXML
+    Slider LeftPowerSlider;
+
+    @FXML
+    ProgressBar RightBackwardIndicator;
+    @FXML
+    ProgressBar RightForwardIndicator;
+    @FXML
+    Slider RightPowerSlider;
+
+    @FXML
     ToggleButton ButtonY;
     @FXML
     ToggleButton ButtonB;
@@ -137,18 +151,30 @@ public class Controller implements Initializable, Runnable{
     String currentip;
     int currentport;
 
+    public void powerIndicator() {
+        double power = RightPowerSlider.getValue()-50;
+        if (power < 0) {
+            Platform.runLater(() -> RightForwardIndicator.setProgress(-power/50));
+            Platform.runLater(() -> RightBackwardIndicator.setProgress(0));
+        } else if (power > 0) {
+            Platform.runLater(() -> RightForwardIndicator.setProgress(0));
+            Platform.runLater(() -> RightBackwardIndicator.setProgress(power/50));
+        } else {
+            Platform.runLater(() -> RightForwardIndicator.setProgress(0));
+            Platform.runLater(() -> RightBackwardIndicator.setProgress(0));
+        }
+    }
+
     public void currentTime1() {
         SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
         Timeline currentTime;
-        currentTime = new Timeline(new KeyFrame(Duration.seconds(1), event -> consoleTitle.setText("Console - Time: " + format.format(Calendar.getInstance().getTime()))));
+        currentTime = new Timeline(new KeyFrame(Duration.seconds(1), event -> consoleTitle.setText("Console - Time: "+format.format(Calendar.getInstance().getTime()))));
         currentTime.setCycleCount(Animation.INDEFINITE);
         currentTime.play();
     }
 
     //this is meant to be called with in the running loop for each button on the controller and should provide feedback in the UI of what buttons are pressed. i don't know how to test if a button is pressed so i have used console input to test
-
     public void controllerButtons(Boolean ButtonPressed, ToggleButton FeedBackViewer) {
-
         if (ButtonPressed) {
             FeedBackViewer.setSelected(true);
         } else {
@@ -156,6 +182,7 @@ public class Controller implements Initializable, Runnable{
         }
     }
 
+    //adds configs to the dropdown list
     public static void AddConfigToList() {
         ipSelector1.getItems().clear();
         String[] servers = ServerList.getKeys();
@@ -180,6 +207,7 @@ public class Controller implements Initializable, Runnable{
         }
     }
 
+    //disconects the server
     public static void ServerDisconnect() {
         if (ServerConnect.connected) {
             //connectButton1.setSelected(false);
@@ -190,6 +218,7 @@ public class Controller implements Initializable, Runnable{
         }
     }
 
+    //connects the server
     public void ServerConnect(String name, String ip, String port) {
         if (!ServerConnect.connected){
             serverConnect = new ServerConnect(ip, port);
@@ -202,6 +231,7 @@ public class Controller implements Initializable, Runnable{
         }
     }
 
+    //toggles the connection to the server
     public void ToggleServerConnection(String name, String ip, String port) {
         if (!ServerConnect.connected){
             ServerConnect(name, ip, port);
@@ -288,14 +318,16 @@ public class Controller implements Initializable, Runnable{
             }
         });
 
-        /*on.setOnAction(event -> {
+        on.setOnAction(event -> {
             on.setDisable(true);
             off.setDisable(false);
+            off.setSelected(false);
         });
         off.setOnAction(event -> {
             off.setDisable(true);
             on.setDisable(false);
-        });/**/
+            on.setSelected(false);
+        });
     }
 
     @Override
@@ -304,7 +336,7 @@ public class Controller implements Initializable, Runnable{
             try{networkManager.update();} catch (SocketException e) {}
             Platform.runLater(() -> StrengthBar.setProgress(networkManager.getSignalStrength()));
             Platform.runLater(() -> StrengthDBMLabel.setText("Strength: "+networkManager.getRawSignalStrength()+ " Dbm"));
-            Platform.runLater(() -> ConnectionType.setText("Connection: "+networkManager.getConnectionType()));
+            Platform.runLater(() -> ConnectionType.setText("Network Connection: "+networkManager.getConnectionType()));
 
             if (networkManager.getSignalStrength() == -1){
                 Platform.runLater(() ->StrengthDBMLabel.setVisible(false));
@@ -324,6 +356,48 @@ public class Controller implements Initializable, Runnable{
 
                 Platform.runLater(() -> RightX.setProgress(gamepad.rightstickx/100));
                 Platform.runLater(() -> RightY.setProgress(gamepad.rightsticky/100));
+
+                //these are to test the controller visual feedback using the console input field as a substitute for the controller input
+                controllerButtons(gamepad.ButtonX, ButtonX);
+                controllerButtons(gamepad.ButtonB, ButtonB);
+                controllerButtons(gamepad.ButtonA, ButtonA);
+                controllerButtons(gamepad.ButtonY, ButtonY);
+                controllerButtons(gamepad.ButtonR1, ButtonR1);
+                controllerButtons(gamepad.ButtonR2, ButtonR2);
+                controllerButtons(gamepad.ButtonL1, ButtonL1);
+                controllerButtons(gamepad.ButtonL2, ButtonL2);
+                /*controllerButtons(gamepad.ButtonUp, ButtonUp);
+                controllerButtons(gamepad.ButtonRight, ButtonRight);
+                controllerButtons(gamepad.ButtonDown, ButtonDown);
+                controllerButtons(gamepad.ButtonLeft, ButtonLeft);/**/
+
+                if (gamepad.HatSwitchPosition==1) {
+                    ButtonUp.setSelected(true);
+                    ButtonRight.setSelected(false);
+                    ButtonDown.setSelected(false);
+                    ButtonLeft.setSelected(false);
+                } else if (gamepad.HatSwitchPosition==2) {
+                    ButtonUp.setSelected(false);
+                    ButtonRight.setSelected(true);
+                    ButtonDown.setSelected(false);
+                    ButtonLeft.setSelected(false);
+                } else if (gamepad.HatSwitchPosition==3) {
+                    ButtonUp.setSelected(false);
+                    ButtonRight.setSelected(false);
+                    ButtonDown.setSelected(true);
+                    ButtonLeft.setSelected(false);
+                } else if (gamepad.HatSwitchPosition==4) {
+                    ButtonUp.setSelected(false);
+                    ButtonRight.setSelected(false);
+                    ButtonDown.setSelected(false);
+                    ButtonLeft.setSelected(true);
+                } else {
+                    ButtonUp.setSelected(false);
+                    ButtonRight.setSelected(false);
+                    ButtonDown.setSelected(false);
+                    ButtonLeft.setSelected(false);
+                }
+
                 ControllerStatus.setText("Controller: Connected");
             } else {
                 ControllerStatus.setText("Controller: Not Connected");
@@ -342,19 +416,28 @@ public class Controller implements Initializable, Runnable{
             } else {
                 sendButton.setDisable(true);
             }
-            //these are to test the controller visual feedback using the console input field as a substitute for the controller input
-            controllerButtons(consoleTextField.getText().equals("A"), ButtonA);
-            controllerButtons(consoleTextField.getText().equals("B"), ButtonB);
-            controllerButtons(consoleTextField.getText().equals("X"), ButtonX);
-            controllerButtons(consoleTextField.getText().equals("Y"), ButtonY);
-            controllerButtons(consoleTextField.getText().equals("Up"), ButtonUp);
-            controllerButtons(consoleTextField.getText().equals("Down"), ButtonDown);
-            controllerButtons(consoleTextField.getText().equals("Left"), ButtonLeft);
-            controllerButtons(consoleTextField.getText().equals("Right"), ButtonRight);
-            controllerButtons(consoleTextField.getText().equals("R1"), ButtonR1);
-            controllerButtons(consoleTextField.getText().equals("R2"), ButtonR2);
-            controllerButtons(consoleTextField.getText().equals("L1"), ButtonL1);
-            controllerButtons(consoleTextField.getText().equals("L2"), ButtonL2);
+            double RightPower = RightPowerSlider.getValue()-50;
+            if (RightPower < 0) {
+                Platform.runLater(() -> RightForwardIndicator.setProgress(-RightPower/50));
+                Platform.runLater(() -> RightBackwardIndicator.setProgress(0));
+            } else if (RightPower > 0) {
+                Platform.runLater(() -> RightForwardIndicator.setProgress(0));
+                Platform.runLater(() -> RightBackwardIndicator.setProgress(RightPower/50));
+            } else {
+                Platform.runLater(() -> RightForwardIndicator.setProgress(0));
+                Platform.runLater(() -> RightBackwardIndicator.setProgress(0));
+            }
+            double LeftPower = LeftPowerSlider.getValue()-50;
+            if (LeftPower < 0) {
+                Platform.runLater(() -> LeftForwardIndicator.setProgress(-LeftPower/50));
+                Platform.runLater(() -> LeftBackwardIndicator.setProgress(0));
+            } else if (LeftPower > 0) {
+                Platform.runLater(() -> LeftForwardIndicator.setProgress(0));
+                Platform.runLater(() -> LeftBackwardIndicator.setProgress(LeftPower/50));
+            } else {
+                Platform.runLater(() -> LeftForwardIndicator.setProgress(0));
+                Platform.runLater(() -> LeftBackwardIndicator.setProgress(0));
+            }
             //Thread.sleep(100);
         } catch (Exception e) {
             e.printStackTrace();

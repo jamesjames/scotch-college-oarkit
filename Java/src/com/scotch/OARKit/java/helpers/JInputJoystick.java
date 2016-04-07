@@ -6,7 +6,7 @@ import net.java.games.input.Component.Identifier;
 import net.java.games.input.Controller;
 import net.java.games.input.ControllerEnvironment;
 
-/**
+/*
  *
  * JInput Joystick
  *
@@ -37,12 +37,12 @@ public class JInputJoystick {
     public Component[] components;
 
     // Controller buttons states
-    private ArrayList<Boolean> buttonsValues;
+    private static ArrayList<Boolean> buttonsValues;
 
 
 
 
-    /**
+    /*
      * Creates a controller, of type that has been given.
      *
      * @param controllerType Desired controller type.
@@ -53,7 +53,7 @@ public class JInputJoystick {
         initController(controllerType, null);
     }
 
-    /**
+    /*
      * Creates a controller, of one of the types that has been given.
      * Controller type which is first found will be created.
      *
@@ -72,7 +72,7 @@ public class JInputJoystick {
         this.buttonsValues = new ArrayList<Boolean>();
     }
 
-    /**
+    /*
      * Save first founded controller of given type.
      *
      * @param controllerType Desired controller type.
@@ -99,7 +99,7 @@ public class JInputJoystick {
 
 
 
-    /**
+    /*
      * Checks if the controller is connected/valid.
      * It also poll the controller for data, but it doesn't save states
      * of the buttons into buttons array list that is used by getButtonsValues()
@@ -119,7 +119,7 @@ public class JInputJoystick {
     }
 
 
-    /**
+    /*
      * Gets the controller type.
      * Throws exception if controller doesn't exists.
      *
@@ -131,7 +131,7 @@ public class JInputJoystick {
     }
 
 
-    /**
+    /*
      * Gets the human readable controller name.
      * Throws exception if controller doesn't exists.
      *
@@ -143,7 +143,7 @@ public class JInputJoystick {
     }
 
 
-    /**
+    /*
      * Check and save current controller state (controller components values).
      * Must be called every time before using controller state methods (eg. method for x axis value),
      * so that you get latest controller components values.
@@ -169,6 +169,7 @@ public class JInputJoystick {
 
         for(int i=0; i < components.length; i++) {
             Component component = components[i];
+            //System.out.println(component);
             // Add states of the buttons
             if(!component.isAnalog())
                 if(component.getPollData() == 1.0f)
@@ -181,7 +182,7 @@ public class JInputJoystick {
     }
 
 
-    /**
+    /*
      * Checks if component with given identifier exists.
      *
      * @param identifier Identifier that correspond to component.
@@ -198,7 +199,7 @@ public class JInputJoystick {
     }
 
 
-    /**
+    /*
      * Gets value of component with given identifier.
      *
      * @param identifier Identifier that correspond to component from which we need value.
@@ -209,7 +210,7 @@ public class JInputJoystick {
     }
 
 
-    /**
+    /*
      * How many buttons does controller have?
      *
      * @return Number of buttons on a controller.
@@ -219,7 +220,7 @@ public class JInputJoystick {
         return buttonsValues.size();
     }
 
-    /**
+    /*
      * Controller buttons states. Index of element in array list correspond to
      * button number on the controller.
      * If element is true then button is pressed, if element is false then
@@ -232,19 +233,19 @@ public class JInputJoystick {
         return buttonsValues;
     }
 
-    /**
+    /*
      * Gets value of required button.
      *
      * @param index Index of a button in array list.
      * @return True if button is pressed, false otherwise.
      */
-    public boolean getButtonValue(int index)
+    public static boolean getButtonValue(int index)
     {
         return buttonsValues.get(index);
     }
 
 
-    /**
+    /*
      * Value of axis named X Axis.
      *
      * @return X Axis value.
@@ -255,7 +256,7 @@ public class JInputJoystick {
         return controller.getComponent(identifier).getPollData();
     }
 
-    /**
+    /*
      * Value of axis named X Axis in percentage.
      * Percentages increases from left to right.
      * If idle (in center) returns 50, if joystick axis is pushed to the left
@@ -272,7 +273,7 @@ public class JInputJoystick {
     }
 
 
-    /**
+    /*
      * Value of axis named Y Axis.
      *
      * @return Y Axis value.
@@ -283,7 +284,7 @@ public class JInputJoystick {
         return controller.getComponent(identifier).getPollData();
     }
 
-    /**
+    /*
      * Value of axis named Y Axis in percentage.
      * Percentages increases from top to bottom.
      * If idle (in center) returns 50, if joystick axis is pushed to the top
@@ -300,7 +301,7 @@ public class JInputJoystick {
     }
 
 
-    /**
+    /*
      * Value of axis named Z Rotation.
      *
      * @return Z Rotation value.
@@ -311,7 +312,7 @@ public class JInputJoystick {
         return controller.getComponent(identifier).getPollData();
     }
 
-    /**
+    /*
      * Value of axis named Z Rotation in percentage.
      * Percentages increases from top to bottom.
      * If idle (in center) returns 50, if joystick axis is pushed to the top
@@ -328,7 +329,7 @@ public class JInputJoystick {
     }
 
 
-    /**
+    /*
      * Value of axis named Z Axis.
      *
      * @return Z Axis value.
@@ -339,7 +340,7 @@ public class JInputJoystick {
         return controller.getComponent(identifier).getPollData();
     }
 
-    /**
+    /*
      * Value of axis named Z Axis in percentage.
      * Percentages increases from left to right.
      * If idle (in center) returns 50, if joystick axis is pushed to the left
@@ -356,7 +357,7 @@ public class JInputJoystick {
     }
 
 
-    /**
+    /*
      * Value of axis named X Rotation.
      *
      * @return X Rotation value.
@@ -367,7 +368,7 @@ public class JInputJoystick {
         return controller.getComponent(identifier).getPollData();
     }
 
-    /**
+    /*
      * Value of axis named X Rotation in percentage.
      * Percentages increases from left to right.
      * If idle (in center) returns 50, if joystick axis is pushed to the left
@@ -384,7 +385,7 @@ public class JInputJoystick {
     }
 
 
-    /**
+    /*
      * Value of axis named Y Rotation.
      *
      * @return Y Rotation value.
@@ -395,7 +396,7 @@ public class JInputJoystick {
         return controller.getComponent(identifier).getPollData();
     }
 
-    /**
+    /*
      * Value of axis named Y Rotation in percentage.
      * Percentages increases from top to bottom.
      * If idle (in center) returns 50, if joystick axis is pushed to the top
@@ -412,7 +413,7 @@ public class JInputJoystick {
     }
 
 
-    /**
+    /*
      * Gets position of the Hat Switch.
      * Float number that is returned by this method correspond with
      * positions in the JInput class Component.POV.
@@ -432,7 +433,7 @@ public class JInputJoystick {
 
     /* Left joystick */
 
-    /**
+    /*
      * X position of left controller joystick.
      *
      * The same as method getXAxisValue().
@@ -446,7 +447,7 @@ public class JInputJoystick {
         return this.getXAxisValue();
     }
 
-    /**
+    /*
      * X position, in percentages, of left controller joystick.
      *
      * The same as method getXAxisPercentage().
@@ -461,7 +462,7 @@ public class JInputJoystick {
     }
 
 
-    /**
+    /*
      * Y position of left controller joystick.
      *
      * The same as method getYAxisValue().
@@ -475,7 +476,7 @@ public class JInputJoystick {
         return this.getYAxisValue();
     }
 
-    /**
+    /*
      * Y position, in percentages, of left controller joystick.
      *
      * The same as method getYAxisPercentage().
@@ -492,7 +493,7 @@ public class JInputJoystick {
 
     /* Right joystick */
 
-    /**
+    /*
      * X position of right controller joystick.
      *
      * The same as method getZAxisValue() if controller type is Controller.Type.STICK.
@@ -521,7 +522,7 @@ public class JInputJoystick {
         return xValueRightJoystick;
     }
 
-    /**
+    /*
      * X position, in percentages, of right controller joystick.
      *
      * The same as method getZAxisPercentage() if controller type is Controller.Type.STICK.
@@ -551,7 +552,7 @@ public class JInputJoystick {
     }
 
 
-    /**
+    /*
      * Y position of right controller joystick.
      *
      * The same as method getZRotationValue() if controller type is Controller.Type.STICK.
@@ -580,7 +581,7 @@ public class JInputJoystick {
         return yValueRightJoystick;
     }
 
-    /**
+    /*
      * Y position, in percentages, of right controller joystick.
      *
      * The same as method getZRotationPercentage() if controller type is Controller.Type.STICK.
