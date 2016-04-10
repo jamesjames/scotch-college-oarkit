@@ -5,6 +5,8 @@ package com.scotch.OARKit.java.Command;
 import java.util.ArrayList;
 
 public enum BaseCommand {
+    SYSTEM("X","System",new String[]{"system"},1),
+    MANUAL("M","Manual",new String[]{"manual"},1),
     ECHO("E","Echo",new String[]{"print","echo"},1),
     BLANK("","", new String[]{},0),
     PI("P","Pi", new String[]{"Pi"},1),
