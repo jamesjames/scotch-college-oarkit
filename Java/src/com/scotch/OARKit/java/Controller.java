@@ -71,14 +71,14 @@ public class Controller implements Initializable, Runnable{
     ToggleButton ButtonLeft;
 
     @FXML
-    ToggleButton ButtonL1;
+    ToggleButton ButtonLT;
     @FXML
-    ToggleButton ButtonL2;
+    ToggleButton ButtonLB;
 
     @FXML
-    ToggleButton ButtonR1;
+    ToggleButton ButtonRT;
     @FXML
-    ToggleButton ButtonR2;
+    ToggleButton ButtonRB;
 
     @FXML
     Label ServerConnectionStatus;
@@ -363,10 +363,10 @@ public class Controller implements Initializable, Runnable{
                 controllerButtons(gamepad.ButtonB, ButtonB);
                 controllerButtons(gamepad.ButtonA, ButtonA);
                 controllerButtons(gamepad.ButtonY, ButtonY);
-                controllerButtons(gamepad.ButtonR1, ButtonR1);
-                controllerButtons(gamepad.ButtonR2, ButtonR2);
-                controllerButtons(gamepad.ButtonL1, ButtonL1);
-                controllerButtons(gamepad.ButtonL2, ButtonL2);
+                controllerButtons(gamepad.ButtonRT, ButtonRT);
+                controllerButtons(gamepad.ButtonRB, ButtonRB);
+                controllerButtons(gamepad.ButtonLT, ButtonLT);
+                controllerButtons(gamepad.ButtonLB, ButtonLB);
                 /*controllerButtons(gamepad.ButtonUp, ButtonUp);
                 controllerButtons(gamepad.ButtonRight, ButtonRight);
                 controllerButtons(gamepad.ButtonDown, ButtonDown);

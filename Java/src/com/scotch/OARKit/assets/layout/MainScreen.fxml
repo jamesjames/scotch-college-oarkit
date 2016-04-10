@@ -321,8 +321,8 @@
                                           <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
-                                          <ToggleButton fx:id="ButtonL2" layoutX="42.0" layoutY="158.0" mnemonicParsing="false" text="L2" />
-                                          <ToggleButton fx:id="ButtonL1" layoutX="38.0" layoutY="188.0" mnemonicParsing="false" text="L1" GridPane.rowIndex="1" />
+                                          <ToggleButton fx:id="ButtonLT" layoutX="42.0" layoutY="158.0" mnemonicParsing="false" text="LT" />
+                                          <ToggleButton fx:id="ButtonLB" layoutX="38.0" layoutY="188.0" mnemonicParsing="false" text="LB" GridPane.rowIndex="1" />
                                        </children>
                                     </GridPane>
                                     <GridPane GridPane.columnIndex="2">
@@ -334,8 +334,8 @@
                                           <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
-                                          <ToggleButton fx:id="ButtonR2" layoutX="183.0" layoutY="153.0" mnemonicParsing="false" text="R2" />
-                                          <ToggleButton fx:id="ButtonR1" layoutX="182.0" layoutY="182.0" mnemonicParsing="false" text="R1" GridPane.rowIndex="1" />
+                                          <ToggleButton fx:id="ButtonRT" layoutX="183.0" layoutY="153.0" mnemonicParsing="false" text="RT" />
+                                          <ToggleButton fx:id="ButtonRB" layoutX="182.0" layoutY="182.0" mnemonicParsing="false" text="RB" GridPane.rowIndex="1" />
                                        </children>
                                     </GridPane>
                                  </children>
