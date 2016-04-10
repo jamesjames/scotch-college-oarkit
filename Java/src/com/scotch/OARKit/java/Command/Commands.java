@@ -29,7 +29,11 @@ public class Commands {
             Logger.error("Socket is not connected");
         } else if(Interpreter.validCommand&&ServerConnect.connected) {
             Controller.serverConnect.sendData(fetchCommand());
-            Logger.info("Command Sent " + command + " With args " + args);
+            if (args.isEmpty()) {
+                Logger.info("Command Sent " + command + " With no args");
+            } else {
+                Logger.info("Command Sent " + command + " With args " + args);
+            }
         }
     }
 }

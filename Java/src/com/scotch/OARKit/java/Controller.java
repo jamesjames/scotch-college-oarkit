@@ -286,7 +286,7 @@ public class Controller implements Initializable, Runnable{
     }
 
     public void createEvents() throws IOException {
-        restartNginx.setOnAction(event -> new Interpreter("print hello").returnCommand().runCommand());
+        restartNginx.setOnAction(event -> new Interpreter("print, hello").returnCommand().runCommand());
         StopServer.setOnAction(event -> new Interpreter("stopserver").returnCommand().runCommand());
 
         sendButton.setOnAction(event -> {

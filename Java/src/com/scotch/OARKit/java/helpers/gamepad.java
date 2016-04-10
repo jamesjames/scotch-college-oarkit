@@ -71,7 +71,7 @@ public class gamepad {
                 HatSwitchPosition=4; //left
             } else {
                 HatSwitchPosition = 0;
-            }
+            }/**/
 
             /*if (gamepad.getHatSwitchPosition()==0.25) {
                 ButtonUp=true;
@@ -133,7 +133,7 @@ public class gamepad {
     }
     private void createCommand() {
         if (ServerConnect.connected) {
-            new Interpreter("gamecontroller " + ConvertToHex(Math.round(leftstickx)) + ConvertToHex(Math.round(leftsticky)) + ConvertToHex(Math.round(rightstickx)) + ConvertToHex(Math.round(rightsticky)) + "77000000000000").returnCommand().runCommand();
+            new Interpreter("gamecontroller, " + ConvertToHex(Math.round(leftstickx)) + ConvertToHex(Math.round(leftsticky)) + ConvertToHex(Math.round(rightstickx)) + ConvertToHex(Math.round(rightsticky)) + "77000000000000").returnCommand().runCommand();
         }
     }
     private String ConvertToHex(int axis){
