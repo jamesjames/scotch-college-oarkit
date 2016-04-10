@@ -242,6 +242,7 @@ public class Controller implements Initializable, Runnable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        if(!new File(OSUtils.osAppData()).exists()) new File(OSUtils.osAppData()).mkdirs();
         try {
             createEvents();
         } catch (IOException e) {
@@ -478,4 +479,5 @@ public class Controller implements Initializable, Runnable{
     public static void disconnectServer(){
         connected = false;
     }/**/
+
 }
