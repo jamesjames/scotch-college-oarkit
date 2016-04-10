@@ -191,7 +191,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>
-                              <GridPane layoutX="5.0" layoutY="5.0">
+                              <GridPane layoutX="5.0" layoutY="29.0">
                                  <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                                  </columnConstraints>
@@ -264,7 +264,7 @@
                                     <Label fx:id="ControllerStatus" text="Controller:" />
                                  </children>
                               </GridPane>
-                              <GridPane layoutX="18.0" layoutY="179.0" mouseTransparent="true">
+                              <GridPane layoutX="18.0" layoutY="192.0" mouseTransparent="true">
                                  <columnConstraints>
                                     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
                                     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" />
@@ -340,6 +340,7 @@
                                     </GridPane>
                                  </children>
                               </GridPane>
+                              <Button fx:id="AddController" layoutX="5.0" layoutY="5.0" mnemonicParsing="false" text="Add Controller" />
                   </children>
                 </AnchorPane>
               </content>

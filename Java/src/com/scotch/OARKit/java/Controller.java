@@ -19,6 +19,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.*;
 import java.lang.Thread;
 
@@ -39,12 +41,23 @@ public class Controller implements Initializable, Runnable{
     public static ServerConnect serverConnect;
 
     @FXML
+    WebView CameraWebView;
+    WebEngine engine;
+    @FXML
+    TextArea consoleLog;
+    @FXML
+    TextField consoleTextField;
+    @FXML
+    Button sendButton;
+    @FXML
+    TitledPane consoleTitle;
+
+    @FXML
     ProgressBar LeftBackwardIndicator;
     @FXML
     ProgressBar LeftForwardIndicator;
     @FXML
     Slider LeftPowerSlider;
-
     @FXML
     ProgressBar RightBackwardIndicator;
     @FXML
@@ -60,7 +73,6 @@ public class Controller implements Initializable, Runnable{
     ToggleButton ButtonA;
     @FXML
     ToggleButton ButtonX;
-
     @FXML
     ToggleButton ButtonUp;
     @FXML
@@ -69,35 +81,33 @@ public class Controller implements Initializable, Runnable{
     ToggleButton ButtonRight;
     @FXML
     ToggleButton ButtonLeft;
-
     @FXML
     ToggleButton ButtonLT;
     @FXML
     ToggleButton ButtonLB;
-
     @FXML
     ToggleButton ButtonRT;
     @FXML
     ToggleButton ButtonRB;
+    @FXML
+    ProgressBar LeftX;
+    @FXML
+    ProgressBar LeftY;
+    @FXML
+    ProgressBar RightX;
+    @FXML
+    ProgressBar RightY;
+    @FXML
+    Label ControllerStatus;
+    @FXML
+    Button AddController;
 
     @FXML
     Label ServerConnectionStatus;
     @FXML
-    Label ControllerStatus;
-
-    @FXML
     Button StopServer;
     @FXML
-    WebView CameraWebView;
-    WebEngine engine;
-    @FXML
-    TextArea consoleLog;
-    @FXML
-    TextField consoleTextField;
-    @FXML
     Button restartNginx;
-    @FXML
-    Button sendButton;
     @FXML
     ToggleButton connectButton;
     public static ToggleButton connectButton1;
@@ -112,10 +122,6 @@ public class Controller implements Initializable, Runnable{
     @FXML
     Label ConnectionType;
     @FXML
-    ToggleButton on;
-    @FXML
-    ToggleButton off;
-    @FXML
     MenuButton ipSelector;
     public static MenuButton ipSelector1;
     @FXML
@@ -127,17 +133,11 @@ public class Controller implements Initializable, Runnable{
     @FXML
     Label portLabel;
     public static Label portLabel1;
-    @FXML
-    TitledPane consoleTitle;
 
     @FXML
-    ProgressBar LeftX;
+    ToggleButton on;
     @FXML
-    ProgressBar LeftY;
-    @FXML
-    ProgressBar RightX;
-    @FXML
-    ProgressBar RightY;
+    ToggleButton off;
 
     Console console;
     PrintStream ps;
@@ -151,19 +151,20 @@ public class Controller implements Initializable, Runnable{
     String currentip;
     int currentport;
 
-    public void powerIndicator() {
-        double power = RightPowerSlider.getValue()-50;
-        if (power < 0) {
-            Platform.runLater(() -> RightForwardIndicator.setProgress(-power/50));
-            Platform.runLater(() -> RightBackwardIndicator.setProgress(0));
-        } else if (power > 0) {
-            Platform.runLater(() -> RightForwardIndicator.setProgress(0));
-            Platform.runLater(() -> RightBackwardIndicator.setProgress(power/50));
-        } else {
-            Platform.runLater(() -> RightForwardIndicator.setProgress(0));
-            Platform.runLater(() -> RightBackwardIndicator.setProgress(0));
+    /*public class KeyEventDemo implements KeyListener {
+
+        public void keyTyped(KeyEvent e) {
+            Logger.info("KEY TYPED: "+e);
         }
-    }
+
+        public void keyPressed(KeyEvent e) {
+        Logger.info("KEY PRESSED: "+e);
+        }
+
+        public void keyReleased(KeyEvent e) {
+            Logger.info("KEY RELEASED: "+e);
+        }
+    }/**/
 
     public void currentTime1() {
         SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
@@ -318,6 +319,11 @@ public class Controller implements Initializable, Runnable{
                 //connectButton.setSelected(false);
             }
         });
+
+        /*AddController.setOnAction(event -> {
+            gamepad.pollgamepad();
+
+        });/**/
 
         on.setOnAction(event -> {
             on.setDisable(true);
