@@ -20,7 +20,7 @@ public class Name implements Initializable {
         createEvents();
     }
 
-    public void createEvents(){
+    public void createEvents() {
         closeButton.setOnAction(event -> {
             NetWindow = (Stage) closeButton.getScene().getWindow();
             NetWindow.close();

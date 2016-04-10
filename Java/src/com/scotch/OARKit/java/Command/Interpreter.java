@@ -24,7 +24,7 @@ public class Interpreter {
     }
     private void phaseBase(){
         baseCommand = BaseCommand.BLANK;
-        String stringBase = command.split(" ")[0];
+        String stringBase = command.split("(, )")[0];
         for( int i = 0; i < BaseCommand.values().length; i++){
             for( int t = 0; t < BaseCommand.values()[i].alias.length; t++){
                 //Logger.info(BaseCommand.values()[i].alias[t]);
@@ -55,12 +55,12 @@ public class Interpreter {
         }
     }
     private void phaseArgs(){
-        if (command.split(" ").length-1 != baseCommand.args){
+        if (command.split("(, )").length-1 != baseCommand.args){
             Logger.error("NOT SUFFICIENT ARGS, KILLING REQUEST");
             this.args = "";
             this.baseCommand = BaseCommand.BLANK;
         } else if (baseCommand.args != 0){
-            String stringArgs = command.split(" ",2)[1];
+            String stringArgs = command.split("(, )",2)[1];
             this.args = stringArgs;
         } else {
             this.args = "";
