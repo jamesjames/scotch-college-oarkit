@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.*?>
@@ -191,7 +192,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>
-                              <GridPane layoutX="5.0" layoutY="29.0">
+                              <GridPane layoutX="5.0" layoutY="36.0">
                                  <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                                  </columnConstraints>
@@ -201,7 +202,6 @@
                                     <RowConstraints vgrow="SOMETIMES" />
                                     <RowConstraints prefHeight="23.0" vgrow="SOMETIMES" />
                                     <RowConstraints prefHeight="23.0" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="5.0" vgrow="SOMETIMES" />
                                     <RowConstraints vgrow="SOMETIMES" />
                                     <RowConstraints prefHeight="23.0" vgrow="SOMETIMES" />
                                     <RowConstraints prefHeight="23.0" vgrow="SOMETIMES" />
@@ -220,7 +220,7 @@
                                           <RowConstraints vgrow="SOMETIMES" />
                                        </rowConstraints>
                                     </GridPane>
-                                    <GridPane GridPane.rowIndex="7">
+                                    <GridPane GridPane.rowIndex="6">
                                        <children>
                                           <Label text="X:" />
                                 <ProgressBar fx:id="RightX" prefHeight="20.0" prefWidth="195.0" progress="0.0" GridPane.columnIndex="1" />
@@ -247,8 +247,8 @@
                                        </children>
                                     </GridPane>
                           <Label layoutX="11.0" layoutY="6.0" text="Left Stick" GridPane.rowIndex="2" />
-                          <Label layoutX="11.0" layoutY="70.0" text="Right Stick" GridPane.rowIndex="6" />
-                                    <GridPane layoutX="15.0" layoutY="61.0" GridPane.rowIndex="8">
+                          <Label layoutX="11.0" layoutY="70.0" text="Right Stick" GridPane.rowIndex="5" />
+                                    <GridPane layoutX="15.0" layoutY="61.0" GridPane.rowIndex="7">
                                        <children>
                                           <Label text="Y:" />
                                           <ProgressBar fx:id="RightY" prefHeight="20.0" prefWidth="195.0" progress="0.0" GridPane.columnIndex="1" />
@@ -264,7 +264,7 @@
                                     <Label fx:id="ControllerStatus" text="Controller:" />
                                  </children>
                               </GridPane>
-                              <GridPane layoutX="18.0" layoutY="192.0" mouseTransparent="true">
+                              <GridPane layoutX="30.0" layoutY="186.0" mouseTransparent="true">
                                  <columnConstraints>
                                     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
                                     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" />

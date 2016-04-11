@@ -41,6 +41,9 @@ public class Controller implements Initializable, Runnable{
     public static ServerConnect serverConnect;
 
     @FXML
+    ProgressIndicator POVTest;
+
+    @FXML
     WebView CameraWebView;
     WebEngine engine;
     @FXML
@@ -151,21 +154,6 @@ public class Controller implements Initializable, Runnable{
     String currentip;
     int currentport;
 
-    /*public class KeyEventDemo implements KeyListener {
-
-        public void keyTyped(KeyEvent e) {
-            Logger.info("KEY TYPED: "+e);
-        }
-
-        public void keyPressed(KeyEvent e) {
-        Logger.info("KEY PRESSED: "+e);
-        }
-
-        public void keyReleased(KeyEvent e) {
-            Logger.info("KEY RELEASED: "+e);
-        }
-    }/**/
-
     public void currentTime1() {
         SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
         Timeline currentTime;
@@ -249,6 +237,11 @@ public class Controller implements Initializable, Runnable{
         } catch (IOException e) {
             e.printStackTrace();
         }
+        out = System.out;
+        //err = System.err;
+        console = new Console(consoleLog);
+        ps = new PrintStream(console, true);
+        redirectOutput(ps);
         ipSelector1 = ipSelector;
         connectButton1 = connectButton;
         nameLabel1 = nameLabel;
@@ -262,16 +255,8 @@ public class Controller implements Initializable, Runnable{
             e.printStackTrace();
         }
         AddConfigToList();
-        gamepad = new gamepad();
-        gamepad.gamepad();
-        out = System.out;
-        //err = System.err;
-        console = new Console(consoleLog);
-        ps = new PrintStream(console, true);
-        redirectOutput(ps);
 
         engine = CameraWebView.getEngine();
-        new Thread(this).start();
         if(Main.properties.getProperty("insideDev").equals("true")){
             //Logger.info("Inside Dev Environment");
             engine.load("http://c.xkcd.com/random/comic/");
@@ -284,6 +269,9 @@ public class Controller implements Initializable, Runnable{
             connected = true;
             engine.load("http://192.168.100.1");
         }
+        gamepad = new gamepad();
+        gamepad.gamepad();
+        new Thread(this).start();
     }
 
     public void createEvents() throws IOException {
@@ -364,7 +352,7 @@ public class Controller implements Initializable, Runnable{
                 Platform.runLater(() -> RightX.setProgress(gamepad.rightstickx/100));
                 Platform.runLater(() -> RightY.setProgress(gamepad.rightsticky/100));
 
-                //these are to test the controller visual feedback using the console input field as a substitute for the controller input
+                //these are for the controller visual feedback
                 controllerButtons(gamepad.ButtonX, ButtonX);
                 controllerButtons(gamepad.ButtonB, ButtonB);
                 controllerButtons(gamepad.ButtonA, ButtonA);
@@ -373,37 +361,10 @@ public class Controller implements Initializable, Runnable{
                 controllerButtons(gamepad.ButtonRB, ButtonRB);
                 controllerButtons(gamepad.ButtonLT, ButtonLT);
                 controllerButtons(gamepad.ButtonLB, ButtonLB);
-                /*controllerButtons(gamepad.ButtonUp, ButtonUp);
+                controllerButtons(gamepad.ButtonUp, ButtonUp);
                 controllerButtons(gamepad.ButtonRight, ButtonRight);
                 controllerButtons(gamepad.ButtonDown, ButtonDown);
-                controllerButtons(gamepad.ButtonLeft, ButtonLeft);/**/
-
-                if (gamepad.HatSwitchPosition==1) {
-                    ButtonUp.setSelected(true);
-                    ButtonRight.setSelected(false);
-                    ButtonDown.setSelected(false);
-                    ButtonLeft.setSelected(false);
-                } else if (gamepad.HatSwitchPosition==2) {
-                    ButtonUp.setSelected(false);
-                    ButtonRight.setSelected(true);
-                    ButtonDown.setSelected(false);
-                    ButtonLeft.setSelected(false);
-                } else if (gamepad.HatSwitchPosition==3) {
-                    ButtonUp.setSelected(false);
-                    ButtonRight.setSelected(false);
-                    ButtonDown.setSelected(true);
-                    ButtonLeft.setSelected(false);
-                } else if (gamepad.HatSwitchPosition==4) {
-                    ButtonUp.setSelected(false);
-                    ButtonRight.setSelected(false);
-                    ButtonDown.setSelected(false);
-                    ButtonLeft.setSelected(true);
-                } else {
-                    ButtonUp.setSelected(false);
-                    ButtonRight.setSelected(false);
-                    ButtonDown.setSelected(false);
-                    ButtonLeft.setSelected(false);
-                }
+                controllerButtons(gamepad.ButtonLeft, ButtonLeft);
 
                 ControllerStatus.setText("Controller: Connected");
             } else {
