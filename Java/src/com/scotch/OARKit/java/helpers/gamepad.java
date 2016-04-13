@@ -35,7 +35,20 @@ public class gamepad {
 
     private int numberOfButtons;
 
-    private JInputJoystick gamepad;
+    public JInputJoystick gamepad;
+
+    public void config() {
+        boolean set=false;
+        while (!set) {
+            for (int i = 0; i < gamepad.getNumberOfButtons(); i++) {
+                if (gamepad.getButtonValue(i)) {
+                    Logger.info("Button A assigned to: " + gamepad.components[i]);
+                    set = true;
+                }
+                //Logger.info(gamepad.gamepad.components[i]);
+            }
+        }
+    }
 
     public void gamepad(){
         gamepad = new JInputJoystick(Controller.Type.GAMEPAD, Controller.Type.STICK);
@@ -43,23 +56,17 @@ public class gamepad {
         numberOfButtons = gamepad.getNumberOfButtons();
 
         // Check if the controller was found.
-        if(gamepad.isControllerConnected()&&gamepad.getControllerType().equals("Gamepad")){
-            Logger.info("-----------------------------------------");
+        if(gamepad.isControllerConnected()/*&&gamepad.getControllerType().equals("Gamepad")/**/){
             Logger.info("Controller found, printing details:");
             Logger.info(gamepad.getControllerName());
             Logger.info(gamepad.getControllerType());
             Logger.info("This controller has " + numberOfButtons + " buttons");
-            Logger.info("-----------------------------------------");
         } else if (gamepad.isControllerConnected()&&gamepad.getControllerType().equals("Stick")){
             connected = false;
-            Logger.info("-------------------------------------------------------------");
             Logger.info("Found joystick. Joysticks not supported. Please use a gamepad");
-            Logger.info("-------------------------------------------------------------");
         } else {
             connected = false;
-            Logger.info("--------------------");
             Logger.info("No controller found!");
-            Logger.info("--------------------");
         }
     }
 
@@ -76,7 +83,32 @@ public class gamepad {
             rightstickx = gamepad.getXRotationPercentage();
             rightsticky = gamepad.getYRotationPercentage();
 
-            if ((gamepad.getControllerName().contains("Xbox")&&gamepad.getControllerName().contains("360"))||gamepad.getControllerName().contains("3D")) {
+            //X, Y, A and B Buttons
+            ButtonX = gamepad.getButtonValue(13);
+            ButtonY = gamepad.getButtonValue(14);
+            ButtonA = gamepad.getButtonValue(11);
+            ButtonB = gamepad.getButtonValue(12);
+            //Triggers
+            /*if (gamepad.getZRotationPercentage()>0) {
+                ButtonRT = true;
+            } else {
+                ButtonRT = false;
+            }
+            if (gamepad.getZAxisPercentage()>0) {
+                ButtonLT = true;
+            } else {
+                ButtonLT = false;
+            }/**/
+            //Bumpers
+            ButtonRB = gamepad.getButtonValue(9);
+            ButtonLB = gamepad.getButtonValue(8);
+            //POV
+            ButtonUp = gamepad.getButtonValue(0);
+            ButtonDown = gamepad.getButtonValue(1);
+            ButtonLeft = gamepad.getButtonValue(2);
+            ButtonRight = gamepad.getButtonValue(3);
+
+            /*if (gamepad.getControllerName().contains("Xbox")&&gamepad.getControllerName().contains("360")) {
                 //X, Y, A and B Buttons
                 ButtonX = gamepad.getButtonValue(13);
                 ButtonY = gamepad.getButtonValue(14);
@@ -136,7 +168,7 @@ public class gamepad {
                     ButtonLeft = false;
                     ButtonRight = false;
                 }
-            }
+            }/**/
             createCommand();
         }
     }

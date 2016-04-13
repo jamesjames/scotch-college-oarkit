@@ -308,9 +308,27 @@ public class Controller implements Initializable, Runnable{
             }
         });
 
-        /*AddController.setOnAction(event -> {
-            gamepad.pollgamepad();
-
+        AddController.setOnAction(event -> {
+            /*boolean set=false;
+            for (int d = 0; d < 1;) {
+                if (!set) {
+                    for (int i = 0; i < gamepad.gamepad.getNumberOfButtons(); i++) {
+                        if (gamepad.gamepad.getButtonValue(i)) {
+                            Logger.info("Button A assigned to: " + gamepad.gamepad.components[i]);
+                            set=true;
+                        }
+                        //Logger.info(gamepad.gamepad.components[i]);
+                    }
+                    try {
+                        Thread.sleep(10000);
+                    } catch (InterruptedException e) {
+                    }
+                } else {
+                    d=1;
+                }
+            }/**/
+            GamePadMapper GamePadMapper = new GamePadMapper();
+            GamePadMapper.start();
         });/**/
 
         on.setOnAction(event -> {
