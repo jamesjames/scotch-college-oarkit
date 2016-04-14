@@ -39,10 +39,6 @@ public class Controller implements Initializable, Runnable{
     public static boolean connected = false;
 
     public static ServerConnect serverConnect;
-    public static String type;
-
-    @FXML
-    ProgressIndicator POVTest;
 
     @FXML
     WebView CameraWebView;
@@ -261,6 +257,27 @@ public class Controller implements Initializable, Runnable{
         }
     }
 
+    private void NewGamePad() {
+        gamepad = new gamepad();
+        gamepad.gamepad();
+        if (gamepad.gamepad.isControllerConnected()) {
+            //Logger.info(type);
+            if (gamepad.gamepad.getControllerType() == net.java.games.input.Controller.Type.GAMEPAD) {
+                LeftTriggerBar.setVisible(true);
+                RightTriggerBar.setVisible(true);
+                TriggersLadle.setVisible(true);
+                ButtonLT.setVisible(false);
+                ButtonRT.setVisible(false);
+            } else if (gamepad.gamepad.getControllerType() == net.java.games.input.Controller.Type.STICK) {
+                LeftTriggerBar.setVisible(false);
+                RightTriggerBar.setVisible(false);
+                TriggersLadle.setVisible(false);
+                ButtonLT.setVisible(true);
+                ButtonRT.setVisible(true);
+            }
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if(!new File(OSUtils.osAppData()).exists()) new File(OSUtils.osAppData()).mkdirs();
@@ -301,19 +318,7 @@ public class Controller implements Initializable, Runnable{
             connected = true;
             engine.load("http://192.168.100.1");
         }
-        gamepad = new gamepad();
-        gamepad.gamepad();
-        if (gamepad.gamepad.isControllerConnected()) {
-            type = gamepad.gamepad.getControllerType().toString();
-            //Logger.info(type);
-            if (type.equals("Gamepad")) {
-                LeftTriggerBar.setVisible(true);
-                RightTriggerBar.setVisible(true);
-                TriggersLadle.setVisible(true);
-                ButtonLT.setVisible(false);
-                ButtonRT.setVisible(false);
-            }
-        }
+        NewGamePad();
         new Thread(this).start();
     }
 
@@ -370,8 +375,12 @@ public class Controller implements Initializable, Runnable{
                     d=1;
                 }
             }/**/
-            GamePadMapper GamePadMapper = new GamePadMapper();
-            GamePadMapper.start();
+            if (gamepad.gamepad.isControllerConnected()) {
+                GamePadMapper GamePadMapper = new GamePadMapper();
+                GamePadMapper.start();
+            } else {
+                Logger.info("No controller connected");
+            }
             /*ArrayList<Object> map = GamePadMapper.Map;
             Logger.info(map);
             String map1="";
@@ -414,64 +423,64 @@ public class Controller implements Initializable, Runnable{
                 Platform.runLater(() ->StrengthBar.setVisible(true));
                 Platform.runLater(() ->StrengthLabel.setVisible(true));
             }
-            if (gamepad.connected){
+            if (gamepad.connected) {
                 gamepad.pollgamepad();
 
-                leftX=(gamepad.leftstickx/100)-0.5;
+                leftX = (gamepad.leftstickx / 100) - 0.5;
                 if (leftX < 0) {
-                    Platform.runLater(() -> LeftXNegative.setProgress(-leftX*2));
+                    Platform.runLater(() -> LeftXNegative.setProgress(-leftX * 2));
                     Platform.runLater(() -> LeftXPositive.setProgress(0));
                 } else if (leftX > 0) {
                     Platform.runLater(() -> LeftXNegative.setProgress(0));
-                    Platform.runLater(() -> LeftXPositive.setProgress(leftX*2));
+                    Platform.runLater(() -> LeftXPositive.setProgress(leftX * 2));
                 } else {
                     Platform.runLater(() -> LeftXNegative.setProgress(0));
                     Platform.runLater(() -> LeftXPositive.setProgress(0));
                 }
 
-                leftY=(gamepad.leftsticky/100)-0.5;
+                leftY = (gamepad.leftsticky / 100) - 0.5;
                 if (leftY < 0) {
                     Platform.runLater(() -> LeftYNegative.setProgress(0));
-                    Platform.runLater(() -> LeftYPositive.setProgress(-leftY*2));
+                    Platform.runLater(() -> LeftYPositive.setProgress(-leftY * 2));
                 } else if (leftY > 0) {
-                    Platform.runLater(() -> LeftYNegative.setProgress(leftY*2));
+                    Platform.runLater(() -> LeftYNegative.setProgress(leftY * 2));
                     Platform.runLater(() -> LeftYPositive.setProgress(0));
                 } else {
                     Platform.runLater(() -> LeftYNegative.setProgress(0));
                     Platform.runLater(() -> LeftYPositive.setProgress(0));
                 }
 
-                rightX=(gamepad.rightstickx/100)-0.5;
+                rightX = (gamepad.rightstickx / 100) - 0.5;
                 if (rightX < 0) {
-                    Platform.runLater(() -> RightXNegative.setProgress(-rightX*2));
+                    Platform.runLater(() -> RightXNegative.setProgress(-rightX * 2));
                     Platform.runLater(() -> RightXPositive.setProgress(0));
                 } else if (rightX > 0) {
                     Platform.runLater(() -> RightXNegative.setProgress(0));
-                    Platform.runLater(() -> RightXPositive.setProgress(rightX*2));
+                    Platform.runLater(() -> RightXPositive.setProgress(rightX * 2));
                 } else {
                     Platform.runLater(() -> RightXNegative.setProgress(0));
                     Platform.runLater(() -> RightXPositive.setProgress(0));
                 }
 
-                rightY=(gamepad.rightsticky/100)-0.5;
+                rightY = (gamepad.rightsticky / 100) - 0.5;
                 if (rightY < 0) {
                     Platform.runLater(() -> RightYNegative.setProgress(0));
-                    Platform.runLater(() -> RightYPositive.setProgress(-rightY*2));
+                    Platform.runLater(() -> RightYPositive.setProgress(-rightY * 2));
                 } else if (rightY > 0) {
-                    Platform.runLater(() -> RightYNegative.setProgress(rightY*2));
+                    Platform.runLater(() -> RightYNegative.setProgress(rightY * 2));
                     Platform.runLater(() -> RightYPositive.setProgress(0));
                 } else {
                     Platform.runLater(() -> RightYNegative.setProgress(0));
                     Platform.runLater(() -> RightYPositive.setProgress(0));
                 }
 
-                Platform.runLater(() -> LeftX.setProgress(gamepad.leftstickx/100));
-                Platform.runLater(() -> LeftY.setProgress(gamepad.leftsticky/100));
-                Platform.runLater(() -> LeftTriggerBar.setProgress(gamepad.lefttrigger/100));
+                Platform.runLater(() -> LeftX.setProgress(gamepad.leftstickx / 100));
+                Platform.runLater(() -> LeftY.setProgress(gamepad.leftsticky / 100));
+                Platform.runLater(() -> LeftTriggerBar.setProgress(gamepad.lefttrigger / 100));
 
-                Platform.runLater(() -> RightX.setProgress(gamepad.rightstickx/100));
-                Platform.runLater(() -> RightY.setProgress(gamepad.rightsticky/100));
-                Platform.runLater(() -> RightTriggerBar.setProgress(gamepad.righttrigger/100));
+                Platform.runLater(() -> RightX.setProgress(gamepad.rightstickx / 100));
+                Platform.runLater(() -> RightY.setProgress(gamepad.rightsticky / 100));
+                Platform.runLater(() -> RightTriggerBar.setProgress(gamepad.righttrigger / 100));
 
 
                 //these are for the controller visual feedback
@@ -490,9 +499,9 @@ public class Controller implements Initializable, Runnable{
                 controllerButtons(gamepad.ButtonRightStick, ButtonRightStick);
                 controllerButtons(gamepad.ButtonLeftStick, ButtonLeftStick);
 
-                ControllerStatus.setText("Controller: Connected");
+                Platform.runLater(() -> ControllerStatus.setText("Controller: Connected"));
             } else {
-                ControllerStatus.setText("Controller: Not Connected");
+                Platform.runLater(() -> ControllerStatus.setText("Controller: Not Connected"));
             }
             if (!connected){
                 Platform.runLater(() -> connectButton.setText("Connect"));
