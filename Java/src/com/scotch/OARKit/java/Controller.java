@@ -303,14 +303,16 @@ public class Controller implements Initializable, Runnable{
         }
         gamepad = new gamepad();
         gamepad.gamepad();
-        type = gamepad.gamepad.getControllerType().toString();
-        //Logger.info(type);
-        if (type.equals("Gamepad")) {
-            LeftTriggerBar.setVisible(true);
-            RightTriggerBar.setVisible(true);
-            TriggersLadle.setVisible(true);
-            ButtonLT.setVisible(false);
-            ButtonRT.setVisible(false);
+        if (gamepad.gamepad.isControllerConnected()) {
+            type = gamepad.gamepad.getControllerType().toString();
+            //Logger.info(type);
+            if (type.equals("Gamepad")) {
+                LeftTriggerBar.setVisible(true);
+                RightTriggerBar.setVisible(true);
+                TriggersLadle.setVisible(true);
+                ButtonLT.setVisible(false);
+                ButtonRT.setVisible(false);
+            }
         }
         new Thread(this).start();
     }
