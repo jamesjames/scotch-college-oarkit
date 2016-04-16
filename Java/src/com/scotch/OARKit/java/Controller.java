@@ -18,6 +18,7 @@ import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import net.java.games.input.Component;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
