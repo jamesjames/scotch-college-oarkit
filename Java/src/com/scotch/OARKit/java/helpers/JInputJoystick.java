@@ -33,7 +33,7 @@ import net.java.games.input.ControllerEnvironment;
 
 public class JInputJoystick {
 
-    private Controller controller;
+    public Controller controller;
     public Component[] components;
 
     // Controller buttons states

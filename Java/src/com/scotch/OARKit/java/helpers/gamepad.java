@@ -7,6 +7,7 @@ import com.scotch.OARKit.java.helpers.JInputJoystick;
 import javafx.scene.control.Button;
 import net.java.games.input.*;
 import net.java.games.input.Controller;
+import net.java.games.input.ControllerEnvironment;
 
 import java.util.Objects;
 
@@ -70,7 +71,7 @@ public class gamepad {
             connected = false;
         } else if(gamepad.pollController()){
             // TODO poll all the axis and set them to variables
-
+            
             leftstickx = gamepad.getX_LeftJoystick_Percentage();
             leftsticky = gamepad.getY_LeftJoystick_Percentage();
 
