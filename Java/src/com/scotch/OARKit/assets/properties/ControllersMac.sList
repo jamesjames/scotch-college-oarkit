@@ -1,0 +1,2 @@
+Name, #Buttons, XId, YId, AId, BId, RightBumperId, LeftBumperId, HatSwitchIsButtons, HatSwitchUpId, HatSwitchDownId, HatSwitchLeftId, HatSwitchRightId, TriggersAreAxis, RightTriggerAxis, LeftTriggerAxis, RightTriggerId, LeftTriggerId, RightStickXAxis, RightStickYAxis, LeftStickXAxis, LeftStickYAxis
+Xbox 360 Wired Controller, 15, 13, 14, 11, 12, 9, 8, true, 0, 1, 2, 3, true, ZRotation, ZAxis, , , XRotation, YRotation, XAxis, YAxis

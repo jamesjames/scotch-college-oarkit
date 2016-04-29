@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.*?>
@@ -191,80 +192,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>
-                              <GridPane layoutX="5.0" layoutY="5.0">
-                                 <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                                 </columnConstraints>
-                                 <rowConstraints>
-                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="5.0" vgrow="SOMETIMES" />
-                                    <RowConstraints vgrow="SOMETIMES" />
-                                    <RowConstraints prefHeight="23.0" vgrow="SOMETIMES" />
-                                    <RowConstraints prefHeight="23.0" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="5.0" vgrow="SOMETIMES" />
-                                    <RowConstraints vgrow="SOMETIMES" />
-                                    <RowConstraints prefHeight="23.0" vgrow="SOMETIMES" />
-                                    <RowConstraints prefHeight="23.0" vgrow="SOMETIMES" />
-                                 </rowConstraints>
-                                 <children>
-                                    <GridPane GridPane.rowIndex="4">
-                                       <children>
-                                          <Label text="Y:" />
-                                <ProgressBar fx:id="LeftY" prefHeight="20.0" prefWidth="195.0" progress="0.0" GridPane.columnIndex="1" />
-                                       </children>
-                                       <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.86559295654297" minWidth="10.0" prefWidth="13.342927932739258" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.21836471557617" minWidth="10.0" prefWidth="186.65707206726074" />
-                                       </columnConstraints>
-                                       <rowConstraints>
-                                          <RowConstraints vgrow="SOMETIMES" />
-                                       </rowConstraints>
-                                    </GridPane>
-                                    <GridPane GridPane.rowIndex="7">
-                                       <children>
-                                          <Label text="X:" />
-                                <ProgressBar fx:id="RightX" prefHeight="20.0" prefWidth="195.0" progress="0.0" GridPane.columnIndex="1" />
-                                       </children>
-                                       <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.86559295654297" minWidth="10.0" prefWidth="13.342927932739258" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.21836471557617" minWidth="10.0" prefWidth="186.65707206726074" />
-                                       </columnConstraints>
-                                       <rowConstraints>
-                                          <RowConstraints vgrow="SOMETIMES" />
-                                       </rowConstraints>
-                                    </GridPane>
-                                    <GridPane GridPane.rowIndex="3">
-                                      <columnConstraints>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.86559295654297" minWidth="10.0" prefWidth="13.342927932739258" />
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.21836471557617" minWidth="10.0" prefWidth="186.65707206726074" />
-                                      </columnConstraints>
-                                      <rowConstraints>
-                                        <RowConstraints vgrow="SOMETIMES" />
-                                      </rowConstraints>
-                                       <children>
-                                <Label text="X:" />
-                                          <ProgressBar fx:id="LeftX" prefHeight="20.0" prefWidth="195.0" progress="0.0" GridPane.columnIndex="1" />
-                                       </children>
-                                    </GridPane>
-                          <Label layoutX="11.0" layoutY="6.0" text="Left Stick" GridPane.rowIndex="2" />
-                          <Label layoutX="11.0" layoutY="70.0" text="Right Stick" GridPane.rowIndex="6" />
-                                    <GridPane layoutX="15.0" layoutY="61.0" GridPane.rowIndex="8">
-                                       <children>
-                                          <Label text="Y:" />
-                                          <ProgressBar fx:id="RightY" prefHeight="20.0" prefWidth="195.0" progress="0.0" GridPane.columnIndex="1" />
-                                       </children>
-                                       <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.86559295654297" minWidth="10.0" prefWidth="13.342927932739258" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.21836471557617" minWidth="10.0" prefWidth="186.65707206726074" />
-                                       </columnConstraints>
-                                       <rowConstraints>
-                                          <RowConstraints vgrow="SOMETIMES" />
-                                       </rowConstraints>
-                                    </GridPane>
-                                    <Label fx:id="ControllerStatus" text="Controller:" />
-                                 </children>
-                              </GridPane>
-                              <GridPane layoutX="18.0" layoutY="179.0" mouseTransparent="true">
+                              <GridPane layoutX="30.0" layoutY="186.0" mouseTransparent="true">
                                  <columnConstraints>
                                     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
                                     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" />
@@ -340,6 +268,43 @@
                                     </GridPane>
                                  </children>
                               </GridPane>
+                              <Button fx:id="AddController" layoutX="5.0" layoutY="5.0" mnemonicParsing="false" text="Configure Controller" />
+                              <ProgressBar fx:id="LeftTriggerBar" layoutX="45.0" layoutY="189.0" prefHeight="20.0" prefWidth="100.0" progress="0.0" scaleX="-1.0" visible="false" />
+                              <ProgressBar fx:id="RightTriggerBar" layoutX="145.0" layoutY="189.0" prefHeight="20.0" prefWidth="100.0" progress="0.0" visible="false" AnchorPane.rightAnchor="45.0" />
+                              <Label fx:id="TriggersLadle" layoutX="120.0" layoutY="210.0" prefHeight="16.0" prefWidth="50.0" text="Triggers" textAlignment="CENTER" visible="false" />
+                              <Label fx:id="ControllerStatus" layoutX="5.0" layoutY="34.0" text="Controller:" />
+                              <GridPane layoutX="10.0" layoutY="55.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="10.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <AnchorPane layoutX="332.0" layoutY="137.0" GridPane.columnIndex="2">
+                                       <children>
+                                          <ToggleButton fx:id="ButtonRightStick" layoutX="52.0" layoutY="52.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" />
+                                          <ProgressBar fx:id="RightYPositive" layoutX="39.0" layoutY="13.0" prefHeight="26.0" prefWidth="52.0" progress="0.0" rotate="-90.0" GridPane.columnIndex="1" />
+                                          <ProgressBar fx:id="RightYNegative" layoutX="40.0" layoutY="91.0" prefHeight="26.0" prefWidth="52.0" progress="0.0" rotate="-90.0" scaleX="-1.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <ProgressBar fx:id="RightXPositive" layoutX="78.0" layoutY="52.0" prefHeight="26.0" prefWidth="52.0" progress="0.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                          <ProgressBar fx:id="RightXNegative" layoutY="52.0" prefHeight="26.0" prefWidth="52.0" progress="0.0" scaleX="-1.0" GridPane.rowIndex="1" />
+                                          <Label layoutX="15.0" layoutY="17.0" text="Right&#10;Stick:" textAlignment="CENTER" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane layoutX="194.0" layoutY="128.0">
+                                       <children>
+                                          <ToggleButton fx:id="ButtonLeftStick" layoutX="52.0" layoutY="52.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" />
+                                          <ProgressBar fx:id="LeftYNegative" layoutX="40.0" layoutY="91.0" prefHeight="26.0" prefWidth="52.0" progress="0.0" rotate="-90.0" scaleX="-1.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <ProgressBar fx:id="LeftYPositive" layoutX="39.0" layoutY="13.0" prefHeight="26.0" prefWidth="52.0" progress="0.0" rotate="-90.0" GridPane.columnIndex="1" />
+                                          <ProgressBar fx:id="LeftXPositive" layoutX="78.0" layoutY="52.0" prefHeight="26.0" prefWidth="52.0" progress="0.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                          <ProgressBar fx:id="LeftXNegative" layoutY="52.0" prefHeight="26.0" prefWidth="52.0" progress="0.0" scaleX="-1.0" GridPane.rowIndex="1" />
+                                          <Label layoutX="15.0" layoutY="17.0" text="Left&#10;Stick:" textAlignment="CENTER" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </GridPane>
                   </children>
                 </AnchorPane>
               </content>
@@ -376,6 +341,87 @@
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
                               <TextArea fx:id="consoleLog" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="303.0" minWidth="701.0" prefHeight="303.0" prefWidth="701.0" text="" AnchorPane.bottomAnchor="-10.399999999999977" AnchorPane.leftAnchor="-10.399999999999977" AnchorPane.rightAnchor="-10.399999999999977" AnchorPane.topAnchor="-10.399999999999977" />
+                              <GridPane alignment="CENTER" layoutX="175.0" layoutY="102.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="26.0" />
+                                    <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="52.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="26.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="52.0" valignment="TOP" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                              </GridPane>
+                              <GridPane layoutX="34.0" layoutY="17.0" prefHeight="76.0" prefWidth="201.0" visible="false">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints vgrow="NEVER" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="23.0" vgrow="NEVER" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="23.0" vgrow="NEVER" />
+                                    <RowConstraints vgrow="NEVER" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="23.0" vgrow="NEVER" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="23.0" vgrow="NEVER" />
+                                 </rowConstraints>
+                                 <children>
+                                    <GridPane GridPane.rowIndex="2">
+                                       <children>
+                                          <Label text="Y:" />
+                                <ProgressBar fx:id="LeftY" prefHeight="20.0" prefWidth="195.0" progress="0.0" GridPane.columnIndex="1" />
+                                       </children>
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.86559295654297" minWidth="10.0" prefWidth="13.342927932739258" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.21836471557617" minWidth="10.0" prefWidth="186.65707206726074" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                    </GridPane>
+                                    <GridPane GridPane.rowIndex="4">
+                                       <children>
+                                          <Label text="X:" />
+                                <ProgressBar fx:id="RightX" prefHeight="20.0" prefWidth="195.0" progress="0.0" GridPane.columnIndex="1" />
+                                       </children>
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.86559295654297" minWidth="10.0" prefWidth="13.342927932739258" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.21836471557617" minWidth="10.0" prefWidth="186.65707206726074" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                    </GridPane>
+                                    <GridPane GridPane.rowIndex="1">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.86559295654297" minWidth="10.0" prefWidth="13.342927932739258" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.21836471557617" minWidth="10.0" prefWidth="186.65707206726074" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                <Label text="X:" />
+                                          <ProgressBar fx:id="LeftX" prefHeight="20.0" prefWidth="195.0" progress="0.0" GridPane.columnIndex="1" />
+                                       </children>
+                                    </GridPane>
+                          <Label layoutX="11.0" layoutY="6.0" text="Left Stick" />
+                          <Label layoutX="11.0" layoutY="70.0" text="Right Stick" GridPane.rowIndex="3" />
+                                    <GridPane layoutX="15.0" layoutY="61.0" GridPane.rowIndex="5">
+                                       <children>
+                                          <Label text="Y:" />
+                                          <ProgressBar fx:id="RightY" prefHeight="20.0" prefWidth="195.0" progress="0.0" GridPane.columnIndex="1" />
+                                       </children>
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.86559295654297" minWidth="10.0" prefWidth="13.342927932739258" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.21836471557617" minWidth="10.0" prefWidth="186.65707206726074" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                    </GridPane>
+                                 </children>
+                              </GridPane>
                            </children>
                         </AnchorPane>
                     </content>

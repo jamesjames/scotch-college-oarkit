@@ -20,6 +20,7 @@ import static com.scotch.OARKit.java.helpers.NativeLoader.*;
 
 public class Main extends Application {
     public static Properties properties;
+    public static String os;
 
     @Override
     public void stop(){
@@ -53,7 +54,7 @@ public class Main extends Application {
         }
     }
     public static void startLibraries() throws IOException {
-        String os = System.getProperty("os.name").toLowerCase();
+        os = System.getProperty("os.name").toLowerCase();
         String arch = System.getProperty("os.arch");
         if (os.contains("win")){
             loadLib("/jinput-dx8.dll");

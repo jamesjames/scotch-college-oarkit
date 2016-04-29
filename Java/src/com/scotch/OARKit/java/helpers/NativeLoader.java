@@ -19,7 +19,7 @@ public class NativeLoader {
         byte[] buffer = new byte[1024];
         int read = -1;
         File temp = new File(new File(System.getProperty("java.io.tmpdir")), name.replace("/",""));
-        Logger.info(temp);
+        //Logger.info(temp);
         FileOutputStream fos = new FileOutputStream(temp);
 
         while((read = in.read(buffer)) != -1) {
@@ -38,7 +38,7 @@ public class NativeLoader {
             tempdir = temp.toString().replace(name,"");
             //Logger.info(tempdir);
         }
-        Logger.info(tempdir);
+        //Logger.info(tempdir);
         //System.setProperty("Djava.library.path", tempdir);
         try {
             addLibraryPath(tempdir);

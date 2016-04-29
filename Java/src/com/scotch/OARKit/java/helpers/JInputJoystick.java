@@ -33,7 +33,7 @@ import net.java.games.input.ControllerEnvironment;
 
 public class JInputJoystick {
 
-    private Controller controller;
+    public Controller controller;
     public Component[] components;
 
     // Controller buttons states
@@ -423,6 +423,7 @@ public class JInputJoystick {
     public float getHatSwitchPosition()
     {
         Identifier identifier = Component.Identifier.Axis.POV;
+        //Logger.info(controller.getComponent(identifier).getPollData());
         return controller.getComponent(identifier).getPollData();
     }
 

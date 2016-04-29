@@ -1,10 +1,17 @@
 package com.scotch.OARKit.java.helpers;
 
 import com.kenai.jaffl.struct.Struct;
+import com.scotch.OARKit.java.*;
 import com.scotch.OARKit.java.Command.Interpreter;
 import com.scotch.OARKit.java.helpers.JInputJoystick;
 import javafx.scene.control.Button;
 import net.java.games.input.*;
+import net.java.games.input.Controller;
+import net.java.games.input.ControllerEnvironment;
+
+import java.util.Objects;
+
+import static com.scotch.OARKit.java.helpers.NativeLoader.loadLib;
 
 
 public class gamepad {
@@ -13,11 +20,14 @@ public class gamepad {
 
     public float leftstickx;
     public float leftsticky;
+    public float lefttrigger;
 
     public float rightstickx;
     public float rightsticky;
+    public float righttrigger;
 
     public int HatSwitchPosition = 0;
+    public float POV = 0;
 
     public boolean ButtonX;
     public boolean ButtonY;
@@ -27,25 +37,31 @@ public class gamepad {
     public boolean ButtonRB;
     public boolean ButtonLT;
     public boolean ButtonLB;
+    public boolean ButtonUp;
+    public boolean ButtonRight;
+    public boolean ButtonDown;
+    public boolean ButtonLeft;
+    public boolean ButtonRightStick;
+    public boolean ButtonLeftStick;
 
-    private int numberOfButtons;
+    public static int numberOfButtons;
 
-    private JInputJoystick gamepad;
+    public JInputJoystick gamepad;
 
     public void gamepad(){
         gamepad = new JInputJoystick(Controller.Type.GAMEPAD, Controller.Type.STICK);
         gamepad.pollController();
-        numberOfButtons = gamepad.getNumberOfButtons();
 
         // Check if the controller was found.
-        if( !gamepad.isControllerConnected() ){
-            connected = false;
-            Logger.info("No controller found!");
-        } else {
+        if(gamepad.isControllerConnected()/*&&gamepad.getControllerType().equals("Gamepad")/**/){
+            numberOfButtons = gamepad.getNumberOfButtons();
             Logger.info("Controller found, printing details:");
             Logger.info(gamepad.getControllerName());
             Logger.info(gamepad.getControllerType());
             Logger.info("This controller has " + numberOfButtons + " buttons");
+        } else {
+            connected = false;
+            Logger.info("No controller found!");
         }
     }
 
@@ -53,81 +69,248 @@ public class gamepad {
         if(!gamepad.pollController()) {
             Logger.info("Controller disconnected!");
             connected = false;
-        } else {
+        } else if(gamepad.pollController()){
             // TODO poll all the axis and set them to variables
+            
             leftstickx = gamepad.getX_LeftJoystick_Percentage();
             leftsticky = gamepad.getY_LeftJoystick_Percentage();
 
             rightstickx = gamepad.getX_RightJoystick_Percentage();
             rightsticky = gamepad.getY_RightJoystick_Percentage();
 
-            if (gamepad.getHatSwitchPosition()==0.25) {
-                HatSwitchPosition=1; //up
-            } else if (gamepad.getHatSwitchPosition()==0.5) {
-                HatSwitchPosition=2; //right
-            } else if (gamepad.getHatSwitchPosition()==0.75) {
-                HatSwitchPosition=3; //down
-            } else if (gamepad.getHatSwitchPosition()==1.0) {
-                HatSwitchPosition=4; //left
-            } else {
-                HatSwitchPosition = 0;
-            }/**/
-
-            /*if (gamepad.getHatSwitchPosition()==0.25) {
-                ButtonUp=true;
-                ButtonRight=false;
-                ButtonDown=false;
-                ButtonLeft=false;
-            } else if (gamepad.getHatSwitchPosition()==0.5) {
-                ButtonUp=false;
-                ButtonDown=true;
-                ButtonLeft=false;
-                ButtonRight=false;
-            } else if (gamepad.getHatSwitchPosition()==0.75) {
-                ButtonUp=false;
-                ButtonDown=false;
-                ButtonLeft=true;
-                ButtonRight=false;
-            } else if (gamepad.getHatSwitchPosition()==1.0) {
-                ButtonUp=false;
-                ButtonDown=false;
-                ButtonLeft=false;
-                ButtonRight=true;
-            } else {
-                ButtonUp=false;
-                ButtonDown=false;
-                ButtonLeft=false;
-                ButtonRight=false;
-            }/**/
-
-            /*if (gamepad.getControllerName().equals("Controller (Rock Candy Gamepad for Xbox 360)")) {
-                ButtonX = gamepad.getButtonValue(2);
-                ButtonY = gamepad.getButtonValue(3);
-                ButtonA = gamepad.getButtonValue(0);
-                ButtonB = gamepad.getButtonValue(1);
-                ButtonRT = gamepad.getButtonValue(6);
-                ButtonRB = gamepad.getButtonValue(5);
-                ButtonLT = gamepad.getButtonValue(10);
-                ButtonLB = gamepad.getButtonValue(4);
-            } else {
-                ButtonX = gamepad.getButtonValue(0);
-                ButtonY = gamepad.getButtonValue(3);
-                ButtonA = gamepad.getButtonValue(1);
-                ButtonB = gamepad.getButtonValue(2);
-                ButtonRT = gamepad.getButtonValue(4);
-                ButtonRB = gamepad.getButtonValue(5);
-                ButtonLT = gamepad.getButtonValue(6);
-                ButtonLB = gamepad.getButtonValue(7);
-            }/**/
-            ButtonX = gamepad.getButtonValue(0);
-            ButtonY = gamepad.getButtonValue(3);
-            ButtonA = gamepad.getButtonValue(1);
-            ButtonB = gamepad.getButtonValue(2);
-            ButtonRT = gamepad.getButtonValue(4);
-            ButtonRB = gamepad.getButtonValue(5);
-            ButtonLT = gamepad.getButtonValue(6);
-            ButtonLB = gamepad.getButtonValue(7);
-
+            if (Main.os.contains("win")) {
+                try {
+                    if (gamepad.getControllerType() == Controller.Type.GAMEPAD) {
+                        //X, Y, A and B Buttons
+                        ButtonX = gamepad.getButtonValue(2);
+                        ButtonY = gamepad.getButtonValue(3);
+                        ButtonA = gamepad.getButtonValue(0);
+                        ButtonB = gamepad.getButtonValue(1);
+                        //POV
+                        float hatSwitchPosition = gamepad.getHatSwitchPosition();
+                        if (Float.compare(hatSwitchPosition, Component.POV.OFF) == 0) {
+                            ButtonUp = false;
+                            ButtonRight = false;
+                            ButtonDown = false;
+                            ButtonLeft = false;
+                        } else if (Float.compare(hatSwitchPosition, Component.POV.UP) == 0) {
+                            ButtonUp = true;
+                            ButtonRight = false;
+                            ButtonDown = false;
+                            ButtonLeft = false;
+                        } else if (Float.compare(hatSwitchPosition, Component.POV.DOWN) == 0) {
+                            ButtonUp = false;
+                            ButtonRight = false;
+                            ButtonDown = true;
+                            ButtonLeft = false;
+                        } else if (Float.compare(hatSwitchPosition, Component.POV.LEFT) == 0) {
+                            ButtonUp = false;
+                            ButtonRight = false;
+                            ButtonDown = false;
+                            ButtonLeft = true;
+                        } else if (Float.compare(hatSwitchPosition, Component.POV.RIGHT) == 0) {
+                            ButtonUp = false;
+                            ButtonRight = true;
+                            ButtonDown = false;
+                            ButtonLeft = false;
+                        } else if (Float.compare(hatSwitchPosition, Component.POV.UP_LEFT) == 0) {
+                            ButtonUp = true;
+                            ButtonRight = false;
+                            ButtonDown = false;
+                            ButtonLeft = true;
+                        } else if (Float.compare(hatSwitchPosition, Component.POV.UP_RIGHT) == 0) {
+                            ButtonUp = true;
+                            ButtonRight = true;
+                            ButtonDown = false;
+                            ButtonLeft = false;
+                        } else if (Float.compare(hatSwitchPosition, Component.POV.DOWN_LEFT) == 0) {
+                            ButtonUp = false;
+                            ButtonRight = false;
+                            ButtonDown = true;
+                            ButtonLeft = true;
+                        } else if (Float.compare(hatSwitchPosition, Component.POV.DOWN_RIGHT) == 0) {
+                            ButtonUp = false;
+                            ButtonRight = true;
+                            ButtonDown = true;
+                            ButtonLeft = false;
+                        }
+                        //Stick Buttons
+                        ButtonLeftStick = gamepad.getButtonValue(8);
+                        ButtonRightStick = gamepad.getButtonValue(9);
+                        //Bumpers
+                        ButtonRB = gamepad.getButtonValue(5);
+                        ButtonLB = gamepad.getButtonValue(4);
+                        //Triggers
+                        float triggeraxis = gamepad.getZAxisPercentage()-50;
+                        if (triggeraxis < 0) {
+                            righttrigger = -triggeraxis*2;
+                            lefttrigger = 0;
+                        } else if (triggeraxis > 0) {
+                            righttrigger = 0;
+                            lefttrigger = triggeraxis*2;
+                        } else {
+                            righttrigger = 0;
+                            lefttrigger  = 0;
+                        }
+                    } else if (gamepad.getControllerType() == Controller.Type.STICK) {
+                        //X, Y, A and B Buttons
+                        ButtonX = gamepad.getButtonValue(1);
+                        ButtonY = gamepad.getButtonValue(4);
+                        ButtonA = gamepad.getButtonValue(2);
+                        ButtonB = gamepad.getButtonValue(3);
+                        //POV
+                        float hatSwitchPosition = gamepad.getHatSwitchPosition();
+                        if (Float.compare(hatSwitchPosition, Component.POV.OFF) == 0) {
+                            ButtonUp = false;
+                            ButtonRight = false;
+                            ButtonDown = false;
+                            ButtonLeft = false;
+                        } else if (Float.compare(hatSwitchPosition, Component.POV.UP) == 0) {
+                            ButtonUp = true;
+                            ButtonRight = false;
+                            ButtonDown = false;
+                            ButtonLeft = false;
+                        } else if (Float.compare(hatSwitchPosition, Component.POV.DOWN) == 0) {
+                            ButtonUp = false;
+                            ButtonRight = false;
+                            ButtonDown = true;
+                            ButtonLeft = false;
+                        } else if (Float.compare(hatSwitchPosition, Component.POV.LEFT) == 0) {
+                            ButtonUp = false;
+                            ButtonRight = false;
+                            ButtonDown = false;
+                            ButtonLeft = true;
+                        } else if (Float.compare(hatSwitchPosition, Component.POV.RIGHT) == 0) {
+                            ButtonUp = false;
+                            ButtonRight = true;
+                            ButtonDown = false;
+                            ButtonLeft = false;
+                        } else if (Float.compare(hatSwitchPosition, Component.POV.UP_LEFT) == 0) {
+                            ButtonUp = true;
+                            ButtonRight = false;
+                            ButtonDown = false;
+                            ButtonLeft = true;
+                        } else if (Float.compare(hatSwitchPosition, Component.POV.UP_RIGHT) == 0) {
+                            ButtonUp = true;
+                            ButtonRight = true;
+                            ButtonDown = false;
+                            ButtonLeft = false;
+                        } else if (Float.compare(hatSwitchPosition, Component.POV.DOWN_LEFT) == 0) {
+                            ButtonUp = false;
+                            ButtonRight = false;
+                            ButtonDown = true;
+                            ButtonLeft = true;
+                        } else if (Float.compare(hatSwitchPosition, Component.POV.DOWN_RIGHT) == 0) {
+                            ButtonUp = false;
+                            ButtonRight = true;
+                            ButtonDown = true;
+                            ButtonLeft = false;
+                        }
+                        //Stick Buttons
+                        ButtonLeftStick = gamepad.getButtonValue(11);
+                        ButtonRightStick = gamepad.getButtonValue(12);
+                        //Bumpers
+                        ButtonRB = gamepad.getButtonValue(6);
+                        ButtonLB = gamepad.getButtonValue(5);
+                        //Triggers
+                        ButtonRT = gamepad.getButtonValue(8);
+                        ButtonLT = gamepad.getButtonValue(7);
+                    }
+                } catch (IndexOutOfBoundsException e) {
+                    Logger.info("This controller is not compatible. Please try another one.");
+                    connected = false;
+                }
+            } else if (Main.os.contains("mac")) {
+                try {
+                    if (gamepad.getControllerType() == Controller.Type.GAMEPAD) {
+                        //X, Y, A and B Buttons
+                        ButtonX = gamepad.getButtonValue(8);
+                        ButtonY = gamepad.getButtonValue(9);
+                        ButtonA = gamepad.getButtonValue(11);
+                        ButtonB = gamepad.getButtonValue(10);
+                        //POV
+                        ButtonUp = gamepad.getButtonValue(0);
+                        ButtonDown = gamepad.getButtonValue(1);
+                        ButtonLeft = gamepad.getButtonValue(2);
+                        ButtonRight = gamepad.getButtonValue(3);
+                        //Stick Buttons
+                        ButtonLeftStick = gamepad.getButtonValue(6);
+                        ButtonRightStick = gamepad.getButtonValue(7);
+                        //Bumpers
+                        ButtonRB = gamepad.getButtonValue(9);
+                        ButtonLB = gamepad.getButtonValue(8);
+                        //Triggers
+                        righttrigger = gamepad.getZRotationPercentage();
+                        lefttrigger = gamepad.getZAxisPercentage();
+                    } else if (gamepad.getControllerType() == Controller.Type.STICK) {
+                        //X, Y, A and B Buttons
+                        ButtonX = gamepad.getButtonValue(0);
+                        ButtonY = gamepad.getButtonValue(3);
+                        ButtonA = gamepad.getButtonValue(1);
+                        ButtonB = gamepad.getButtonValue(2);
+                        //POV
+                        float hatSwitchPosition = gamepad.getHatSwitchPosition();
+                        if (Float.compare(hatSwitchPosition, Component.POV.OFF) == 0) {
+                            ButtonUp = false;
+                            ButtonRight = false;
+                            ButtonDown = false;
+                            ButtonLeft = false;
+                        } else if (Float.compare(hatSwitchPosition, Component.POV.UP) == 0) {
+                            ButtonUp = true;
+                            ButtonRight = false;
+                            ButtonDown = false;
+                            ButtonLeft = false;
+                        } else if (Float.compare(hatSwitchPosition, Component.POV.DOWN) == 0) {
+                            ButtonUp = false;
+                            ButtonRight = false;
+                            ButtonDown = true;
+                            ButtonLeft = false;
+                        } else if (Float.compare(hatSwitchPosition, Component.POV.LEFT) == 0) {
+                            ButtonUp = false;
+                            ButtonRight = false;
+                            ButtonDown = false;
+                            ButtonLeft = true;
+                        } else if (Float.compare(hatSwitchPosition, Component.POV.RIGHT) == 0) {
+                            ButtonUp = false;
+                            ButtonRight = true;
+                            ButtonDown = false;
+                            ButtonLeft = false;
+                        } else if (Float.compare(hatSwitchPosition, Component.POV.UP_LEFT) == 0) {
+                            ButtonUp = true;
+                            ButtonRight = false;
+                            ButtonDown = false;
+                            ButtonLeft = true;
+                        } else if (Float.compare(hatSwitchPosition, Component.POV.UP_RIGHT) == 0) {
+                            ButtonUp = true;
+                            ButtonRight = true;
+                            ButtonDown = false;
+                            ButtonLeft = false;
+                        } else if (Float.compare(hatSwitchPosition, Component.POV.DOWN_LEFT) == 0) {
+                            ButtonUp = false;
+                            ButtonRight = false;
+                            ButtonDown = true;
+                            ButtonLeft = true;
+                        } else if (Float.compare(hatSwitchPosition, Component.POV.DOWN_RIGHT) == 0) {
+                            ButtonUp = false;
+                            ButtonRight = true;
+                            ButtonDown = true;
+                            ButtonLeft = false;
+                        }
+                        //Stick Buttons
+                        ButtonLeftStick = gamepad.getButtonValue(10);
+                        ButtonRightStick = gamepad.getButtonValue(11);
+                        //Bumpers
+                        ButtonRB = gamepad.getButtonValue(5);
+                        ButtonLB = gamepad.getButtonValue(4);
+                        //Triggers
+                        ButtonRT = gamepad.getButtonValue(7);
+                        ButtonLT = gamepad.getButtonValue(6);
+                    }
+                } catch (IndexOutOfBoundsException e) {
+                    Logger.info("This controller is not compatible. Please try another one.");
+                    connected = false;
+                }
+            }
             createCommand();
         }
     }
