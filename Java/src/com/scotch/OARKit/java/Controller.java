@@ -328,7 +328,7 @@ public class Controller implements Initializable, Runnable{
         StopServer.setOnAction(event -> new Interpreter("stopserver").returnCommand().runCommand());
 
         sendButton.setOnAction(event -> {
-            new Interpreter(consoleTextField.getText()).returnCommand().runCommand();
+            new Interpreter(consoleTextField.getText().toLowerCase()).returnCommand().runCommand();
             consoleTextField.setText("");
         });
 

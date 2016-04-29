@@ -9,7 +9,7 @@ public enum BaseCommand {
     MANUAL("M","Manual",new String[]{"manual"},1),
     ECHO("E","Echo",new String[]{"print","echo"},1),
     BLANK("","", new String[]{},0),
-    PI("P","Pi", new String[]{"Pi"},1),
+    PI("P","Pi", new String[]{"pi"},1),
     STOPSERVER("STOPSERVER","Stop Server", new String[]{"stopserver"},0), //interpreter cannot handle multi-character commands Apparently.
     GAMECONTROLLER("G","Game Controller", new String[]{"gamecontroller"},1);
 

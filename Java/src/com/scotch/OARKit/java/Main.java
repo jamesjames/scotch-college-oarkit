@@ -11,7 +11,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
-
+import java.awt.*;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -34,9 +34,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("com/scotch/OARKit/assets/layout/MainScreen.fxml"));
         primaryStage.setTitle("Scotch OAR Kit");
-        primaryStage.setScene(new Scene(root, 1024, 768));
+        primaryStage.setScene(new Scene(root, /*1024/**/gd.getDisplayMode().getWidth(), /*768/**/gd.getDisplayMode().getHeight()));
         primaryStage.show();
 
     }

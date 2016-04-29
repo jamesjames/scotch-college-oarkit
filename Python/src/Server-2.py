@@ -21,7 +21,7 @@ x = Properties()
 x.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("com/scotch/OARKit/assets/properties/default.properties"))
 #print(x.getProperty("insideDev"))
 
-##MotorPrefs = imp.load_source('MotorPrefs', './python/MotorPrefs.py')
+#MotorPrefs = imp.load_source('MotorPrefs', './python/MotorPrefs.py')
 import MotorPrefs
 
 MotorPrefs.isSimulation = OnRobot #Simulation flag
@@ -135,16 +135,17 @@ def ExecuteManualCMD(data):
 
 #Execute system commands
 def ExecuteSystemCMD(data):
-    if "-" not in data:
-        data += "-0"
-
-    requestedFunction = data.split("-")[0]
-    functionArgs = data.split("-")[1:]
-
+    print data
     availableFunctions = dir(SystemCommands)
 
-    if "prg" + requestedFunction in availableFunctions:
-        exec("SystemCommands.prg" + requestedFunction + "(" + functionArgs + ")")
+    if "-" not in data:
+        if "prg" + data in availableFunctions:
+            exec("SystemCommands.prg" + data + "(0)")
+    else:
+        requestedFunction = data.split("-")[0]
+        print requestedFunction
+        if "prg" + requestedFunction in availableFunctions:
+            exec("SystemCommands.prg" + requestedFunction + "(" + str(data.split("-")[1:]) + ")")
     
 #Take the command string from the connection and act on it
 def interpretGamepadData(data):
@@ -188,9 +189,9 @@ def decodeIncomingData(data):
 
     print "Command Received: " + str(data)
 
-    if data[0] == "E":
-        data = data[1:] #This is a workaround to the current Client console state (get rid of it later)
-        print "<<< Console Workaround Enabled (Deleting preceeding 'E' flag)  >>>"
+    #if data[0] == "E":
+        #data = data[1:] #This is a workaround to the current Client console state (get rid of it later)
+        #print "<<< Console Workaround Enabled (Deleting preceeding 'E' flag)  >>>"
 
     try:
         if data[0] == "G":

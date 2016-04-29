@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.effect.*?>
@@ -38,7 +40,7 @@
             </AnchorPane>
         </content>
       </TitledPane>
-    <SplitPane dividerPositions="0.2975708502024291" prefHeight="280.0" prefWidth="778.0" SplitPane.resizableWithParent="false">
+    <SplitPane dividerPositions="0.2975708502024291" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="386.0" prefWidth="988.0" SplitPane.resizableWithParent="false">
       <items>
         <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="386.0" prefWidth="290.0" tabClosingPolicy="UNAVAILABLE" SplitPane.resizableWithParent="false">
           <tabs>
@@ -148,14 +150,29 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>
-                              <AnchorPane layoutX="8.0" layoutY="111.0" rotate="90.0">
+                              <AnchorPane layoutX="124.0" layoutY="94.0" prefHeight="6.0" prefWidth="7.0">
+                                 <children>
+                                    <Circle centerX="20.0" centerY="20.0" fill="WHITE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                                    <Line endX="-20.0" fill="BLACK" layoutX="20.0" layoutY="20.0" rotate="90.0" startX="20.0">
+                                       <stroke>
+                                          <LinearGradient endX="0.4855769230769231" endY="1.0" startX="0.46634615384615385">
+                                             <stops>
+                                                <Stop color="BLACK" />
+                                                <Stop color="#ffffff00" offset="1.0" />
+                                             </stops>
+                                          </LinearGradient>
+                                       </stroke>
+                                    </Line>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="18.0" layoutY="250.0" rotate="90.0">
                                  <children>
                                     <ProgressBar fx:id="LeftBackwardIndicator" layoutX="49.0" prefWidth="50.0" progress="0.0" scaleY="-1.0" />
                                     <ProgressBar fx:id="LeftForwardIndicator" prefWidth="50.0" progress="0.0" rotate="180.0" />
                                     <Slider fx:id="LeftPowerSlider" layoutY="21.0" prefWidth="99.0" value="50.0" />
                                  </children>
                               </AnchorPane>
-                              <AnchorPane layoutX="112.0" layoutY="179.0" rotate="90.0">
+                              <AnchorPane layoutX="140.0" layoutY="250.0" rotate="90.0">
                                  <children>
                                     <ProgressBar fx:id="RightBackwardIndicator" layoutX="49.0" layoutY="18.0" prefWidth="50.0" progress="0.0" />
                                     <Slider fx:id="RightPowerSlider" layoutY="1.0" prefWidth="99.0" value="50.0" />
@@ -184,6 +201,7 @@
                                     </AnchorPane>
                                  </children>
                               </GridPane>
+                              <Button layoutX="184.0" layoutY="5.0" mnemonicParsing="false" text="All Stop" />
                   </children>
                 </AnchorPane>
               </content>
