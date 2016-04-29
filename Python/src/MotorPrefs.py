@@ -48,6 +48,9 @@ class ServoObject():
         self.position = position
         sp.moveToDegAngle(self.servoID, position)
 
+    def getPosition(self):
+        return self.position
+
 #Object to handle multiple servos as one
 class TrackObject():
     def __init__(self, attachedServos):
@@ -72,6 +75,8 @@ class Truck():
         self.BR = BackRight
         self.BL = BackLeft
 
+        self.motors = [self.FR, self.FL, self.BR, self.BL]
+
         self.steering = (0,0)
 
     def __str__(self):
@@ -93,6 +98,9 @@ class Truck():
         self.FL.setSpeed(-self.steering[0])
         self.BR.setSpeed(self.steering[1])
         self.BL.setSpeed(-self.steering[0])
+
+    def getServoStatus(self):
+        return [x.getSpeed() for x in self.motors]
         
 #Similar to truck, but can have multiple servos acting as a tank track
 class Tank():

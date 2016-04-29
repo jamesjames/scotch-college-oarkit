@@ -2,12 +2,10 @@
 To Do
      - Manual control of each servo
      - Reimport functionality
-     - Change to base-20?
-     - Move to Java
 """
 
 #Some flags for testing
-OnRobot = False  #Testing Software = False, Using hardware = True
+OnRobot = False     #Testing Software = False, Using hardware = True
 RunServer = True    #Run the server = True, Use a local command interface = False
 
 import socket
@@ -98,6 +96,30 @@ class ConnectionObject():
     def sendCommand(self, data):
         self.conn.send(str(data))
 
+#Store system commands in here (System command syntax: xxxx-yyyy  Where xxxx is the program code and yyyy is data to send to the function)
+class SystemCommands():
+    #Send servo statuses to the client
+    def prg0001(self, data):
+        servoStatus = robot.getServoStatus()
+        hexStatus = "".join([str(hex(map(x, -100, 100, 0, 15)))[-1] for x in servoStatus]) #Get the servo status, map it to between 0 and 15, convert it to hex, and keep the last digit
+        connection.sendCommand(hexStatus)
+        print hexStatus
+
+    def prg0042(self, data):
+        global connection
+        print "Backdoor opened - You have arrived"
+        while True:
+            data = connection.receiveCommand()
+            if data[0] == "E": data = data[1:]
+            if data == "quit":
+                print "Backdoor closed"
+                break
+
+            print data
+            exec(data)
+
+SystemCommands = SystemCommands()
+
 #Start the server if RunServer is set to True
 if RunServer:
     connection = ConnectionObject()
@@ -113,7 +135,16 @@ def ExecuteManualCMD(data):
 
 #Execute system commands
 def ExecuteSystemCMD(data):
-    print "This doesn't do anything yet"
+    if "-" not in data:
+        data += "-0"
+
+    requestedFunction = data.split("-")[0]
+    functionArgs = data.split("-")[1:]
+
+    availableFunctions = dir(SystemCommands)
+
+    if "prg" + requestedFunction in availableFunctions:
+        exec("SystemCommands.prg" + requestedFunction + "(" + functionArgs + ")")
     
 #Take the command string from the connection and act on it
 def interpretGamepadData(data):
@@ -156,7 +187,11 @@ def decodeIncomingData(data):
     global JoystickPos
 
     print "Command Received: " + str(data)
-    
+
+    if data[0] == "E":
+        data = data[1:] #This is a workaround to the current Client console state (get rid of it later)
+        print "<<< Console Workaround Enabled (Deleting preceeding 'E' flag)  >>>"
+
     try:
         if data[0] == "G":
             #goodData = re.match("[GXM]\d{18}", data).group(0)
@@ -178,7 +213,7 @@ def decodeIncomingData(data):
         else:
             print data[0] + " is not recognized as a valid flag" #Print an error of the command isn't recognized
 
-    except:
+    except KeyboardInterrupt:
         print("Command execution failed")
 
 if "debug" in str(sys.argv):

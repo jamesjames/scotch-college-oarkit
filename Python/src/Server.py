@@ -26,7 +26,7 @@ test = False
 
 import socket
 import time
-
+#Don't use this - there's a newer version of this
 if not test:
     import ServoInterface as bot
 
