@@ -45,9 +45,13 @@ public class Interpreter {
                     new java.util.TimerTask() {
                         @Override
                         public void run() {
-                            Logger.info("Closing Socket");
-                            serverConnect.socketClose();
-                            Controller.disconnectServer();
+                            try {
+                                serverConnect.socketClose();
+                                Logger.info("Closing Socket");
+                                Controller.disconnectServer();
+                            } catch (Exception e){
+                                Logger.info("Server not connected");
+                            }
                         }
                     },
                     50

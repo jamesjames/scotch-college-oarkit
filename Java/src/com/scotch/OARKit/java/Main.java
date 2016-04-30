@@ -21,6 +21,7 @@ import static com.scotch.OARKit.java.helpers.NativeLoader.*;
 public class Main extends Application {
     public static Properties properties;
     public static String os;
+    public static String DevMode;
 
     @Override
     public void stop(){
@@ -34,12 +35,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("com/scotch/OARKit/assets/layout/MainScreen.fxml"));
         primaryStage.setTitle("Scotch OAR Kit");
-        primaryStage.setScene(new Scene(root, /*1024/**/gd.getDisplayMode().getWidth(), /*768/**/gd.getDisplayMode().getHeight()));
+        primaryStage.setScene(new Scene(root, 1024, 768));
         primaryStage.show();
-
     }
 
 
@@ -47,6 +46,7 @@ public class Main extends Application {
         Logger.info(System.getProperty("os.name"));
         properties = new Properties();
         properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("com/scotch/OARKit/assets/properties/default.properties"));
+        DevMode=Main.properties.getProperty("insideDev");
         if (args.length > 0 && args[0].equals("server")){
             new Server();
         }else{

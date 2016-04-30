@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.shape.*?>
@@ -150,10 +151,10 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>
-                              <AnchorPane layoutX="124.0" layoutY="94.0" prefHeight="6.0" prefWidth="7.0">
+                              <AnchorPane layoutX="124.0" layoutY="94.0" prefHeight="6.0" prefWidth="7.0" rotate="90.0">
                                  <children>
                                     <Circle centerX="20.0" centerY="20.0" fill="WHITE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                                    <Line endX="-20.0" fill="BLACK" layoutX="20.0" layoutY="20.0" rotate="90.0" startX="20.0">
+                                    <Line fx:id="PanIndicator" endX="-20.0" fill="BLACK" layoutX="20.0" layoutY="20.0" startX="20.0">
                                        <stroke>
                                           <LinearGradient endX="0.4855769230769231" endY="1.0" startX="0.46634615384615385">
                                              <stops>
@@ -191,12 +192,12 @@
                                     <Label layoutX="-27.0" layoutY="10.0" text="Manual Control:" />
                                     <AnchorPane layoutX="65.0" layoutY="5.0" GridPane.columnIndex="1">
                                        <children>
-                                          <ToggleButton fx:id="on" mnemonicParsing="false" mouseTransparent="false" text="On">
+                                          <ToggleButton fx:id="ManualControlOn" mnemonicParsing="false" mouseTransparent="false" text="On">
                                              <toggleGroup>
-                                                <ToggleGroup fx:id="test" />
+                                                <ToggleGroup fx:id="ManualControlToggle" />
                                              </toggleGroup>
                                           </ToggleButton>
-                                          <ToggleButton fx:id="off" disable="true" layoutX="36.0" mnemonicParsing="false" selected="true" text="Off" toggleGroup="$test" />
+                                          <ToggleButton fx:id="ManualControlOff" disable="true" layoutX="36.0" mnemonicParsing="false" selected="true" text="Off" toggleGroup="$ManualControlToggle" />
                                        </children>
                                     </AnchorPane>
                                  </children>
@@ -329,7 +330,38 @@
             </Tab>
                   <Tab text="Settings">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="FitWindowToScreenButton" layoutX="5.0" layoutY="5.0" mnemonicParsing="false" text="Fit window to screen" />
+                              <Button fx:id="ResetWindowSizeButton" layoutX="151.0" layoutY="5.0" mnemonicParsing="false" text="Reset window size" />
+                              <GridPane layoutX="5.0" layoutY="83.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="5.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="5.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="217.95606994628906" minWidth="10.0" prefWidth="128.95457458496094" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label layoutX="9.0" layoutY="43.0" text="Dev Mode:" wrapText="true" />
+                                    <AnchorPane GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.hgrow="NEVER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
+                                       <children>
+                                          <ToggleButton fx:id="DevModeOn" mnemonicParsing="false" mouseTransparent="false" text="On" AnchorPane.topAnchor="3.0">
+                                             <toggleGroup>
+                                                <ToggleGroup fx:id="DevModeToggle" />
+                                             </toggleGroup>
+                                          </ToggleButton>
+                                          <ToggleButton fx:id="DevModeOff" disable="true" layoutX="36.0" mnemonicParsing="false" selected="true" text="Off" toggleGroup="$DevModeToggle" AnchorPane.topAnchor="3.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <Label text="(restarts client &amp; resets window size)" wrapText="true" GridPane.columnIndex="4" />
+                                 </children>
+                              </GridPane>
+                              <Button fx:id="DetectControllerButton" layoutX="5.0" layoutY="36.0" mnemonicParsing="false" prefWidth="275.0" text="Detect Controller (restarts client &amp; resets window size)" wrapText="true" />
+                           </children></AnchorPane>
                     </content>
                   </Tab>
           </tabs>

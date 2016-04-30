@@ -23,7 +23,7 @@ public class Logger {
     }
 
     public static void debug(Object object) {
-        if (Main.properties.getProperty("insideDev").equals("true")&&false) {
+        if (Main.DevMode.equals("true")&&false) {
             String timeStamp = new SimpleDateFormat("[HH:mm:ss] ").format(Calendar.getInstance().getTime());
             System.out.println("[DEBUG] " + timeStamp + object);
         }

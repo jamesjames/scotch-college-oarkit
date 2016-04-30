@@ -3,6 +3,7 @@ package com.scotch.OARKit.java.helpers;
 import com.kenai.jaffl.struct.Struct;
 import com.scotch.OARKit.java.*;
 import com.scotch.OARKit.java.Command.Interpreter;
+import com.scotch.OARKit.java.Command.Interpreter_test;
 import com.scotch.OARKit.java.helpers.JInputJoystick;
 import javafx.scene.control.Button;
 import net.java.games.input.*;
@@ -70,8 +71,7 @@ public class gamepad {
             Logger.info("Controller disconnected!");
             connected = false;
         } else if(gamepad.pollController()){
-            // TODO poll all the axis and set them to variables
-            
+
             leftstickx = gamepad.getX_LeftJoystick_Percentage();
             leftsticky = gamepad.getY_LeftJoystick_Percentage();
 
@@ -316,7 +316,8 @@ public class gamepad {
     }
     private void createCommand() {
         if (ServerConnect.connected) {
-            new Interpreter("gamecontroller, " + ConvertToHex(Math.round(leftstickx)) + ConvertToHex(Math.round(leftsticky)) + ConvertToHex(Math.round(rightstickx)) + ConvertToHex(Math.round(rightsticky)) + "77000000000000").returnCommand().runCommand();
+            //new Interpreter("gamecontroller " + ConvertToHex(Math.round(leftstickx)) + ConvertToHex(Math.round(leftsticky)) + ConvertToHex(Math.round(rightstickx)) + ConvertToHex(Math.round(rightsticky)) + "77000000000000").returnCommand().runCommand();
+            Interpreter_test.interpreter("gamecontroller " + ConvertToHex(Math.round(leftstickx)) + ConvertToHex(Math.round(leftsticky)) + ConvertToHex(Math.round(rightstickx)) + ConvertToHex(Math.round(rightsticky)) + "77000000000000");
         }
     }
     private String ConvertToHex(int axis){
