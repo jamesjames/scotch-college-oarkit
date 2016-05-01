@@ -1,5 +1,6 @@
 package com.scotch.OARKit.java;
 
+import com.scotch.OARKit.java.Command.ACommand;
 import com.scotch.OARKit.java.Command.Interpreter;
 import com.scotch.OARKit.java.Command.Interpreter_test;
 import com.scotch.OARKit.java.ServerList.*;
@@ -329,15 +330,16 @@ public class Controller implements Initializable, Runnable{
         }
         out = System.out;
         //err = System.err;
-        console = new Console(consoleLog);
-        ps = new PrintStream(console, true);
-        redirectOutput(ps);
+        //console = new Console(consoleLog);
+       // ps = new PrintStream(console, true);
+       // redirectOutput(ps);
         ipSelector1 = ipSelector;
         connectButton1 = connectButton;
         nameLabel1 = nameLabel;
         ipLabel1 = ipLabel;
         portLabel1 = portLabel;
         currentTime1();
+        ACommand.findClassesAndInit();
         new GetServerList("com/scotch/OARKit/assets/properties/servers.sList");
         try {
             networkManager = new NetworkManager();

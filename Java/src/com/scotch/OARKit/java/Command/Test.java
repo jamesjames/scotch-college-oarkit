@@ -1,11 +1,12 @@
 package com.scotch.OARKit.java.Command;
 
 /**
- * Created by Campbell Millar on 22/03/2016.
+ * Created by campbell on 5/1/2016.
  */
-public class Echo extends ACommand {
-    public Echo() {
+public class Test extends ACommand {
+    public Test() {
         super(1);
+        System.out.println("It Worked!");
     }
 
     @Override
