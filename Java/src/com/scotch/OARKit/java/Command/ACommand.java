@@ -25,7 +25,7 @@ public abstract class ACommand {
     public abstract boolean checkRaw();
 
     public void sendCommand(){
-        for
+
     }
     public static void findClassesAndInit(){
         Reflections reflections = new Reflections("com.scotch.OARKit.java.Command");
