@@ -135,7 +135,7 @@ def ExecuteManualCMD(data):
 
 #Execute system commands
 def ExecuteSystemCMD(data):
-    print data
+    #print data
     availableFunctions = dir(SystemCommands)
 
     if "-" not in data:

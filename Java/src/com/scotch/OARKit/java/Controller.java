@@ -58,7 +58,7 @@ public class Controller implements Initializable, Runnable{
 
     @FXML
     WebView CameraWebView;
-    WebEngine engine;
+    static WebEngine engine;
     @FXML
     TextArea consoleLog;
     @FXML
@@ -265,7 +265,7 @@ public class Controller implements Initializable, Runnable{
         }
     }
 
-    //disconects the server
+    //disconnects the server
     public static void ServerDisconnect() {
         if (ServerConnect.connected) {
             //connectButton1.setSelected(false);
@@ -277,7 +277,7 @@ public class Controller implements Initializable, Runnable{
     }
 
     //connects the server
-    public void ServerConnect(String name, String ip, String port) {
+    public static void ServerConnect(String name, String ip, String port) {
         if (!ServerConnect.connected){
             serverConnect = new ServerConnect(ip, port);
             if (ServerConnect.connected == true) {
@@ -375,9 +375,9 @@ public class Controller implements Initializable, Runnable{
 
     public void createEvents() throws IOException {
         //restartNginx.setOnAction(event -> new Interpreter("print hello").returnCommand().runCommand());
-        restartNginx.setOnAction(event -> Interpreter_test.interpreter("print hello"));
+        restartNginx.setOnAction(event -> Interpreter_test.interpret("E hello"));
         //StopServer.setOnAction(event -> new Interpreter("stopserver").returnCommand().runCommand());
-        StopServer.setOnAction(event -> Interpreter_test.interpreter("stopserver"));
+        StopServer.setOnAction(event -> Interpreter_test.interpret("StopServer"));
 
         DevModeOn.setOnAction(event -> {
             Main.DevMode="true";
@@ -404,7 +404,7 @@ public class Controller implements Initializable, Runnable{
 
         sendButton.setOnAction(event -> {
             //new Interpreter(consoleTextField.getText().toLowerCase()).returnCommand().runCommand();
-            Interpreter_test.interpreter(consoleTextField.getText());
+            Interpreter_test.interpret(consoleTextField.getText());
             consoleTextField.setText("");
         });
 
