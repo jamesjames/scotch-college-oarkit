@@ -60,6 +60,7 @@ public class gamepad {
             Logger.info(gamepad.getControllerName());
             Logger.info(gamepad.getControllerType());
             Logger.info("This controller has " + numberOfButtons + " buttons");
+            Logger.info("Complete!");
         } else {
             connected = false;
             Logger.info("No controller found!");
