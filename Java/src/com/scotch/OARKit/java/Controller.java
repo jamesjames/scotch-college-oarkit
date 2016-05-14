@@ -330,16 +330,16 @@ public class Controller implements Initializable, Runnable{
         }
         out = System.out;
         //err = System.err;
-        //console = new Console(consoleLog);
-       // ps = new PrintStream(console, true);
-       // redirectOutput(ps);
+        console = new Console(consoleLog);
+        ps = new PrintStream(console, true);
+        redirectOutput(ps);
         ipSelector1 = ipSelector;
         connectButton1 = connectButton;
         nameLabel1 = nameLabel;
         ipLabel1 = ipLabel;
         portLabel1 = portLabel;
         currentTime1();
-        ACommand.findClassesAndInit();
+        //ACommand.findClassesAndInit();
         new GetServerList("com/scotch/OARKit/assets/properties/servers.sList");
         try {
             networkManager = new NetworkManager();
@@ -503,7 +503,7 @@ public class Controller implements Initializable, Runnable{
                 Platform.runLater(() ->StrengthLabel.setVisible(true));
             }
             if (gamepad.connected) {
-                if (manualControl) {
+                if (!manualControl) {
                     gamepad.pollgamepad();
 
                     leftX = (gamepad.leftstickx / 100) - 0.5;

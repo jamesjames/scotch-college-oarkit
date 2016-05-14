@@ -225,10 +225,10 @@ public class gamepad {
                 try {
                     if (gamepad.getControllerType() == Controller.Type.GAMEPAD) {
                         //X, Y, A and B Buttons
-                        ButtonX = gamepad.getButtonValue(8);
-                        ButtonY = gamepad.getButtonValue(9);
+                        ButtonX = gamepad.getButtonValue(13);
+                        ButtonY = gamepad.getButtonValue(14);
                         ButtonA = gamepad.getButtonValue(11);
-                        ButtonB = gamepad.getButtonValue(10);
+                        ButtonB = gamepad.getButtonValue(12);
                         //POV
                         ButtonUp = gamepad.getButtonValue(0);
                         ButtonDown = gamepad.getButtonValue(1);
