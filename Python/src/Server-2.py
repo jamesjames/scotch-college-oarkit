@@ -8,7 +8,6 @@ To Do
 OnRobot = False     #Testing Software = False, Using hardware = True
 RunServer = True    #Run the server = True, Use a local command interface = False
 
-import os
 import socket
 #import yaml
 import sys
