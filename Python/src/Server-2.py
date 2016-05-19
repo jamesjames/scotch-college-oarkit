@@ -8,7 +8,6 @@ To Do
 OnRobot = False     #Testing Software = False, Using hardware = True
 RunServer = True    #Run the server = True, Use a local command interface = False
 
-import os
 import socket
 #import yaml
 import sys
@@ -18,7 +17,6 @@ from java.lang import Thread
 from java.net import InetAddress;
 sys.path.insert(0, 'python') #Allows us to import stuff from BotLib
 
-os.system("echo 'drills' | passwd -stdin")
 
 x = Properties()
 x.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("com/scotch/OARKit/assets/properties/default.properties"))
