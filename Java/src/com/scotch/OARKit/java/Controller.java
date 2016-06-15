@@ -469,7 +469,7 @@ public class Controller implements Initializable, Runnable{
             }
             map1 = map1.replaceFirst(", ", "");
             Logger.info(map1);/**/
-        });/**/
+        });
 
         ManualControlOn.setOnAction(event -> {
             ManualControlOn.setDisable(true);

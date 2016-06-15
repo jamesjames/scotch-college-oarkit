@@ -13,24 +13,24 @@ import java.util.Calendar;
 public class Logger {
     //TODO Move to a JavaFX
     public static void info(Object object) {
-        String timeStamp = new SimpleDateFormat("[HH:mm:ss] ").format(Calendar.getInstance().getTime());
+        String timeStamp = new SimpleDateFormat("[dd/MM/yyyy] [HH:mm:ss] ").format(Calendar.getInstance().getTime());
         System.out.println("[INFO] " + timeStamp + object);
     }
 
     public static void error(Object object) {
-        String timeStamp = new SimpleDateFormat("[HH:mm:ss] ").format(Calendar.getInstance().getTime());
+        String timeStamp = new SimpleDateFormat("[dd/MM/yyyy] [HH:mm:ss] ").format(Calendar.getInstance().getTime());
         System.err.println("[ERROR] " + timeStamp + object);
     }
 
     public static void debug(Object object) {
         if (Main.DevMode.equals("true")&&false) {
-            String timeStamp = new SimpleDateFormat("[HH:mm:ss] ").format(Calendar.getInstance().getTime());
+            String timeStamp = new SimpleDateFormat("[dd/MM/yyyy] [HH:mm:ss] ").format(Calendar.getInstance().getTime());
             System.out.println("[DEBUG] " + timeStamp + object);
         }
     }
 
     public static void warn(Object object) {
-        String timeStamp = new SimpleDateFormat("[HH:mm:ss] ").format(Calendar.getInstance().getTime());
+        String timeStamp = new SimpleDateFormat("[dd/MM/yyyy] [HH:mm:ss] ").format(Calendar.getInstance().getTime());
         System.err.println("[WARNING] " + timeStamp + object);
     }
 

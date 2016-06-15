@@ -39,7 +39,7 @@ public class ServerConnect {
         }
         Logger.info("This method going to be removed, please use ServerConnect(String ip, int port)");
     }
-    //FOR DIFFERING IP BUT SAME PORT - 5006
+    //FOR DIFFERING IP AND PORT
     public ServerConnect(String ip, String port){
         try {
             socket = new Socket(ip, Integer.parseInt(port));

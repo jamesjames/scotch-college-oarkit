@@ -67,6 +67,14 @@ public class gamepad {
         }
     }
 
+    private void hatSwitch(){
+        float hatSwitchPosition = gamepad.getHatSwitchPosition();
+        ButtonUp = (Float.compare(hatSwitchPosition, Component.POV.UP) == 0)||(Float.compare(hatSwitchPosition, Component.POV.UP_LEFT) == 0)||(Float.compare(hatSwitchPosition, Component.POV.UP_RIGHT) == 0);
+        ButtonRight = (Float.compare(hatSwitchPosition, Component.POV.RIGHT) == 0)||(Float.compare(hatSwitchPosition, Component.POV.UP_RIGHT) == 0)||(Float.compare(hatSwitchPosition, Component.POV.DOWN_RIGHT) == 0);
+        ButtonDown = (Float.compare(hatSwitchPosition, Component.POV.DOWN) == 0)||(Float.compare(hatSwitchPosition, Component.POV.DOWN_LEFT) == 0)||(Float.compare(hatSwitchPosition, Component.POV.DOWN_RIGHT) == 0);
+        ButtonLeft = (Float.compare(hatSwitchPosition, Component.POV.LEFT) == 0)||(Float.compare(hatSwitchPosition, Component.POV.UP_LEFT) == 0)||(Float.compare(hatSwitchPosition, Component.POV.DOWN_LEFT) == 0);
+    }
+
     public void pollgamepad(){
         if(!gamepad.pollController()) {
             Logger.info("Controller disconnected!");
@@ -88,53 +96,7 @@ public class gamepad {
                         ButtonA = gamepad.getButtonValue(0);
                         ButtonB = gamepad.getButtonValue(1);
                         //POV
-                        float hatSwitchPosition = gamepad.getHatSwitchPosition();
-                        if (Float.compare(hatSwitchPosition, Component.POV.OFF) == 0) {
-                            ButtonUp = false;
-                            ButtonRight = false;
-                            ButtonDown = false;
-                            ButtonLeft = false;
-                        } else if (Float.compare(hatSwitchPosition, Component.POV.UP) == 0) {
-                            ButtonUp = true;
-                            ButtonRight = false;
-                            ButtonDown = false;
-                            ButtonLeft = false;
-                        } else if (Float.compare(hatSwitchPosition, Component.POV.DOWN) == 0) {
-                            ButtonUp = false;
-                            ButtonRight = false;
-                            ButtonDown = true;
-                            ButtonLeft = false;
-                        } else if (Float.compare(hatSwitchPosition, Component.POV.LEFT) == 0) {
-                            ButtonUp = false;
-                            ButtonRight = false;
-                            ButtonDown = false;
-                            ButtonLeft = true;
-                        } else if (Float.compare(hatSwitchPosition, Component.POV.RIGHT) == 0) {
-                            ButtonUp = false;
-                            ButtonRight = true;
-                            ButtonDown = false;
-                            ButtonLeft = false;
-                        } else if (Float.compare(hatSwitchPosition, Component.POV.UP_LEFT) == 0) {
-                            ButtonUp = true;
-                            ButtonRight = false;
-                            ButtonDown = false;
-                            ButtonLeft = true;
-                        } else if (Float.compare(hatSwitchPosition, Component.POV.UP_RIGHT) == 0) {
-                            ButtonUp = true;
-                            ButtonRight = true;
-                            ButtonDown = false;
-                            ButtonLeft = false;
-                        } else if (Float.compare(hatSwitchPosition, Component.POV.DOWN_LEFT) == 0) {
-                            ButtonUp = false;
-                            ButtonRight = false;
-                            ButtonDown = true;
-                            ButtonLeft = true;
-                        } else if (Float.compare(hatSwitchPosition, Component.POV.DOWN_RIGHT) == 0) {
-                            ButtonUp = false;
-                            ButtonRight = true;
-                            ButtonDown = true;
-                            ButtonLeft = false;
-                        }
+                        hatSwitch();
                         //Stick Buttons
                         ButtonLeftStick = gamepad.getButtonValue(8);
                         ButtonRightStick = gamepad.getButtonValue(9);
@@ -160,53 +122,7 @@ public class gamepad {
                         ButtonA = gamepad.getButtonValue(2);
                         ButtonB = gamepad.getButtonValue(3);
                         //POV
-                        float hatSwitchPosition = gamepad.getHatSwitchPosition();
-                        if (Float.compare(hatSwitchPosition, Component.POV.OFF) == 0) {
-                            ButtonUp = false;
-                            ButtonRight = false;
-                            ButtonDown = false;
-                            ButtonLeft = false;
-                        } else if (Float.compare(hatSwitchPosition, Component.POV.UP) == 0) {
-                            ButtonUp = true;
-                            ButtonRight = false;
-                            ButtonDown = false;
-                            ButtonLeft = false;
-                        } else if (Float.compare(hatSwitchPosition, Component.POV.DOWN) == 0) {
-                            ButtonUp = false;
-                            ButtonRight = false;
-                            ButtonDown = true;
-                            ButtonLeft = false;
-                        } else if (Float.compare(hatSwitchPosition, Component.POV.LEFT) == 0) {
-                            ButtonUp = false;
-                            ButtonRight = false;
-                            ButtonDown = false;
-                            ButtonLeft = true;
-                        } else if (Float.compare(hatSwitchPosition, Component.POV.RIGHT) == 0) {
-                            ButtonUp = false;
-                            ButtonRight = true;
-                            ButtonDown = false;
-                            ButtonLeft = false;
-                        } else if (Float.compare(hatSwitchPosition, Component.POV.UP_LEFT) == 0) {
-                            ButtonUp = true;
-                            ButtonRight = false;
-                            ButtonDown = false;
-                            ButtonLeft = true;
-                        } else if (Float.compare(hatSwitchPosition, Component.POV.UP_RIGHT) == 0) {
-                            ButtonUp = true;
-                            ButtonRight = true;
-                            ButtonDown = false;
-                            ButtonLeft = false;
-                        } else if (Float.compare(hatSwitchPosition, Component.POV.DOWN_LEFT) == 0) {
-                            ButtonUp = false;
-                            ButtonRight = false;
-                            ButtonDown = true;
-                            ButtonLeft = true;
-                        } else if (Float.compare(hatSwitchPosition, Component.POV.DOWN_RIGHT) == 0) {
-                            ButtonUp = false;
-                            ButtonRight = true;
-                            ButtonDown = true;
-                            ButtonLeft = false;
-                        }
+                        hatSwitch();
                         //Stick Buttons
                         ButtonLeftStick = gamepad.getButtonValue(11);
                         ButtonRightStick = gamepad.getButtonValue(12);
@@ -250,53 +166,7 @@ public class gamepad {
                         ButtonA = gamepad.getButtonValue(1);
                         ButtonB = gamepad.getButtonValue(2);
                         //POV
-                        float hatSwitchPosition = gamepad.getHatSwitchPosition();
-                        if (Float.compare(hatSwitchPosition, Component.POV.OFF) == 0) {
-                            ButtonUp = false;
-                            ButtonRight = false;
-                            ButtonDown = false;
-                            ButtonLeft = false;
-                        } else if (Float.compare(hatSwitchPosition, Component.POV.UP) == 0) {
-                            ButtonUp = true;
-                            ButtonRight = false;
-                            ButtonDown = false;
-                            ButtonLeft = false;
-                        } else if (Float.compare(hatSwitchPosition, Component.POV.DOWN) == 0) {
-                            ButtonUp = false;
-                            ButtonRight = false;
-                            ButtonDown = true;
-                            ButtonLeft = false;
-                        } else if (Float.compare(hatSwitchPosition, Component.POV.LEFT) == 0) {
-                            ButtonUp = false;
-                            ButtonRight = false;
-                            ButtonDown = false;
-                            ButtonLeft = true;
-                        } else if (Float.compare(hatSwitchPosition, Component.POV.RIGHT) == 0) {
-                            ButtonUp = false;
-                            ButtonRight = true;
-                            ButtonDown = false;
-                            ButtonLeft = false;
-                        } else if (Float.compare(hatSwitchPosition, Component.POV.UP_LEFT) == 0) {
-                            ButtonUp = true;
-                            ButtonRight = false;
-                            ButtonDown = false;
-                            ButtonLeft = true;
-                        } else if (Float.compare(hatSwitchPosition, Component.POV.UP_RIGHT) == 0) {
-                            ButtonUp = true;
-                            ButtonRight = true;
-                            ButtonDown = false;
-                            ButtonLeft = false;
-                        } else if (Float.compare(hatSwitchPosition, Component.POV.DOWN_LEFT) == 0) {
-                            ButtonUp = false;
-                            ButtonRight = false;
-                            ButtonDown = true;
-                            ButtonLeft = true;
-                        } else if (Float.compare(hatSwitchPosition, Component.POV.DOWN_RIGHT) == 0) {
-                            ButtonUp = false;
-                            ButtonRight = true;
-                            ButtonDown = true;
-                            ButtonLeft = false;
-                        }
+                        hatSwitch();
                         //Stick Buttons
                         ButtonLeftStick = gamepad.getButtonValue(10);
                         ButtonRightStick = gamepad.getButtonValue(11);
